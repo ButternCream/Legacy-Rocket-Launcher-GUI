@@ -266,7 +266,7 @@ namespace Rocket_League_Customizer
                 return;
             }
             //Write custom data to file
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "test.txt"))
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "settings.txt"))
             {
                 writer.WriteLine(jump_text.Text);
                 writer.WriteLine(ball_text.Text);
