@@ -8,14 +8,13 @@ namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
-        bool dllInjected = false;
+        //bool dllInjected = false;
 
         public RLCustomizer()
         {
             InitializeComponent();
             InitCustomBlog();
-            CheckFirstTime();
-             
+            CheckFirstTime();     
         }
 
         //Start DLL Injection
@@ -167,7 +166,7 @@ namespace Rocket_League_Customizer
         {
             if (Properties.Settings.Default.FirstTime)
             {
-                MessageBox.Show("Welcome! To get everything properly set up, please start Rocket League through steam and then press the \"Save\" button.", "Welcome");
+                MessageBox.Show("Welcome! To get everything properly set up, please start Rocket League through steam and then press the \"Set RL Path\" button.", "Welcome");
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
             }
@@ -179,7 +178,7 @@ namespace Rocket_League_Customizer
             string rlPath = GetProcessPath("RocketLeague");
             if (rlPath == string.Empty)
             {
-                MessageBox.Show("Please have Rocket League running before you click Save.", "Error");
+                MessageBox.Show("Please have Rocket League running.", "Error");
                 return;
             }
             else
@@ -262,7 +261,7 @@ namespace Rocket_League_Customizer
             //If path isn't set save it
             if (Properties.Settings.Default.RLPath == "")
             {
-                SavePath();
+                MessageBox.Show("Please start Rocket League and click the \"Set RL Path\"");
                 return;
             }
             //Write custom data to file
@@ -301,7 +300,15 @@ namespace Rocket_League_Customizer
                 MessageBox.Show("Path not set. Please launch rocket league and press the \"Save\" button.", "Error");
                 return;
             }
-            System.Diagnostics.Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
+            else if (!(GetProcessPath("RocketLeague") == string.Empty))
+            {
+                MessageBox.Show("Rocket League already running.");
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
+            }
+           
         }
         //Go to our reddit page
         private void redditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,7 +328,7 @@ namespace Rocket_League_Customizer
 
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Inject DLL button (you only need to do this once).\n\nStep 3:Then hit the corresponding number on the numpad.\n\n\tNumpad 1 requires you to be in the main menu.\n\tNumpad 2 requires you to be in game.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
+            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Inject DLL button (you only need to do this once).\n\nStep 3:Then hit the corresponding number on the numpad.\n\n\tNumpad 1 requires you to be in game.\n\tNumpad 2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
         }
 
         private void dllButton_Click(object sender, EventArgs e)
@@ -332,28 +339,31 @@ namespace Rocket_League_Customizer
             //MessageBox.Show(exePath);
             String strDLLName = exePath + "RocketLeagueTest.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
-            if (!dllInjected)
+           
+            Int32 ProcID = GetProcessId(strProcessName);
+            if (ProcID >= 0)
             {
-                Int32 ProcID = GetProcessId(strProcessName);
-                if (ProcID >= 0)
+                IntPtr hProcess = (IntPtr)OpenProcess(0x1F0FFF, 1, ProcID);
+                if (hProcess == null)
                 {
-                    IntPtr hProcess = (IntPtr)OpenProcess(0x1F0FFF, 1, ProcID);
-                    if (hProcess == null)
-                    {
-                        MessageBox.Show("OpenProcess() Failed!");
-                        return;
-                    }
-                    else
-                    {
-                        InjectDLL(hProcess, strDLLName);
-                        dllInjected = true;
-                    }
+                    MessageBox.Show("OpenProcess() Failed!");
+                    return;
+                }
+                else
+                {
+                    InjectDLL(hProcess, strDLLName);
+                    //dllInjected = true;
                 }
             }
             else
             {
                 MessageBox.Show("Dll Already Injected", "Error");
             }
+        }
+
+        private void setRLPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavePath();
         }
     }
 }
