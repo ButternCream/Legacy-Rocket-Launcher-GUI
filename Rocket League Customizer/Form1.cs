@@ -328,7 +328,7 @@ namespace Rocket_League_Customizer
 
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Inject DLL button (you only need to do this once).\n\nStep 3:Then hit the corresponding number on the numpad.\n\n\tNumpad 1 requires you to be in game.\n\tNumpad 2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
+            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Inject DLL button (you only need to do this once).\n\nStep 3:Then hit the corresponding key.\n\n\tF1 requires you to be in game.\n\tF2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
         }
 
         private void dllButton_Click(object sender, EventArgs e)
@@ -354,10 +354,6 @@ namespace Rocket_League_Customizer
                     InjectDLL(hProcess, strDLLName);
                     //dllInjected = true;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Dll Already Injected", "Error");
             }
         }
 
