@@ -58,10 +58,10 @@
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setRLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InGameTitleLabel = new System.Windows.Forms.Label();
             this.MenuTitleLabel = new System.Windows.Forms.Label();
             this.dllButton = new System.Windows.Forms.Button();
-            this.setRLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -329,25 +329,32 @@
             this.howToUseToolStripMenuItem.Text = "Help";
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.howToUseToolStripMenuItem_Click);
             // 
+            // setRLPathToolStripMenuItem
+            // 
+            this.setRLPathToolStripMenuItem.Name = "setRLPathToolStripMenuItem";
+            this.setRLPathToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.setRLPathToolStripMenuItem.Text = "Set RL Path";
+            this.setRLPathToolStripMenuItem.Click += new System.EventHandler(this.setRLPathToolStripMenuItem_Click);
+            // 
             // InGameTitleLabel
             // 
             this.InGameTitleLabel.AutoSize = true;
             this.InGameTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InGameTitleLabel.Location = new System.Drawing.Point(279, 29);
             this.InGameTitleLabel.Name = "InGameTitleLabel";
-            this.InGameTitleLabel.Size = new System.Drawing.Size(179, 22);
+            this.InGameTitleLabel.Size = new System.Drawing.Size(112, 22);
             this.InGameTitleLabel.TabIndex = 26;
-            this.InGameTitleLabel.Text = "In Game (Numpad 1)";
+            this.InGameTitleLabel.Text = "In Game (F1)";
             // 
             // MenuTitleLabel
             // 
             this.MenuTitleLabel.AutoSize = true;
             this.MenuTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuTitleLabel.Location = new System.Drawing.Point(8, 29);
+            this.MenuTitleLabel.Location = new System.Drawing.Point(51, 29);
             this.MenuTitleLabel.Name = "MenuTitleLabel";
-            this.MenuTitleLabel.Size = new System.Drawing.Size(158, 22);
+            this.MenuTitleLabel.Size = new System.Drawing.Size(91, 22);
             this.MenuTitleLabel.TabIndex = 27;
-            this.MenuTitleLabel.Text = "Menu (Numpad 2)";
+            this.MenuTitleLabel.Text = "Menu (F2)";
             // 
             // dllButton
             // 
@@ -358,13 +365,6 @@
             this.dllButton.Text = "Inject DLL";
             this.dllButton.UseVisualStyleBackColor = true;
             this.dllButton.Click += new System.EventHandler(this.dllButton_Click);
-            // 
-            // setRLPathToolStripMenuItem
-            // 
-            this.setRLPathToolStripMenuItem.Name = "setRLPathToolStripMenuItem";
-            this.setRLPathToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.setRLPathToolStripMenuItem.Text = "Set RL Path";
-            this.setRLPathToolStripMenuItem.Click += new System.EventHandler(this.setRLPathToolStripMenuItem_Click);
             // 
             // RLCustomizer
             // 
