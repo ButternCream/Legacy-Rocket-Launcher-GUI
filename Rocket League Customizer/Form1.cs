@@ -326,7 +326,11 @@ namespace Rocket_League_Customizer
 
         private void dllButton_Click(object sender, EventArgs e)
         {
-            String strDLLName = @"C:\Users\Scooter\Desktop\RL Mods\RocketLeagueTest\RocketLeagueTest\Debug\RocketLeagueTest.dll"; // here you put the dll you want, only the path.
+            string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            exePath = exePath.Replace("\\", "\\\\");
+            exePath = exePath.Remove(exePath.Length - 28);
+            //MessageBox.Show(exePath);
+            String strDLLName = exePath + "RocketLeagueTest.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
             if (!dllInjected)
             {
