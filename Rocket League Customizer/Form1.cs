@@ -155,7 +155,7 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            MessageBox.Show("Mods Loaded");
+            MessageBox.Show("Mods Loaded\nPress F1 to in a game to activate the in game mods.\nPress F2 in the main menu to activate menu mods.\nGo to help for more instructions.");
             return;
         }
         //End DLL Injection
