@@ -209,7 +209,7 @@ namespace Rocket_League_Customizer
             youtubeTitle_textBox.Enabled = false;
             youtubeURL_textBox.Enabled = false;
             //Goal text to be fixed
-            goal_text.Enabled = false;
+            //goal_text.Enabled = false;
             //mmr_checkBox.Enabled = false;
 
             /*jump_text.Enabled = false;
@@ -292,6 +292,8 @@ namespace Rocket_League_Customizer
                 } else {
                     writer.WriteLine("0");
                 }
+                writer.WriteLine(spinRateText.Text);
+                writer.WriteLine(speedText.Text);
                 MessageBox.Show("Settings Saved");
                 WriteToLog("Settings Saved");
             }
@@ -371,6 +373,27 @@ namespace Rocket_League_Customizer
             {
                 writer.WriteLine(text);
             }
+
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hidden_checkBox.Checked = false;
+            nameChange_CheckBox.Checked = false;
+            customBlog_checkBox.Checked = false;
+            unlJumps_checkBox.Checked = false;
+            zombieCheckBox.Checked = false;
+            title_textBox.Text = "Rocket League Mods";
+            body_textBox.Text = "/r/RocketLeagueMods";
+            motd_textBox.Text = "Rocket League Customizer by ButterandCream";
+            youtubeTitle_textBox.Text = "Youtube";
+            youtubeURL_textBox.Text = "https://www.youtube.com/";
+            jump_text.Text = "1.5";
+            ball_text.Text = "1";
+            car_text.Text = "1";
+            goal_text.Text = "{Player} Scored!";
+            spinRateText.Text = "5.5";
+            speedText.Text = "2300.0";
 
         }
     }
