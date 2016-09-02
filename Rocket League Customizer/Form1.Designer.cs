@@ -401,7 +401,7 @@
             this.Controls.Add(this.InGameTitleLabel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket League Customizer";
+            this.Text = "Rocket Launcher";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
