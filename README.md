@@ -12,7 +12,7 @@ Current Features:
 - Show Hidden Maps
 - In Game Name Change
 - Custom Blog Menu (The Ad at the side of the main menu)
-- Goal Score Custom Text (Sometimes works sometimes doesn't - working on it - currently disabled)
+- Goal Score Custom Text (Sometimes works sometimes doesn't - working on it)
 
 Planned Features:
 
@@ -31,4 +31,4 @@ Planned Features:
 - Spider Man Mode
 - Freeze Players
 - Max Team Size
-- Please message me any feedback / more bug reports on reddit or steam.
+Please message me any feedback / more bug reports on reddit or steam.
