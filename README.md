@@ -13,12 +13,12 @@ Current Features:
 - In Game Name Change
 - Custom Blog Menu (The Ad at the side of the main menu)
 - Goal Score Custom Text (Sometimes works sometimes doesn't - working on it)
+- Change Car Spin/Torque Rate
+- Car Speed
 
 Planned Features:
 
-- Change Car Spin/Torque Rate
 - Twitch Chat
-- Car Speed
 - Custom Hotkeys
 - Demolish on opposing side of field
 - Demolish in goal
