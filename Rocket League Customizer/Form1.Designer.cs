@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLCustomizer));
             this.jump_label = new System.Windows.Forms.Label();
             this.car_label = new System.Windows.Forms.Label();
             this.ball_label = new System.Windows.Forms.Label();
@@ -399,6 +400,7 @@
             this.Controls.Add(this.jump_label);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.InGameTitleLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
             this.Text = "Rocket Launcher";

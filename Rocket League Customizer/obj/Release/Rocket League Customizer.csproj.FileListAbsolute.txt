@@ -10,3 +10,4 @@ C:\Users\Scooter\Desktop\Test\Rocket Launcher Release\Rocket Launcher.exe
 C:\Users\Scooter\Desktop\Test\Rocket Launcher Release\Rocket Launcher.pdb
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket Launcher.exe
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket Launcher.pdb
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.csprojResolveAssemblyReference.cache
