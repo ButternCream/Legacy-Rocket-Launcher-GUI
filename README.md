@@ -31,4 +31,5 @@ Planned Features:
 - Spider Man Mode
 - Freeze Players
 - Max Team Size
+
 Please message me any feedback / more bug reports on reddit or steam.
