@@ -155,7 +155,7 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            MessageBox.Show("DLL Injected");
+            MessageBox.Show("Mods Loaded");
             return;
         }
         //End DLL Injection
@@ -206,6 +206,8 @@ namespace Rocket_League_Customizer
             motd_textBox.Enabled = false;
             youtubeTitle_textBox.Enabled = false;
             youtubeURL_textBox.Enabled = false;
+            //Goal text to be fixed
+            goal_text.Enabled = false;
             //mmr_checkBox.Enabled = false;
 
             /*jump_text.Enabled = false;
@@ -297,7 +299,7 @@ namespace Rocket_League_Customizer
             //If the path isn't set tell them
             if (Properties.Settings.Default.RLPath == "")
             {
-                MessageBox.Show("Path not set. Please launch rocket league and press the \"Save\" button.", "Error");
+                MessageBox.Show("Path not set. Please launch rocket league and press the \"Set RL Path\" button.", "Error");
                 return;
             }
             else if (!(GetProcessPath("RocketLeague") == string.Empty))
@@ -321,14 +323,9 @@ namespace Rocket_League_Customizer
             System.Diagnostics.Process.Start("http://rocketleaguemods.com/");
         }
 
-        private void injectDLLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Inject DLL button (you only need to do this once).\n\nStep 3:Then hit the corresponding key.\n\n\tF1 requires you to be in game.\n\tF2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
+            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once).\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in game.\n\tF2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
         }
 
         private void dllButton_Click(object sender, EventArgs e)
@@ -337,7 +334,7 @@ namespace Rocket_League_Customizer
             exePath = exePath.Replace("\\", "\\\\");
             exePath = exePath.Remove(exePath.Length - 28);
             //MessageBox.Show(exePath);
-            String strDLLName = exePath + "RocketLeagueTest.dll"; // here you put the dll you want, only the path.
+            String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
            
             Int32 ProcID = GetProcessId(strProcessName);

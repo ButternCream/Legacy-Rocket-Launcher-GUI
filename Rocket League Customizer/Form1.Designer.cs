@@ -362,7 +362,7 @@
             this.dllButton.Name = "dllButton";
             this.dllButton.Size = new System.Drawing.Size(75, 23);
             this.dllButton.TabIndex = 28;
-            this.dllButton.Text = "Inject DLL";
+            this.dllButton.Text = "Load Mods";
             this.dllButton.UseVisualStyleBackColor = true;
             this.dllButton.Click += new System.EventHandler(this.dllButton_Click);
             // 

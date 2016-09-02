@@ -6,4 +6,3 @@ C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.csproj.GenerateResource.Cache
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.exe
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.pdb
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.csprojResolveAssemblyReference.cache
