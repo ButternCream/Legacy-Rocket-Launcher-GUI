@@ -5,7 +5,6 @@ C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket_League_Customizer.Properties.Resources.resources
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.csproj.GenerateResource.Cache
 C:\Users\Scooter\Desktop\RL Mods\Rocket Launcher Release\Rocket League Customizer.exe.config
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Release\Rocket League Customizer.csprojResolveAssemblyReference.cache
 C:\Users\Scooter\Desktop\Test\Rocket Launcher Release\Rocket Launcher.exe.config
 C:\Users\Scooter\Desktop\Test\Rocket Launcher Release\Rocket Launcher.exe
 C:\Users\Scooter\Desktop\Test\Rocket Launcher Release\Rocket Launcher.pdb

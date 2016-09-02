@@ -155,7 +155,7 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            MessageBox.Show("Mods Loaded\nPress F1 to in a game to activate the in game mods.\nPress F2 in the main menu to activate menu mods.\nGo to help for more instructions.");
+            MessageBox.Show("Mods Loaded\nPress F1 in a game to activate the in game mods.\nPress F2 in the main menu to activate menu mods.\nGo to help for more instructions.");
             return;
         }
         //End DLL Injection
@@ -189,9 +189,11 @@ namespace Rocket_League_Customizer
                     Properties.Settings.Default.RLPath = rlPath;
                     Properties.Settings.Default.Save();
                     MessageBox.Show("Rocket League Path Saved as \n" + Properties.Settings.Default.RLPath, "Success");
+                    WriteToLog("Path Saved");
                 } catch (Exception e)
                 {
                     MessageBox.Show("Unable to save Rocket League path.", "Error");
+                    WriteToLog("Path Not Saved");
                     return;
                 }
             }
@@ -230,6 +232,7 @@ namespace Rocket_League_Customizer
             {
                 string rl = processes[0].MainModule.FileName;
                 rl = rl.Replace("\\", "\\\\");
+                WriteToLog("Path: " + rl);
                 return rl.Remove(rl.Length - 16);
             }
             else
@@ -290,6 +293,7 @@ namespace Rocket_League_Customizer
                     writer.WriteLine("0");
                 }
                 MessageBox.Show("Settings Saved");
+                WriteToLog("Settings Saved");
             }
             
         }
@@ -332,8 +336,10 @@ namespace Rocket_League_Customizer
         {
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
             exePath = exePath.Replace("\\", "\\\\");
-            exePath = exePath.Remove(exePath.Length - 28);
+            exePath = exePath.Remove(exePath.Length - 19);
             //MessageBox.Show(exePath);
+            WriteToLog(exePath);
+            
             String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
            
@@ -357,6 +363,15 @@ namespace Rocket_League_Customizer
         private void setRLPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SavePath();
+        }
+
+        private void WriteToLog(string text)
+        {
+            using (StreamWriter writer = new StreamWriter("log.txt"))
+            {
+                writer.WriteLine(text);
+            }
+
         }
     }
 }

@@ -1,9 +1,8 @@
-c:\users\scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket League Customizer.exe.config
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket League Customizer.exe
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket League Customizer.pdb
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket_League_Customizer.Properties.Resources.resources
 C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket League Customizer.csproj.GenerateResource.Cache
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket League Customizer.exe
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket League Customizer.pdb
 C:\Users\Scooter\Documents\Visual Studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket_League_Customizer.RLCustomizer.resources
-C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket League Customizer.csprojResolveAssemblyReference.cache
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket Launcher.exe.config
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket Launcher.exe
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\bin\Debug\Rocket Launcher.pdb
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket Launcher.exe
+C:\Users\Scooter\documents\visual studio 2015\Projects\Rocket League Customizer\Rocket League Customizer\obj\Debug\Rocket Launcher.pdb
