@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLCustomizer));
             this.jump_label = new System.Windows.Forms.Label();
             this.car_label = new System.Windows.Forms.Label();
@@ -69,6 +70,11 @@
             this.spinRateText = new System.Windows.Forms.TextBox();
             this.speedText = new System.Windows.Forms.TextBox();
             this.speedLabel = new System.Windows.Forms.Label();
+            this.spiderManCheckBox = new System.Windows.Forms.CheckBox();
+            this.DemoOnOppCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomSizeBotsCheckBox = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +82,7 @@
             // 
             this.jump_label.AutoSize = true;
             this.jump_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jump_label.Location = new System.Drawing.Point(267, 101);
+            this.jump_label.Location = new System.Drawing.Point(334, 175);
             this.jump_label.Name = "jump_label";
             this.jump_label.Size = new System.Drawing.Size(126, 16);
             this.jump_label.TabIndex = 0;
@@ -86,7 +92,7 @@
             // 
             this.car_label.AutoSize = true;
             this.car_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.car_label.Location = new System.Drawing.Point(335, 153);
+            this.car_label.Location = new System.Drawing.Point(402, 228);
             this.car_label.Name = "car_label";
             this.car_label.Size = new System.Drawing.Size(58, 16);
             this.car_label.TabIndex = 1;
@@ -96,7 +102,7 @@
             // 
             this.ball_label.AutoSize = true;
             this.ball_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ball_label.Location = new System.Drawing.Point(333, 127);
+            this.ball_label.Location = new System.Drawing.Point(400, 201);
             this.ball_label.Name = "ball_label";
             this.ball_label.Size = new System.Drawing.Size(60, 16);
             this.ball_label.TabIndex = 2;
@@ -106,7 +112,7 @@
             // 
             this.goal_label.AutoSize = true;
             this.goal_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.goal_label.Location = new System.Drawing.Point(301, 179);
+            this.goal_label.Location = new System.Drawing.Point(368, 254);
             this.goal_label.Name = "goal_label";
             this.goal_label.Size = new System.Drawing.Size(92, 16);
             this.goal_label.TabIndex = 3;
@@ -115,7 +121,7 @@
             // jump_text
             // 
             this.jump_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jump_text.Location = new System.Drawing.Point(399, 98);
+            this.jump_text.Location = new System.Drawing.Point(466, 172);
             this.jump_text.Name = "jump_text";
             this.jump_text.Size = new System.Drawing.Size(100, 21);
             this.jump_text.TabIndex = 4;
@@ -124,7 +130,7 @@
             // ball_text
             // 
             this.ball_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ball_text.Location = new System.Drawing.Point(399, 124);
+            this.ball_text.Location = new System.Drawing.Point(466, 198);
             this.ball_text.Name = "ball_text";
             this.ball_text.Size = new System.Drawing.Size(100, 21);
             this.ball_text.TabIndex = 5;
@@ -133,7 +139,7 @@
             // car_text
             // 
             this.car_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.car_text.Location = new System.Drawing.Point(399, 150);
+            this.car_text.Location = new System.Drawing.Point(466, 225);
             this.car_text.Name = "car_text";
             this.car_text.Size = new System.Drawing.Size(100, 21);
             this.car_text.TabIndex = 6;
@@ -142,7 +148,7 @@
             // goal_text
             // 
             this.goal_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.goal_text.Location = new System.Drawing.Point(399, 176);
+            this.goal_text.Location = new System.Drawing.Point(466, 251);
             this.goal_text.Name = "goal_text";
             this.goal_text.Size = new System.Drawing.Size(147, 21);
             this.goal_text.TabIndex = 7;
@@ -152,7 +158,7 @@
             // 
             this.unlJumps_checkBox.AutoSize = true;
             this.unlJumps_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unlJumps_checkBox.Location = new System.Drawing.Point(283, 54);
+            this.unlJumps_checkBox.Location = new System.Drawing.Point(337, 54);
             this.unlJumps_checkBox.Name = "unlJumps_checkBox";
             this.unlJumps_checkBox.Size = new System.Drawing.Size(152, 20);
             this.unlJumps_checkBox.TabIndex = 8;
@@ -163,7 +169,7 @@
             // 
             this.zombieCheckBox.AutoSize = true;
             this.zombieCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zombieCheckBox.Location = new System.Drawing.Point(283, 77);
+            this.zombieCheckBox.Location = new System.Drawing.Point(337, 77);
             this.zombieCheckBox.Name = "zombieCheckBox";
             this.zombieCheckBox.Size = new System.Drawing.Size(223, 20);
             this.zombieCheckBox.TabIndex = 9;
@@ -174,28 +180,32 @@
             // 
             this.Hidden_checkBox.AutoSize = true;
             this.Hidden_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hidden_checkBox.Location = new System.Drawing.Point(55, 54);
+            this.Hidden_checkBox.Location = new System.Drawing.Point(93, 54);
             this.Hidden_checkBox.Name = "Hidden_checkBox";
             this.Hidden_checkBox.Size = new System.Drawing.Size(130, 20);
             this.Hidden_checkBox.TabIndex = 10;
             this.Hidden_checkBox.Text = "Show Hidden Maps";
+            this.toolTip2.SetToolTip(this.Hidden_checkBox, "Requires you to start training and then go back to the main menu to work.\r\nTraini" +
+        "ng map & an old version of underpass will show up in exhibition");
             this.Hidden_checkBox.UseVisualStyleBackColor = true;
             // 
             // nameChange_CheckBox
             // 
             this.nameChange_CheckBox.AutoSize = true;
             this.nameChange_CheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameChange_CheckBox.Location = new System.Drawing.Point(55, 77);
+            this.nameChange_CheckBox.Location = new System.Drawing.Point(93, 77);
             this.nameChange_CheckBox.Name = "nameChange_CheckBox";
             this.nameChange_CheckBox.Size = new System.Drawing.Size(185, 20);
             this.nameChange_CheckBox.TabIndex = 11;
             this.nameChange_CheckBox.Text = "Enable in Game Name Change";
+            this.toolTip2.SetToolTip(this.nameChange_CheckBox, "Requires you to start training and then go back to the main menu to work. \r\nClick" +
+        " on your name on the main menu to change it.");
             this.nameChange_CheckBox.UseVisualStyleBackColor = true;
             // 
             // saveBtn
             // 
             this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveBtn.Location = new System.Drawing.Point(199, 307);
+            this.saveBtn.Location = new System.Drawing.Point(239, 331);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 12;
@@ -207,7 +217,7 @@
             // 
             this.customBlog_checkBox.AutoSize = true;
             this.customBlog_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customBlog_checkBox.Location = new System.Drawing.Point(55, 100);
+            this.customBlog_checkBox.Location = new System.Drawing.Point(93, 100);
             this.customBlog_checkBox.Name = "customBlog_checkBox";
             this.customBlog_checkBox.Size = new System.Drawing.Size(166, 20);
             this.customBlog_checkBox.TabIndex = 13;
@@ -261,7 +271,7 @@
             this.motd_textBox.Name = "motd_textBox";
             this.motd_textBox.Size = new System.Drawing.Size(186, 21);
             this.motd_textBox.TabIndex = 19;
-            this.motd_textBox.Text = "Rocket League Customizer by ButterandCream";
+            this.motd_textBox.Text = "Rocket Launcher by ButterandCream";
             // 
             // MotD_label
             // 
@@ -272,6 +282,7 @@
             this.MotD_label.Size = new System.Drawing.Size(44, 17);
             this.MotD_label.TabIndex = 18;
             this.MotD_label.Text = "MotD:";
+            this.toolTip1.SetToolTip(this.MotD_label, "Message of the day");
             // 
             // youtubeTitle_textBox
             // 
@@ -305,11 +316,11 @@
             // 
             this.youtubeURL_label.AutoSize = true;
             this.youtubeURL_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeURL_label.Location = new System.Drawing.Point(1, 282);
+            this.youtubeURL_label.Location = new System.Drawing.Point(53, 282);
             this.youtubeURL_label.Name = "youtubeURL_label";
-            this.youtubeURL_label.Size = new System.Drawing.Size(86, 17);
+            this.youtubeURL_label.Size = new System.Drawing.Size(34, 17);
             this.youtubeURL_label.TabIndex = 22;
-            this.youtubeURL_label.Text = "Youtube URL:";
+            this.youtubeURL_label.Text = "URL:";
             // 
             // menuStrip1
             // 
@@ -320,7 +331,7 @@
             this.howToUseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(552, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(631, 24);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -388,26 +399,26 @@
             // 
             this.InGameTitleLabel.AutoSize = true;
             this.InGameTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InGameTitleLabel.Location = new System.Drawing.Point(279, 29);
+            this.InGameTitleLabel.Location = new System.Drawing.Point(333, 29);
             this.InGameTitleLabel.Name = "InGameTitleLabel";
             this.InGameTitleLabel.Size = new System.Drawing.Size(160, 22);
             this.InGameTitleLabel.TabIndex = 26;
-            this.InGameTitleLabel.Text = "In Game (Press F1)";
+            this.InGameTitleLabel.Text = "In Game (Press F2)";
             // 
             // MenuTitleLabel
             // 
             this.MenuTitleLabel.AutoSize = true;
             this.MenuTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuTitleLabel.Location = new System.Drawing.Point(51, 29);
+            this.MenuTitleLabel.Location = new System.Drawing.Point(89, 29);
             this.MenuTitleLabel.Name = "MenuTitleLabel";
             this.MenuTitleLabel.Size = new System.Drawing.Size(139, 22);
             this.MenuTitleLabel.TabIndex = 27;
-            this.MenuTitleLabel.Text = "Menu (Press F2)";
+            this.MenuTitleLabel.Text = "Menu (Press F1)";
             // 
             // dllButton
             // 
             this.dllButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dllButton.Location = new System.Drawing.Point(280, 307);
+            this.dllButton.Location = new System.Drawing.Point(320, 331);
             this.dllButton.Name = "dllButton";
             this.dllButton.Size = new System.Drawing.Size(75, 23);
             this.dllButton.TabIndex = 28;
@@ -419,7 +430,7 @@
             // 
             this.spinRateLabel.AutoSize = true;
             this.spinRateLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spinRateLabel.Location = new System.Drawing.Point(307, 205);
+            this.spinRateLabel.Location = new System.Drawing.Point(374, 280);
             this.spinRateLabel.Name = "spinRateLabel";
             this.spinRateLabel.Size = new System.Drawing.Size(86, 16);
             this.spinRateLabel.TabIndex = 29;
@@ -428,7 +439,7 @@
             // spinRateText
             // 
             this.spinRateText.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spinRateText.Location = new System.Drawing.Point(399, 202);
+            this.spinRateText.Location = new System.Drawing.Point(466, 277);
             this.spinRateText.Name = "spinRateText";
             this.spinRateText.Size = new System.Drawing.Size(100, 21);
             this.spinRateText.TabIndex = 30;
@@ -437,7 +448,7 @@
             // speedText
             // 
             this.speedText.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedText.Location = new System.Drawing.Point(399, 228);
+            this.speedText.Location = new System.Drawing.Point(466, 303);
             this.speedText.Name = "speedText";
             this.speedText.Size = new System.Drawing.Size(100, 21);
             this.speedText.TabIndex = 32;
@@ -447,18 +458,70 @@
             // 
             this.speedLabel.AutoSize = true;
             this.speedLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedLabel.Location = new System.Drawing.Point(324, 231);
+            this.speedLabel.Location = new System.Drawing.Point(391, 306);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(69, 16);
             this.speedLabel.TabIndex = 31;
             this.speedLabel.Text = "Max Speed:";
+            // 
+            // spiderManCheckBox
+            // 
+            this.spiderManCheckBox.AutoSize = true;
+            this.spiderManCheckBox.Location = new System.Drawing.Point(337, 103);
+            this.spiderManCheckBox.Name = "spiderManCheckBox";
+            this.spiderManCheckBox.Size = new System.Drawing.Size(110, 17);
+            this.spiderManCheckBox.TabIndex = 33;
+            this.spiderManCheckBox.Text = "Spider Man Mode";
+            this.spiderManCheckBox.UseVisualStyleBackColor = true;
+            this.spiderManCheckBox.CheckedChanged += new System.EventHandler(this.spiderManCheckBox_CheckedChanged);
+            // 
+            // DemoOnOppCheckBox
+            // 
+            this.DemoOnOppCheckBox.AutoSize = true;
+            this.DemoOnOppCheckBox.Location = new System.Drawing.Point(337, 127);
+            this.DemoOnOppCheckBox.Name = "DemoOnOppCheckBox";
+            this.DemoOnOppCheckBox.Size = new System.Drawing.Size(197, 17);
+            this.DemoOnOppCheckBox.TabIndex = 34;
+            this.DemoOnOppCheckBox.Text = "Demolish On Opposing Side Of Field";
+            this.DemoOnOppCheckBox.UseVisualStyleBackColor = true;
+            this.DemoOnOppCheckBox.CheckedChanged += new System.EventHandler(this.DemoOnOppCheckBox_CheckedChanged);
+            // 
+            // randomSizeBotsCheckBox
+            // 
+            this.randomSizeBotsCheckBox.AutoSize = true;
+            this.randomSizeBotsCheckBox.Location = new System.Drawing.Point(337, 151);
+            this.randomSizeBotsCheckBox.Name = "randomSizeBotsCheckBox";
+            this.randomSizeBotsCheckBox.Size = new System.Drawing.Size(189, 17);
+            this.randomSizeBotsCheckBox.TabIndex = 35;
+            this.randomSizeBotsCheckBox.Text = "Random Size Bots (Bots Required)";
+            this.randomSizeBotsCheckBox.UseVisualStyleBackColor = true;
+            this.randomSizeBotsCheckBox.CheckedChanged += new System.EventHandler(this.randomSizeBotsCheckBox_CheckedChanged);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 250;
+            this.toolTip1.AutoPopDelay = 10000;
+            this.toolTip1.InitialDelay = 250;
+            this.toolTip1.ReshowDelay = 50;
+            this.toolTip1.ShowAlways = true;
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
+            // toolTip2
+            // 
+            this.toolTip2.AutomaticDelay = 250;
+            this.toolTip2.AutoPopDelay = 10000;
+            this.toolTip2.InitialDelay = 250;
+            this.toolTip2.ReshowDelay = 50;
             // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(552, 346);
+            this.ClientSize = new System.Drawing.Size(631, 366);
+            this.Controls.Add(this.randomSizeBotsCheckBox);
+            this.Controls.Add(this.DemoOnOppCheckBox);
+            this.Controls.Add(this.spiderManCheckBox);
             this.Controls.Add(this.speedText);
             this.Controls.Add(this.speedLabel);
             this.Controls.Add(this.spinRateText);
@@ -546,6 +609,11 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setRLPathToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem1;
+        private System.Windows.Forms.CheckBox spiderManCheckBox;
+        private System.Windows.Forms.CheckBox DemoOnOppCheckBox;
+        private System.Windows.Forms.CheckBox randomSizeBotsCheckBox;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }
 

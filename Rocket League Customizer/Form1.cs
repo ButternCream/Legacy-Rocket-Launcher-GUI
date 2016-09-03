@@ -276,6 +276,8 @@ namespace Rocket_League_Customizer
                     writer.WriteLine("1");
                     writer.WriteLine(title_textBox.Text);
                     writer.WriteLine(body_textBox.Text);
+                    //Stops the getline function in the dll when reading multi line body
+                    writer.WriteLine("xxx");
                     writer.WriteLine(motd_textBox.Text);
                     writer.WriteLine(youtubeTitle_textBox.Text);
                     writer.WriteLine(youtubeURL_textBox.Text);
@@ -285,6 +287,9 @@ namespace Rocket_League_Customizer
                 }
                 writer.WriteLine(spinRateText.Text);
                 writer.WriteLine(speedText.Text);
+                writer.WriteLine((spiderManCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
                 MessageBox.Show("Settings Saved");
                 
                 WriteToLog("Settings Saved");
@@ -342,7 +347,14 @@ namespace Rocket_League_Customizer
                             line = reader.ReadLine();
                             title_textBox.Text = line;
                             line = reader.ReadLine();
-                            body_textBox.Text = line;
+                            body_textBox.Text = line + " ";
+                            line = reader.ReadLine();
+                            while (line != "xxx")
+                            {
+                                body_textBox.Text += line + " ";
+                                line = reader.ReadLine();
+                            }
+                            
                             line = reader.ReadLine();
                             motd_textBox.Text = line;
                             line = reader.ReadLine();
@@ -473,6 +485,29 @@ namespace Rocket_League_Customizer
             spinRateText.Text = "5.5";
             speedText.Text = "2300.0";
             WriteToLog("Reset Settings.");
+        }
+
+
+        //To Implement
+        //First
+        private void spiderManCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        //Second
+        private void DemoOnOppCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        //Third
+        private void randomSizeBotsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
         }
     }
 }
