@@ -8,16 +8,17 @@ namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
-        //bool dllInjected = false;
 
         public RLCustomizer()
         {
             InitializeComponent();
             InitCustomBlog();
-            CheckFirstTime();     
+            CheckFirstTime();
+            InitSavedSettings();
+            WriteToLog("Initialized");
         }
 
-        //Start DLL Injection
+        /* START LOAD MODS INJECTION */
 
         [DllImport("kernel32")]
         public static extern IntPtr CreateRemoteThread(
@@ -156,9 +157,11 @@ namespace Rocket_League_Customizer
             }
             // return succeeded
             MessageBox.Show("Mods Loaded\nPress F1 in a game to activate the in game mods.\nPress F2 in the main menu to activate menu mods.\nGo to help for more instructions.");
+            WriteToLog("Mods successfully loaded.");
             return;
         }
-        //End DLL Injection
+
+        /* END LOAD MODS INJECTION */
 
 
         //If its their first time running the program, tell them what to do.
@@ -166,7 +169,7 @@ namespace Rocket_League_Customizer
         {
             if (Properties.Settings.Default.FirstTime)
             {
-                MessageBox.Show("Welcome! To get everything properly set up, please start Rocket League through steam and then press the \"Set RL Path\" button.", "Welcome");
+                MessageBox.Show("Welcome! To get everything properly set up, please start Rocket League through steam and then press the \"Set RL Path\" button under Settings.", "Welcome");
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
             }
@@ -188,7 +191,7 @@ namespace Rocket_League_Customizer
                 {
                     Properties.Settings.Default.RLPath = rlPath;
                     Properties.Settings.Default.Save();
-                    MessageBox.Show("Rocket League Path Saved as \n" + Properties.Settings.Default.RLPath, "Success");
+                    MessageBox.Show("Rocket League path saved as \n" + Properties.Settings.Default.RLPath, "Success");
                     WriteToLog("Path Saved");
                 } catch (Exception e)
                 {
@@ -208,19 +211,6 @@ namespace Rocket_League_Customizer
             motd_textBox.Enabled = false;
             youtubeTitle_textBox.Enabled = false;
             youtubeURL_textBox.Enabled = false;
-            //Goal text to be fixed
-            //goal_text.Enabled = false;
-            //mmr_checkBox.Enabled = false;
-
-            /*jump_text.Enabled = false;
-            ball_text.Enabled = false;
-            car_text.Enabled = false;
-            goal_text.Enabled = false;
-            unlJumps_checkBox.Enabled = false;
-            zombieCheckBox.Enabled = false;
-            Hidden_checkBox.Enabled = false;
-            nameChange_CheckBox.Enabled = false;
-            */
         }
 
         //Function get the rocket league path to exe
@@ -241,6 +231,7 @@ namespace Rocket_League_Customizer
             }
         }
 
+        //Custom blog checkbox event
         private void customBlog_checkBox_CheckedChanged(object sender, EventArgs e)
         {
             //Check if they want custom blog or not
@@ -260,7 +251,7 @@ namespace Rocket_League_Customizer
         }
 
 
-
+        //Save button click event
         private void saveBtn_Click(object sender, EventArgs e)
         {
             //If path isn't set save it
@@ -295,11 +286,88 @@ namespace Rocket_League_Customizer
                 writer.WriteLine(spinRateText.Text);
                 writer.WriteLine(speedText.Text);
                 MessageBox.Show("Settings Saved");
+                
                 WriteToLog("Settings Saved");
+                writer.Close();
             }
             
         }
 
+        //Load saved settings from settings file
+        private void InitSavedSettings()
+        {
+            if (!File.Exists(Properties.Settings.Default.RLPath + "settings.txt") || Properties.Settings.Default.RLPath == string.Empty)
+            {
+                WriteToLog("Settings do not exist.");
+                return;
+            }
+                
+
+            string line;
+            int count = 0;
+            System.IO.StreamReader reader = new System.IO.StreamReader(Properties.Settings.Default.RLPath + "settings.txt");
+            WriteToLog("Settings do exist.");
+            while ((line = reader.ReadLine()) != null)
+            {
+                switch (count)
+                {
+                    case 0:
+                        jump_text.Text = line;
+                        break;
+                    case 1:
+                        ball_text.Text = line;
+                        break;
+                    case 2:
+                        car_text.Text = line;
+                        break;
+                    case 3:
+                        goal_text.Text = line;
+                        break;
+                    case 4:
+                        unlJumps_checkBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 5:
+                        zombieCheckBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 6:
+                        Hidden_checkBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 7:
+                        nameChange_CheckBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 8:
+                        if (line == "1")
+                        {
+                            customBlog_checkBox.Checked = true;
+                            line = reader.ReadLine();
+                            title_textBox.Text = line;
+                            line = reader.ReadLine();
+                            body_textBox.Text = line;
+                            line = reader.ReadLine();
+                            motd_textBox.Text = line;
+                            line = reader.ReadLine();
+                            youtubeTitle_textBox.Text = line;
+                            line = reader.ReadLine();
+                            youtubeURL_textBox.Text = line;
+                            break;
+                        }
+                        break;
+                    case 9:
+                        spinRateText.Text = line;
+                        break;
+                    case 10:
+                        speedText.Text = line;
+                        break;
+
+                }
+                count++;
+                
+
+            }
+            reader.Close();
+        }
+
+        //Start rocket league button event
         private void startRocketLeagueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //If the path isn't set tell them
@@ -329,11 +397,12 @@ namespace Rocket_League_Customizer
             System.Diagnostics.Process.Start("http://rocketleaguemods.com/");
         }
 
+        //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once).\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in game.\n\tF2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
         }
-
+        //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
         {
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
@@ -356,17 +425,20 @@ namespace Rocket_League_Customizer
                 }
                 else
                 {
+                    if (!File.Exists(strDLLName))
+                    {
+                        WriteToLog("Missing DLL");
+                        MessageBox.Show("DLL Missing");
+                        return;
+                    }
                     InjectDLL(hProcess, strDLLName);
-                    //dllInjected = true;
+                    
                 }
             }
         }
 
-        private void setRLPathToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SavePath();
-        }
-
+     
+        //Write to log function - Debugging
         private void WriteToLog(string text)
         {
             using (StreamWriter writer = new StreamWriter("log.txt"))
@@ -376,7 +448,13 @@ namespace Rocket_League_Customizer
 
         }
 
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        //Set RL Path
+        private void setRLPathToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SavePath();
+        }
+        //Reset settings
+        private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Hidden_checkBox.Checked = false;
             nameChange_CheckBox.Checked = false;
@@ -394,7 +472,7 @@ namespace Rocket_League_Customizer
             goal_text.Text = "{Player} Scored!";
             spinRateText.Text = "5.5";
             speedText.Text = "2300.0";
-
+            WriteToLog("Reset Settings.");
         }
     }
 }

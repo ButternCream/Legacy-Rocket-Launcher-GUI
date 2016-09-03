@@ -55,11 +55,13 @@
             this.youtubeURL_label = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startRocketLeagueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setRLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InGameTitleLabel = new System.Windows.Forms.Label();
             this.MenuTitleLabel = new System.Windows.Forms.Label();
             this.dllButton = new System.Windows.Forms.Button();
@@ -67,7 +69,6 @@
             this.spinRateText = new System.Windows.Forms.TextBox();
             this.speedText = new System.Windows.Forms.TextBox();
             this.speedLabel = new System.Windows.Forms.Label();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -237,8 +238,9 @@
             // 
             this.body_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.body_textBox.Location = new System.Drawing.Point(93, 154);
+            this.body_textBox.Multiline = true;
             this.body_textBox.Name = "body_textBox";
-            this.body_textBox.Size = new System.Drawing.Size(186, 21);
+            this.body_textBox.Size = new System.Drawing.Size(186, 67);
             this.body_textBox.TabIndex = 17;
             this.body_textBox.Text = "/r/RocketLeagueMods";
             // 
@@ -255,7 +257,7 @@
             // motd_textBox
             // 
             this.motd_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motd_textBox.Location = new System.Drawing.Point(93, 179);
+            this.motd_textBox.Location = new System.Drawing.Point(93, 228);
             this.motd_textBox.Name = "motd_textBox";
             this.motd_textBox.Size = new System.Drawing.Size(186, 21);
             this.motd_textBox.TabIndex = 19;
@@ -265,7 +267,7 @@
             // 
             this.MotD_label.AutoSize = true;
             this.MotD_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MotD_label.Location = new System.Drawing.Point(43, 183);
+            this.MotD_label.Location = new System.Drawing.Point(43, 232);
             this.MotD_label.Name = "MotD_label";
             this.MotD_label.Size = new System.Drawing.Size(44, 17);
             this.MotD_label.TabIndex = 18;
@@ -274,7 +276,7 @@
             // youtubeTitle_textBox
             // 
             this.youtubeTitle_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeTitle_textBox.Location = new System.Drawing.Point(93, 205);
+            this.youtubeTitle_textBox.Location = new System.Drawing.Point(93, 254);
             this.youtubeTitle_textBox.Name = "youtubeTitle_textBox";
             this.youtubeTitle_textBox.Size = new System.Drawing.Size(186, 21);
             this.youtubeTitle_textBox.TabIndex = 21;
@@ -284,7 +286,7 @@
             // 
             this.youtubeTitle_label.AutoSize = true;
             this.youtubeTitle_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeTitle_label.Location = new System.Drawing.Point(0, 207);
+            this.youtubeTitle_label.Location = new System.Drawing.Point(0, 256);
             this.youtubeTitle_label.Name = "youtubeTitle_label";
             this.youtubeTitle_label.Size = new System.Drawing.Size(87, 17);
             this.youtubeTitle_label.TabIndex = 20;
@@ -293,7 +295,7 @@
             // youtubeURL_textBox
             // 
             this.youtubeURL_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeURL_textBox.Location = new System.Drawing.Point(93, 231);
+            this.youtubeURL_textBox.Location = new System.Drawing.Point(93, 280);
             this.youtubeURL_textBox.Name = "youtubeURL_textBox";
             this.youtubeURL_textBox.Size = new System.Drawing.Size(186, 21);
             this.youtubeURL_textBox.TabIndex = 23;
@@ -303,7 +305,7 @@
             // 
             this.youtubeURL_label.AutoSize = true;
             this.youtubeURL_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeURL_label.Location = new System.Drawing.Point(1, 233);
+            this.youtubeURL_label.Location = new System.Drawing.Point(1, 282);
             this.youtubeURL_label.Name = "youtubeURL_label";
             this.youtubeURL_label.Size = new System.Drawing.Size(86, 17);
             this.youtubeURL_label.TabIndex = 22;
@@ -313,10 +315,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startRocketLeagueToolStripMenuItem,
-            this.setRLPathToolStripMenuItem,
+            this.settingsToolStripMenuItem,
             this.linksToolStripMenuItem,
-            this.howToUseToolStripMenuItem,
-            this.resetToolStripMenuItem});
+            this.howToUseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(552, 24);
@@ -329,6 +330,29 @@
             this.startRocketLeagueToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
             this.startRocketLeagueToolStripMenuItem.Text = "Start Rocket League";
             this.startRocketLeagueToolStripMenuItem.Click += new System.EventHandler(this.startRocketLeagueToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setRLPathToolStripMenuItem1,
+            this.resetToolStripMenuItem1});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // setRLPathToolStripMenuItem1
+            // 
+            this.setRLPathToolStripMenuItem1.Name = "setRLPathToolStripMenuItem1";
+            this.setRLPathToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.setRLPathToolStripMenuItem1.Text = "Set RL Path";
+            this.setRLPathToolStripMenuItem1.Click += new System.EventHandler(this.setRLPathToolStripMenuItem1_Click);
+            // 
+            // resetToolStripMenuItem1
+            // 
+            this.resetToolStripMenuItem1.Name = "resetToolStripMenuItem1";
+            this.resetToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.resetToolStripMenuItem1.Text = "Reset";
+            this.resetToolStripMenuItem1.Click += new System.EventHandler(this.resetToolStripMenuItem1_Click);
             // 
             // linksToolStripMenuItem
             // 
@@ -359,13 +383,6 @@
             this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.howToUseToolStripMenuItem.Text = "Help";
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.howToUseToolStripMenuItem_Click);
-            // 
-            // setRLPathToolStripMenuItem
-            // 
-            this.setRLPathToolStripMenuItem.Name = "setRLPathToolStripMenuItem";
-            this.setRLPathToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.setRLPathToolStripMenuItem.Text = "Set RL Path";
-            this.setRLPathToolStripMenuItem.Click += new System.EventHandler(this.setRLPathToolStripMenuItem_Click);
             // 
             // InGameTitleLabel
             // 
@@ -436,17 +453,11 @@
             this.speedLabel.TabIndex = 31;
             this.speedLabel.Text = "Max Speed:";
             // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
-            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(552, 346);
             this.Controls.Add(this.speedText);
             this.Controls.Add(this.speedLabel);
@@ -480,10 +491,12 @@
             this.Controls.Add(this.jump_label);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.InGameTitleLabel);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher";
+            this.Text = "Rocket Launcher 1.7";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -526,12 +539,13 @@
         private System.Windows.Forms.Label InGameTitleLabel;
         private System.Windows.Forms.Label MenuTitleLabel;
         private System.Windows.Forms.Button dllButton;
-        private System.Windows.Forms.ToolStripMenuItem setRLPathToolStripMenuItem;
         private System.Windows.Forms.Label spinRateLabel;
         private System.Windows.Forms.TextBox spinRateText;
         private System.Windows.Forms.TextBox speedText;
         private System.Windows.Forms.Label speedLabel;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setRLPathToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem1;
     }
 }
 
