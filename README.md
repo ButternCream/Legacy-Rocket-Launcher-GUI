@@ -12,12 +12,12 @@ Current Features:
 - Show Hidden Maps
 - In Game Name Change
 - Custom Blog Menu (The Ad at the side of the main menu)
-- Goal Score Custom Text (Sometimes works sometimes doesn't - working on it)
+- Goal Score Custom Text (Sometimes works sometimes doesn't)
 - Change Car Spin/Torque Rate
 - Car Speed
 - Spider Man Mode
-- Demolish on opposing side of field (Exhibiton)
-- Random bot size 
+- Demolish on Opposing Side Of Field (Exhibition)
+- Random Bot Size 
 
 Planned Features:
 
