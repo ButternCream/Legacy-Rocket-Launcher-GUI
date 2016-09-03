@@ -156,7 +156,7 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            MessageBox.Show("Mods Loaded\nPress F1 in a game to activate the in game mods.\nPress F2 in the main menu to activate menu mods.\nGo to help for more instructions.");
+            MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
             WriteToLog("Mods successfully loaded.");
             return;
         }
@@ -290,6 +290,7 @@ namespace Rocket_League_Customizer
                 writer.WriteLine((spiderManCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine(ballGravityScaleText.Text);
                 MessageBox.Show("Settings Saved");
                 
                 WriteToLog("Settings Saved");
@@ -370,7 +371,18 @@ namespace Rocket_League_Customizer
                     case 10:
                         speedText.Text = line;
                         break;
-
+                    case 11:
+                        spiderManCheckBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 12:
+                        DemoOnOppCheckBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 13:
+                        randomSizeBotsCheckBox.Checked = (line == "1") ? true : false;
+                        break;
+                    case 14:
+                        ballGravityScaleText.Text = line;
+                        break;
                 }
                 count++;
                 
@@ -420,10 +432,11 @@ namespace Rocket_League_Customizer
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
             exePath = exePath.Replace("\\", "\\\\");
             string exeName = System.AppDomain.CurrentDomain.FriendlyName;
+            WriteToLog(exeName);
             //MessageBox.Show(exeName);
             //Added dynamic file name check
             exePath = exePath.Remove(exePath.Length - exeName.Length);
-            MessageBox.Show(exePath);
+            //MessageBox.Show(exePath);
             WriteToLog(exePath);
             
             String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
@@ -478,7 +491,7 @@ namespace Rocket_League_Customizer
             zombieCheckBox.Checked = false;
             title_textBox.Text = "Rocket League Mods";
             body_textBox.Text = "/r/RocketLeagueMods";
-            motd_textBox.Text = "Rocket League Customizer by ButterandCream";
+            motd_textBox.Text = "Rocket Launcher by ButterandCream";
             youtubeTitle_textBox.Text = "Youtube";
             youtubeURL_textBox.Text = "https://www.youtube.com/";
             jump_text.Text = "1.5";
@@ -487,6 +500,7 @@ namespace Rocket_League_Customizer
             goal_text.Text = "{Player} Scored!";
             spinRateText.Text = "5.5";
             speedText.Text = "2300.0";
+            ballGravityScaleText.Text = "1";
             WriteToLog("Reset Settings.");
         }
 

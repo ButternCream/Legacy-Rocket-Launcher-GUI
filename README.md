@@ -18,6 +18,7 @@ Current Features:
 - Spider Man Mode
 - Demolish on Opposing Side Of Field (Exhibition)
 - Random Bot Size 
+- Ball Gravity Scale
 
 Planned Features:
 
@@ -25,12 +26,13 @@ Planned Features:
 - Custom Hotkeys
 - Demolish in goal
 - Max Ball Speed
-- Ball Gravity Scale
-- Ability to launch ball 
+- Ability to launch ball
 - Attach Ball to Car (football)
 - Ball Bounce
 - Set Car Physics Scale (Mass)
 - Freeze Players
 - Max Team Size
+- Dev Console
+- C++ Proxy
 
 Please message me any feedback / more bug reports on reddit or steam.
