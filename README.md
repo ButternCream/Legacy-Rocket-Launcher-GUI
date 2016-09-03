@@ -26,8 +26,8 @@ Planned Features:
 - Demolish in goal
 - Max Ball Speed
 - Ball Gravity Scale
-- Ability to launch ball (football)
-- Attach Ball to Car
+- Ability to launch ball 
+- Attach Ball to Car (football)
 - Ball Bounce
 - Set Car Physics Scale (Mass)
 - Freeze Players
