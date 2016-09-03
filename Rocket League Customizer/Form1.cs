@@ -412,15 +412,18 @@ namespace Rocket_League_Customizer
         //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once).\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in game.\n\tF2 requires you to be in the main menu.\n\nNote\nIf you enable Hidden Maps or In Game Name Change you must go into training and back out before they activate.", "Help");
+            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once).\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\tF2 requires you to be in game.\n", "Help");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
         {
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
             exePath = exePath.Replace("\\", "\\\\");
-            exePath = exePath.Remove(exePath.Length - 19);
-            //MessageBox.Show(exePath);
+            string exeName = System.AppDomain.CurrentDomain.FriendlyName;
+            //MessageBox.Show(exeName);
+            //Added dynamic file name check
+            exePath = exePath.Remove(exePath.Length - exeName.Length);
+            MessageBox.Show(exePath);
             WriteToLog(exePath);
             
             String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.

@@ -82,7 +82,8 @@
             // 
             this.jump_label.AutoSize = true;
             this.jump_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jump_label.Location = new System.Drawing.Point(309, 175);
+            this.jump_label.ForeColor = System.Drawing.Color.Black;
+            this.jump_label.Location = new System.Drawing.Point(278, 175);
             this.jump_label.Name = "jump_label";
             this.jump_label.Size = new System.Drawing.Size(147, 19);
             this.jump_label.TabIndex = 0;
@@ -92,7 +93,8 @@
             // 
             this.car_label.AutoSize = true;
             this.car_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.car_label.Location = new System.Drawing.Point(387, 228);
+            this.car_label.ForeColor = System.Drawing.Color.Black;
+            this.car_label.Location = new System.Drawing.Point(356, 228);
             this.car_label.Name = "car_label";
             this.car_label.Size = new System.Drawing.Size(69, 19);
             this.car_label.TabIndex = 1;
@@ -102,7 +104,8 @@
             // 
             this.ball_label.AutoSize = true;
             this.ball_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ball_label.Location = new System.Drawing.Point(387, 201);
+            this.ball_label.ForeColor = System.Drawing.Color.Black;
+            this.ball_label.Location = new System.Drawing.Point(356, 201);
             this.ball_label.Name = "ball_label";
             this.ball_label.Size = new System.Drawing.Size(69, 19);
             this.ball_label.TabIndex = 2;
@@ -112,7 +115,8 @@
             // 
             this.goal_label.AutoSize = true;
             this.goal_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.goal_label.Location = new System.Drawing.Point(347, 254);
+            this.goal_label.ForeColor = System.Drawing.Color.Black;
+            this.goal_label.Location = new System.Drawing.Point(316, 254);
             this.goal_label.Name = "goal_label";
             this.goal_label.Size = new System.Drawing.Size(109, 19);
             this.goal_label.TabIndex = 3;
@@ -121,7 +125,8 @@
             // jump_text
             // 
             this.jump_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jump_text.Location = new System.Drawing.Point(462, 172);
+            this.jump_text.ForeColor = System.Drawing.Color.Black;
+            this.jump_text.Location = new System.Drawing.Point(431, 172);
             this.jump_text.Name = "jump_text";
             this.jump_text.Size = new System.Drawing.Size(147, 24);
             this.jump_text.TabIndex = 4;
@@ -130,7 +135,8 @@
             // ball_text
             // 
             this.ball_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ball_text.Location = new System.Drawing.Point(462, 198);
+            this.ball_text.ForeColor = System.Drawing.Color.Black;
+            this.ball_text.Location = new System.Drawing.Point(431, 198);
             this.ball_text.Name = "ball_text";
             this.ball_text.Size = new System.Drawing.Size(147, 24);
             this.ball_text.TabIndex = 5;
@@ -139,7 +145,8 @@
             // car_text
             // 
             this.car_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.car_text.Location = new System.Drawing.Point(462, 225);
+            this.car_text.ForeColor = System.Drawing.Color.Black;
+            this.car_text.Location = new System.Drawing.Point(431, 225);
             this.car_text.Name = "car_text";
             this.car_text.Size = new System.Drawing.Size(147, 24);
             this.car_text.TabIndex = 6;
@@ -148,7 +155,8 @@
             // goal_text
             // 
             this.goal_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.goal_text.Location = new System.Drawing.Point(462, 251);
+            this.goal_text.ForeColor = System.Drawing.Color.Black;
+            this.goal_text.Location = new System.Drawing.Point(431, 251);
             this.goal_text.Name = "goal_text";
             this.goal_text.Size = new System.Drawing.Size(147, 24);
             this.goal_text.TabIndex = 7;
@@ -158,7 +166,8 @@
             // 
             this.unlJumps_checkBox.AutoSize = true;
             this.unlJumps_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unlJumps_checkBox.Location = new System.Drawing.Point(462, 51);
+            this.unlJumps_checkBox.ForeColor = System.Drawing.Color.Black;
+            this.unlJumps_checkBox.Location = new System.Drawing.Point(431, 51);
             this.unlJumps_checkBox.Name = "unlJumps_checkBox";
             this.unlJumps_checkBox.Size = new System.Drawing.Size(174, 23);
             this.unlJumps_checkBox.TabIndex = 8;
@@ -169,7 +178,8 @@
             // 
             this.zombieCheckBox.AutoSize = true;
             this.zombieCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zombieCheckBox.Location = new System.Drawing.Point(462, 74);
+            this.zombieCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.zombieCheckBox.Location = new System.Drawing.Point(431, 74);
             this.zombieCheckBox.Name = "zombieCheckBox";
             this.zombieCheckBox.Size = new System.Drawing.Size(255, 23);
             this.zombieCheckBox.TabIndex = 9;
@@ -180,11 +190,12 @@
             // 
             this.Hidden_checkBox.AutoSize = true;
             this.Hidden_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hidden_checkBox.Location = new System.Drawing.Point(99, 54);
+            this.Hidden_checkBox.ForeColor = System.Drawing.Color.Black;
+            this.Hidden_checkBox.Location = new System.Drawing.Point(71, 54);
             this.Hidden_checkBox.Name = "Hidden_checkBox";
-            this.Hidden_checkBox.Size = new System.Drawing.Size(148, 23);
+            this.Hidden_checkBox.Size = new System.Drawing.Size(166, 23);
             this.Hidden_checkBox.TabIndex = 10;
-            this.Hidden_checkBox.Text = "Show Hidden Maps";
+            this.Hidden_checkBox.Text = "Show Hidden Maps (?)";
             this.toolTip2.SetToolTip(this.Hidden_checkBox, "Requires you to start training and then go back to the main menu to work.\r\nTraini" +
         "ng map & an old version of underpass will show up in exhibition");
             this.Hidden_checkBox.UseVisualStyleBackColor = true;
@@ -193,11 +204,12 @@
             // 
             this.nameChange_CheckBox.AutoSize = true;
             this.nameChange_CheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameChange_CheckBox.Location = new System.Drawing.Point(99, 77);
+            this.nameChange_CheckBox.ForeColor = System.Drawing.Color.Black;
+            this.nameChange_CheckBox.Location = new System.Drawing.Point(71, 77);
             this.nameChange_CheckBox.Name = "nameChange_CheckBox";
-            this.nameChange_CheckBox.Size = new System.Drawing.Size(215, 23);
+            this.nameChange_CheckBox.Size = new System.Drawing.Size(233, 23);
             this.nameChange_CheckBox.TabIndex = 11;
-            this.nameChange_CheckBox.Text = "Enable in Game Name Change";
+            this.nameChange_CheckBox.Text = "Enable in Game Name Change (?)";
             this.toolTip2.SetToolTip(this.nameChange_CheckBox, "Requires you to start training and then go back to the main menu to work. \r\nClick" +
         " on your name on the main menu to change it.");
             this.nameChange_CheckBox.UseVisualStyleBackColor = true;
@@ -205,7 +217,8 @@
             // saveBtn
             // 
             this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveBtn.Location = new System.Drawing.Point(266, 338);
+            this.saveBtn.ForeColor = System.Drawing.Color.Black;
+            this.saveBtn.Location = new System.Drawing.Point(252, 338);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(86, 24);
             this.saveBtn.TabIndex = 12;
@@ -217,7 +230,8 @@
             // 
             this.customBlog_checkBox.AutoSize = true;
             this.customBlog_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customBlog_checkBox.Location = new System.Drawing.Point(99, 100);
+            this.customBlog_checkBox.ForeColor = System.Drawing.Color.Black;
+            this.customBlog_checkBox.Location = new System.Drawing.Point(71, 100);
             this.customBlog_checkBox.Name = "customBlog_checkBox";
             this.customBlog_checkBox.Size = new System.Drawing.Size(191, 23);
             this.customBlog_checkBox.TabIndex = 13;
@@ -229,7 +243,8 @@
             // 
             this.blogTitle_label.AutoSize = true;
             this.blogTitle_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blogTitle_label.Location = new System.Drawing.Point(56, 131);
+            this.blogTitle_label.ForeColor = System.Drawing.Color.Black;
+            this.blogTitle_label.Location = new System.Drawing.Point(28, 131);
             this.blogTitle_label.Name = "blogTitle_label";
             this.blogTitle_label.Size = new System.Drawing.Size(37, 19);
             this.blogTitle_label.TabIndex = 14;
@@ -238,7 +253,8 @@
             // title_textBox
             // 
             this.title_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title_textBox.Location = new System.Drawing.Point(99, 128);
+            this.title_textBox.ForeColor = System.Drawing.Color.Black;
+            this.title_textBox.Location = new System.Drawing.Point(71, 128);
             this.title_textBox.Name = "title_textBox";
             this.title_textBox.Size = new System.Drawing.Size(186, 24);
             this.title_textBox.TabIndex = 15;
@@ -247,9 +263,11 @@
             // body_textBox
             // 
             this.body_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.body_textBox.Location = new System.Drawing.Point(99, 154);
+            this.body_textBox.ForeColor = System.Drawing.Color.Black;
+            this.body_textBox.Location = new System.Drawing.Point(71, 154);
             this.body_textBox.Multiline = true;
             this.body_textBox.Name = "body_textBox";
+            this.body_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.body_textBox.Size = new System.Drawing.Size(186, 67);
             this.body_textBox.TabIndex = 17;
             this.body_textBox.Text = "/r/RocketLeagueMods";
@@ -258,7 +276,8 @@
             // 
             this.body_label.AutoSize = true;
             this.body_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.body_label.Location = new System.Drawing.Point(50, 154);
+            this.body_label.ForeColor = System.Drawing.Color.Black;
+            this.body_label.Location = new System.Drawing.Point(22, 154);
             this.body_label.Name = "body_label";
             this.body_label.Size = new System.Drawing.Size(43, 19);
             this.body_label.TabIndex = 16;
@@ -267,7 +286,8 @@
             // motd_textBox
             // 
             this.motd_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motd_textBox.Location = new System.Drawing.Point(99, 223);
+            this.motd_textBox.ForeColor = System.Drawing.Color.Black;
+            this.motd_textBox.Location = new System.Drawing.Point(71, 223);
             this.motd_textBox.Name = "motd_textBox";
             this.motd_textBox.Size = new System.Drawing.Size(186, 24);
             this.motd_textBox.TabIndex = 19;
@@ -277,17 +297,19 @@
             // 
             this.MotD_label.AutoSize = true;
             this.MotD_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MotD_label.Location = new System.Drawing.Point(45, 226);
+            this.MotD_label.ForeColor = System.Drawing.Color.Black;
+            this.MotD_label.Location = new System.Drawing.Point(-3, 225);
             this.MotD_label.Name = "MotD_label";
-            this.MotD_label.Size = new System.Drawing.Size(48, 19);
+            this.MotD_label.Size = new System.Drawing.Size(68, 19);
             this.MotD_label.TabIndex = 18;
-            this.MotD_label.Text = "MotD:";
+            this.MotD_label.Text = " (?) Motd:";
             this.toolTip1.SetToolTip(this.MotD_label, "Message of the day");
             // 
             // youtubeTitle_textBox
             // 
             this.youtubeTitle_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeTitle_textBox.Location = new System.Drawing.Point(99, 249);
+            this.youtubeTitle_textBox.ForeColor = System.Drawing.Color.Black;
+            this.youtubeTitle_textBox.Location = new System.Drawing.Point(71, 249);
             this.youtubeTitle_textBox.Name = "youtubeTitle_textBox";
             this.youtubeTitle_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeTitle_textBox.TabIndex = 21;
@@ -297,16 +319,18 @@
             // 
             this.youtubeTitle_label.AutoSize = true;
             this.youtubeTitle_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeTitle_label.Location = new System.Drawing.Point(0, 252);
+            this.youtubeTitle_label.ForeColor = System.Drawing.Color.Black;
+            this.youtubeTitle_label.Location = new System.Drawing.Point(28, 252);
             this.youtubeTitle_label.Name = "youtubeTitle_label";
-            this.youtubeTitle_label.Size = new System.Drawing.Size(93, 19);
+            this.youtubeTitle_label.Size = new System.Drawing.Size(37, 19);
             this.youtubeTitle_label.TabIndex = 20;
-            this.youtubeTitle_label.Text = "Youtube Title:";
+            this.youtubeTitle_label.Text = "Title:";
             // 
             // youtubeURL_textBox
             // 
             this.youtubeURL_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeURL_textBox.Location = new System.Drawing.Point(99, 275);
+            this.youtubeURL_textBox.ForeColor = System.Drawing.Color.Black;
+            this.youtubeURL_textBox.Location = new System.Drawing.Point(71, 275);
             this.youtubeURL_textBox.Name = "youtubeURL_textBox";
             this.youtubeURL_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeURL_textBox.TabIndex = 23;
@@ -316,7 +340,8 @@
             // 
             this.youtubeURL_label.AutoSize = true;
             this.youtubeURL_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youtubeURL_label.Location = new System.Drawing.Point(56, 278);
+            this.youtubeURL_label.ForeColor = System.Drawing.Color.Black;
+            this.youtubeURL_label.Location = new System.Drawing.Point(28, 278);
             this.youtubeURL_label.Name = "youtubeURL_label";
             this.youtubeURL_label.Size = new System.Drawing.Size(37, 19);
             this.youtubeURL_label.TabIndex = 22;
@@ -324,6 +349,8 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startRocketLeagueToolStripMenuItem,
@@ -332,12 +359,14 @@
             this.howToUseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(722, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(699, 27);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // startRocketLeagueToolStripMenuItem
             // 
+            this.startRocketLeagueToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.startRocketLeagueToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.startRocketLeagueToolStripMenuItem.Name = "startRocketLeagueToolStripMenuItem";
             this.startRocketLeagueToolStripMenuItem.Size = new System.Drawing.Size(145, 23);
             this.startRocketLeagueToolStripMenuItem.Text = "Start Rocket League";
@@ -348,6 +377,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setRLPathToolStripMenuItem1,
             this.resetToolStripMenuItem1});
+            this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(71, 23);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -368,9 +398,11 @@
             // 
             // linksToolStripMenuItem
             // 
+            this.linksToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.linksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.redditToolStripMenuItem,
             this.websiteToolStripMenuItem});
+            this.linksToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.linksToolStripMenuItem.Name = "linksToolStripMenuItem";
             this.linksToolStripMenuItem.Size = new System.Drawing.Size(52, 23);
             this.linksToolStripMenuItem.Text = "Links";
@@ -391,6 +423,7 @@
             // 
             // howToUseToolStripMenuItem
             // 
+            this.howToUseToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.howToUseToolStripMenuItem.Name = "howToUseToolStripMenuItem";
             this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(49, 23);
             this.howToUseToolStripMenuItem.Text = "Help";
@@ -400,7 +433,8 @@
             // 
             this.InGameTitleLabel.AutoSize = true;
             this.InGameTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InGameTitleLabel.Location = new System.Drawing.Point(457, 30);
+            this.InGameTitleLabel.ForeColor = System.Drawing.Color.Black;
+            this.InGameTitleLabel.Location = new System.Drawing.Point(426, 30);
             this.InGameTitleLabel.Name = "InGameTitleLabel";
             this.InGameTitleLabel.Size = new System.Drawing.Size(152, 21);
             this.InGameTitleLabel.TabIndex = 26;
@@ -410,7 +444,8 @@
             // 
             this.MenuTitleLabel.AutoSize = true;
             this.MenuTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuTitleLabel.Location = new System.Drawing.Point(95, 30);
+            this.MenuTitleLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenuTitleLabel.Location = new System.Drawing.Point(67, 30);
             this.MenuTitleLabel.Name = "MenuTitleLabel";
             this.MenuTitleLabel.Size = new System.Drawing.Size(132, 21);
             this.MenuTitleLabel.TabIndex = 27;
@@ -419,7 +454,8 @@
             // dllButton
             // 
             this.dllButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dllButton.Location = new System.Drawing.Point(358, 338);
+            this.dllButton.ForeColor = System.Drawing.Color.Black;
+            this.dllButton.Location = new System.Drawing.Point(344, 338);
             this.dllButton.Name = "dllButton";
             this.dllButton.Size = new System.Drawing.Size(86, 24);
             this.dllButton.TabIndex = 28;
@@ -431,7 +467,8 @@
             // 
             this.spinRateLabel.AutoSize = true;
             this.spinRateLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spinRateLabel.Location = new System.Drawing.Point(355, 280);
+            this.spinRateLabel.ForeColor = System.Drawing.Color.Black;
+            this.spinRateLabel.Location = new System.Drawing.Point(324, 280);
             this.spinRateLabel.Name = "spinRateLabel";
             this.spinRateLabel.Size = new System.Drawing.Size(101, 19);
             this.spinRateLabel.TabIndex = 29;
@@ -440,7 +477,8 @@
             // spinRateText
             // 
             this.spinRateText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spinRateText.Location = new System.Drawing.Point(462, 277);
+            this.spinRateText.ForeColor = System.Drawing.Color.Black;
+            this.spinRateText.Location = new System.Drawing.Point(431, 277);
             this.spinRateText.Name = "spinRateText";
             this.spinRateText.Size = new System.Drawing.Size(147, 24);
             this.spinRateText.TabIndex = 30;
@@ -449,7 +487,8 @@
             // speedText
             // 
             this.speedText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedText.Location = new System.Drawing.Point(462, 303);
+            this.speedText.ForeColor = System.Drawing.Color.Black;
+            this.speedText.Location = new System.Drawing.Point(431, 303);
             this.speedText.Name = "speedText";
             this.speedText.Size = new System.Drawing.Size(147, 24);
             this.speedText.TabIndex = 32;
@@ -459,7 +498,8 @@
             // 
             this.speedLabel.AutoSize = true;
             this.speedLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedLabel.Location = new System.Drawing.Point(375, 306);
+            this.speedLabel.ForeColor = System.Drawing.Color.Black;
+            this.speedLabel.Location = new System.Drawing.Point(344, 306);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(81, 19);
             this.speedLabel.TabIndex = 31;
@@ -469,7 +509,8 @@
             // 
             this.spiderManCheckBox.AutoSize = true;
             this.spiderManCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spiderManCheckBox.Location = new System.Drawing.Point(462, 97);
+            this.spiderManCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.spiderManCheckBox.Location = new System.Drawing.Point(431, 97);
             this.spiderManCheckBox.Name = "spiderManCheckBox";
             this.spiderManCheckBox.Size = new System.Drawing.Size(139, 23);
             this.spiderManCheckBox.TabIndex = 33;
@@ -481,7 +522,8 @@
             // 
             this.DemoOnOppCheckBox.AutoSize = true;
             this.DemoOnOppCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DemoOnOppCheckBox.Location = new System.Drawing.Point(462, 121);
+            this.DemoOnOppCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.DemoOnOppCheckBox.Location = new System.Drawing.Point(431, 121);
             this.DemoOnOppCheckBox.Name = "DemoOnOppCheckBox";
             this.DemoOnOppCheckBox.Size = new System.Drawing.Size(254, 23);
             this.DemoOnOppCheckBox.TabIndex = 34;
@@ -493,7 +535,8 @@
             // 
             this.randomSizeBotsCheckBox.AutoSize = true;
             this.randomSizeBotsCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.randomSizeBotsCheckBox.Location = new System.Drawing.Point(462, 145);
+            this.randomSizeBotsCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.randomSizeBotsCheckBox.Location = new System.Drawing.Point(431, 145);
             this.randomSizeBotsCheckBox.Name = "randomSizeBotsCheckBox";
             this.randomSizeBotsCheckBox.Size = new System.Drawing.Size(235, 23);
             this.randomSizeBotsCheckBox.TabIndex = 35;
@@ -521,8 +564,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(722, 374);
+            this.ClientSize = new System.Drawing.Size(699, 374);
             this.Controls.Add(this.randomSizeBotsCheckBox);
             this.Controls.Add(this.DemoOnOppCheckBox);
             this.Controls.Add(this.spiderManCheckBox);
@@ -559,6 +603,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.InGameTitleLabel);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
