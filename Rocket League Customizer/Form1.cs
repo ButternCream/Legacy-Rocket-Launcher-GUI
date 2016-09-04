@@ -33,6 +33,7 @@ namespace Rocket_League_Customizer
             InitCustomBlog();
             CheckFirstTime();
             InitSavedSettings();
+            InitMaps();
             WriteToLog("Initialized");
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
@@ -245,6 +246,7 @@ namespace Rocket_League_Customizer
             motd_textBox.Enabled = false;
             youtubeTitle_textBox.Enabled = false;
             youtubeURL_textBox.Enabled = false;
+            //loaderTab.Enabled = false;
         }
 
         //Function get the rocket league path to exe
@@ -325,6 +327,7 @@ namespace Rocket_League_Customizer
                 writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine(ballGravityScaleText.Text);
+                writer.WriteLine(bounceScaleText.Text);
                 MessageBox.Show("Settings Saved");
                 
                 WriteToLog("Settings Saved");
@@ -338,7 +341,7 @@ namespace Rocket_League_Customizer
         {
             // Initialize settings saved to application
             autoLoadModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoLoadMods;
-
+            
 
             if (!File.Exists(Properties.Settings.Default.RLPath + "settings.txt") || Properties.Settings.Default.RLPath == string.Empty)
             {
@@ -420,6 +423,9 @@ namespace Rocket_League_Customizer
                         break;
                     case 14:
                         ballGravityScaleText.Text = line;
+                        break;
+                    case 15:
+                        bounceScaleText.Text = line;
                         break;
                 }
                 count++;
@@ -539,6 +545,7 @@ namespace Rocket_League_Customizer
             spinRateText.Text = "5.5";
             speedText.Text = "2300.0";
             ballGravityScaleText.Text = "1";
+            bounceScaleText.Text = "1";
             WriteToLog("Reset Settings.");
         }
 
@@ -643,6 +650,112 @@ namespace Rocket_League_Customizer
         private void autoLoadModsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             autoLoadModsToolStripMenuItem.Checked = !autoLoadModsToolStripMenuItem.Checked;
+        }
+
+        /* All functions related to the map loader
+         * 
+         *  BEGIN
+         *  
+         */
+
+         //Add Maps Button
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = mapFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string filename = Path.GetFileName(mapFileDialog.FileName);
+                AddMaps(filename);
+                
+            }
+        }
+
+        //Initiate the maps.txt file
+        //Checks if it exists and if not create the map file
+        //Otherwise just read the maps
+        private void InitMaps()
+        {
+            if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
+            {
+                using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
+                {
+                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park(Midnight)" + Environment.NewLine +
+                        "Beckwith Park(Stormy)" + Environment.NewLine + "Cosmic(Rocket Labs)" + Environment.NewLine + "DFH Stadium"
+                        + Environment.NewLine + "DFH Stadium(Snowy)" + Environment.NewLine + "Double Goal(Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
+                        "Mannfield(Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars(Rocket Labs)" + Environment.NewLine + "Test Volleyball" + Environment.NewLine + "Underpass(Rocket Labs)"
+                         + Environment.NewLine + "Underpass V0(Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central(Night)" + Environment.NewLine +
+                         "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum(Dusk)" + Environment.NewLine + "Utopia Retro(Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
+                    writer.Close();
+                }
+                readMaps();
+
+                WriteToLog("maps.txt created");
+            }
+            else
+            {
+                readMaps();
+                WriteToLog("maps.txt already exists, reading maps...");
+            }
+        }
+
+        //Add custom map to file and list box
+        private void AddMaps(string mapName)
+        {
+            
+            if (File.ReadAllText(Properties.Settings.Default.RLPath + "maps.txt").Contains(mapName))
+            {
+                MessageBox.Show("Map is already added");
+                return;
+            }
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
+            {
+                
+                mapBoxList.Items.Add(mapName);
+                writer.WriteLine(mapName);
+                writer.Close();
+                MessageBox.Show(mapName + " Added");
+                WriteToLog(mapName + "added to the list.");
+            }
+        }
+
+        //Reads the maps in from the file
+        private void readMaps()
+        {
+            if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
+            {
+                return;
+            }
+            string name;
+            using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "maps.txt"))
+            {
+                while((name = reader.ReadLine()) != null)
+                {
+                    mapBoxList.Items.Add(name);
+                }
+                reader.Close();
+            }
+            WriteToLog("Read maps.txt");
+        }
+
+        //Save Maps Settings
+        private void saveMapsSettingsBtn_Click(object sender, EventArgs e)
+        {
+            string mapName = mapBoxList.Text;
+            string gameType = gameTypeComboBox.Text;
+            if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
+            {
+                MessageBox.Show("Please select a valid setting for all fields.");
+                return;
+            }
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            {
+                writer.WriteLine(mapName);
+                writer.WriteLine(gameType);
+                writer.Close();
+                
+            }
+            MessageBox.Show("Map loader settings saved.");
+            WriteToLog("Map loader settings saved.");
         }
     }
 }
