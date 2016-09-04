@@ -25,6 +25,11 @@ namespace Rocket_League_Customizer
         public RLCustomizer()
         {
             InitializeComponent();
+
+            // Since log now appends, clear log file on startup
+            File.WriteAllText("log.txt", "");
+
+
             InitCustomBlog();
             CheckFirstTime();
             InitSavedSettings();
@@ -33,7 +38,6 @@ namespace Rocket_League_Customizer
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
             exePath = System.IO.Directory.GetCurrentDirectory() + "\\";
             WriteToLog(exePath);
-
 
             // Watcher to check for RL Start
             startWatcher = WatchForProcessStart("RocketLeague.exe");
