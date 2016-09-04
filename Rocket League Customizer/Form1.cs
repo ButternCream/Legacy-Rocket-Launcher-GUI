@@ -4,6 +4,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Management;
 
 /*
  * When adding a new feature make sure to change:
@@ -16,6 +17,9 @@ namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
+        private ManagementEventWatcher startWatcher;
+        private ManagementEventWatcher stopWatcher;
+
 
         public RLCustomizer()
         {
@@ -24,6 +28,10 @@ namespace Rocket_League_Customizer
             CheckFirstTime();
             InitSavedSettings();
             WriteToLog("Initialized");
+
+            // Watcher to check for RL Start
+            startWatcher = WatchForProcessStart("RocketLeague.exe");
+
         }
 
         /* START LOAD MODS INJECTION */
@@ -538,6 +546,62 @@ namespace Rocket_League_Customizer
 
         }
 
-    
+        private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Clean up watcher classes
+            startWatcher.Stop();
+        }
+
+        private ManagementEventWatcher WatchForProcessStart(string processName)
+        {
+            string queryString =
+                "SELECT TargetInstance" +
+                "  FROM __InstanceCreationEvent " +
+                "WITHIN  2 " +
+                " WHERE TargetInstance ISA 'Win32_Process' " +
+                "   AND TargetInstance.Name = '" + processName + "'";
+
+            // The dot in the scope means use the current machine
+            string scope = @"\\.\root\CIMV2";
+
+            // Create a watcher and listen for events
+            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
+            watcher.EventArrived += ProcessStarted;
+            watcher.Start();
+            return watcher;
+        }
+
+        private ManagementEventWatcher WatchForProcessEnd(string processName)
+        {
+            string queryString =
+                "SELECT TargetInstance" +
+                "  FROM __InstanceDeletionEvent " +
+                "WITHIN  2 " +
+                " WHERE TargetInstance ISA 'Win32_Process' " +
+                "   AND TargetInstance.Name = '" + processName + "'";
+
+            // The dot in the scope means use the current machine
+            string scope = @"\\.\root\CIMV2";
+
+            // Create a watcher and listen for events
+            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
+            watcher.EventArrived += ProcessEnded;
+            watcher.Start();
+            return watcher;
+        }
+
+        private void ProcessEnded(object sender, EventArrivedEventArgs e)
+        {
+            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
+            string processName = targetInstance.Properties["Name"].Value.ToString();
+            Console.WriteLine(String.Format("{0} process ended", processName));
+        }
+
+        private void ProcessStarted(object sender, EventArrivedEventArgs e)
+        {
+            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
+            string processName = targetInstance.Properties["Name"].Value.ToString();
+            Console.WriteLine(String.Format("{0} process started", processName));
+        }
     }
 }
