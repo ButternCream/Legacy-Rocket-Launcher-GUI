@@ -4,6 +4,14 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
+
+/*
+ * When adding a new feature make sure to change:
+ * 1. Writing it to the settings file
+ * 2. Reading it from the settings file
+ * 3. Reset button event
+ */
+
 namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
@@ -489,6 +497,9 @@ namespace Rocket_League_Customizer
             customBlog_checkBox.Checked = false;
             unlJumps_checkBox.Checked = false;
             zombieCheckBox.Checked = false;
+            spiderManCheckBox.Checked = false;
+            DemoOnOppCheckBox.Checked = false;
+            randomSizeBotsCheckBox.Checked = false;
             title_textBox.Text = "Rocket League Mods";
             body_textBox.Text = "/r/RocketLeagueMods";
             motd_textBox.Text = "Rocket Launcher by ButterandCream";
@@ -527,5 +538,6 @@ namespace Rocket_League_Customizer
 
         }
 
+    
     }
 }
