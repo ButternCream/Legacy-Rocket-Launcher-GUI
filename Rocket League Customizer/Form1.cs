@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Management;
+using System.Net;
+using System.Text;
 
 /*
  * When adding a new feature make sure to change:
@@ -20,7 +22,7 @@ namespace Rocket_League_Customizer
         private ManagementEventWatcher startWatcher;
         private ManagementEventWatcher endWatcher;
         private string exePath;
-
+        private WebServer ws;
 
         public RLCustomizer()
         {
@@ -45,6 +47,70 @@ namespace Rocket_League_Customizer
             endWatcher = WatchForProcessEnd("RocketLeague.exe");
 
 
+            ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
+            ws.Run();
+
+        }
+
+        public static string SendResponse(HttpListenerRequest request)
+        {
+
+            if(request.Url.AbsolutePath.Contains("/Keys/GenerateKeys"))
+                return "Version=1&Key=ymaFdh03/Hw4rvHjr1zhlZVyNWQipDQqC1nzptiXfgE=&IV=nZ2e0bJY1YVZAgORhFbsEw==&HMACKey=Xv17y2p+hdaGbQgtnWAPbC58xeNGbNSDHr3wvODVsjE=&SessionID=9fhBAd0kBYFMMWmbA8GrkQ==";
+            else
+            {
+                string newUrl = request.Url.AbsoluteUri.Replace("http://localhost:8080/", "https://psyonix-rl.appspot.com/");
+                Console.WriteLine(newUrl);
+                var proxyRequest = (HttpWebRequest)WebRequest.Create(newUrl);
+
+                proxyRequest.Method = request.HttpMethod;
+
+                //proxyRequest.Headers.Add(request.Headers);
+
+                proxyRequest.Headers["BuildID"] = request.Headers["BuildID"];
+                proxyRequest.Headers["SessionID"] = request.Headers["SessionID"];
+                proxyRequest.Headers["CallProcKey"] = request.Headers["CallProcKey"];
+                proxyRequest.Headers["Environment"] = request.Headers["Environment"];
+
+                string origRequestBody = "";
+
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(request.InputStream, request.ContentEncoding))
+                {
+                    origRequestBody = reader.ReadToEnd();
+                }
+                Console.WriteLine(origRequestBody);
+
+                ASCIIEncoding encoding = new ASCIIEncoding();
+                byte[] byte1 = encoding.GetBytes(origRequestBody);
+
+                // Set the content type of the data being posted.
+                proxyRequest.ContentType = "application/x-www-form-urlencoded";
+
+                // Set the content length of the string being posted.
+                proxyRequest.ContentLength = byte1.Length;
+
+                Stream newStream = proxyRequest.GetRequestStream();
+
+                newStream.Write(byte1, 0, byte1.Length);
+
+                /**
+                byte[] body = new byte[request.InputStream.Length];
+                request.InputStream.Read(body, 0, body.Length);
+                proxyRequest.GetRequestStream().Write(body, 0, body.Length);
+                **/
+
+                using (var response = (HttpWebResponse)proxyRequest.GetResponse())
+                {
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(stream, Encoding.ASCII);
+                        String responseString = reader.ReadToEnd();
+                        return responseString;
+                    }
+                }
+
+                return "error";
+            }
         }
 
         /* START LOAD MODS INJECTION */
@@ -570,6 +636,9 @@ namespace Rocket_League_Customizer
             // Clean up watcher classes
             startWatcher.Stop();
             endWatcher.Stop();
+
+            // End webserver
+            ws.Stop();
         }
 
         private ManagementEventWatcher WatchForProcessStart(string processName)
@@ -577,7 +646,7 @@ namespace Rocket_League_Customizer
             string queryString =
                 "SELECT TargetInstance" +
                 "  FROM __InstanceCreationEvent " +
-                "WITHIN  2 " +
+                "WITHIN  3 " +
                 " WHERE TargetInstance ISA 'Win32_Process' " +
                 "   AND TargetInstance.Name = '" + processName + "'";
 
@@ -596,7 +665,7 @@ namespace Rocket_League_Customizer
             string queryString =
                 "SELECT TargetInstance" +
                 "  FROM __InstanceDeletionEvent " +
-                "WITHIN  2 " +
+                "WITHIN  3 " +
                 " WHERE TargetInstance ISA 'Win32_Process' " +
                 "   AND TargetInstance.Name = '" + processName + "'";
 
