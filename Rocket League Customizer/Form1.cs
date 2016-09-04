@@ -18,7 +18,7 @@ namespace Rocket_League_Customizer
     public partial class RLCustomizer : Form
     {
         private ManagementEventWatcher startWatcher;
-        private ManagementEventWatcher stopWatcher;
+        private ManagementEventWatcher endWatcher;
 
 
         public RLCustomizer()
@@ -31,6 +31,8 @@ namespace Rocket_League_Customizer
 
             // Watcher to check for RL Start
             startWatcher = WatchForProcessStart("RocketLeague.exe");
+            // Watcher to check for RL End
+            endWatcher = WatchForProcessEnd("RocketLeague.exe");
 
         }
 
@@ -192,13 +194,14 @@ namespace Rocket_League_Customizer
         }
 
         //Save the path of Rocket Leauge
-        private void SavePath()
+        // TU - Added boolean for displaying error message.  If called by button press, save path and display errors.  If called by polling threads, silently update path if possible
+        private bool SavePath(bool showSuccessOutput)
         {
             string rlPath = GetProcessPath("RocketLeague");
             if (rlPath == string.Empty)
             {
                 MessageBox.Show("Please have Rocket League running.", "Error");
-                return;
+                return false;
             }
             else
             {
@@ -207,13 +210,17 @@ namespace Rocket_League_Customizer
                 {
                     Properties.Settings.Default.RLPath = rlPath;
                     Properties.Settings.Default.Save();
-                    MessageBox.Show("Rocket League path saved as \n" + Properties.Settings.Default.RLPath, "Success");
+                    if (showSuccessOutput)
+                    {
+                        MessageBox.Show("Rocket League path saved as \n" + Properties.Settings.Default.RLPath, "Success");
+                    }
                     WriteToLog("Path Saved");
+                    return true;
                 } catch (Exception e)
                 {
                     MessageBox.Show("Unable to save Rocket League path.", "Error");
                     WriteToLog("Path Not Saved");
-                    return;
+                    return false;
                 }
             }
             
@@ -495,7 +502,7 @@ namespace Rocket_League_Customizer
         //Set RL Path
         private void setRLPathToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SavePath();
+            SavePath(true);
         }
         //Reset settings
         private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -550,6 +557,7 @@ namespace Rocket_League_Customizer
         {
             // Clean up watcher classes
             startWatcher.Stop();
+            endWatcher.Stop();
         }
 
         private ManagementEventWatcher WatchForProcessStart(string processName)
@@ -601,7 +609,11 @@ namespace Rocket_League_Customizer
         {
             ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
             string processName = targetInstance.Properties["Name"].Value.ToString();
-            Console.WriteLine(String.Format("{0} process started", processName));
+            WriteToLog("RocketLeague Start detected.");
+            // Update RL path
+            SavePath(false);
+            // Check if autoload mods is checked
+
         }
     }
 }
