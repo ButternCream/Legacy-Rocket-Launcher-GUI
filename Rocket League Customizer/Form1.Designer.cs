@@ -83,6 +83,7 @@
             this.loaderTab = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.mapBoxList = new System.Windows.Forms.ComboBox();
+            this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -414,7 +415,8 @@
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setRLPathToolStripMenuItem1,
-            this.resetToolStripMenuItem1});
+            this.resetToolStripMenuItem1,
+            this.autoLoadModsToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(100, 31);
@@ -762,6 +764,14 @@
             this.mapBoxList.Size = new System.Drawing.Size(266, 32);
             this.mapBoxList.TabIndex = 2;
             // 
+            // autoLoadModsToolStripMenuItem
+            // 
+            this.autoLoadModsToolStripMenuItem.Name = "autoLoadModsToolStripMenuItem";
+            this.autoLoadModsToolStripMenuItem.Size = new System.Drawing.Size(282, 32);
+            this.autoLoadModsToolStripMenuItem.Text = "Auto Load Mods";
+            this.autoLoadModsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.autoLoadModsToolStripMenuItem_CheckedChanged);
+            this.autoLoadModsToolStripMenuItem.Click += new System.EventHandler(this.autoLoadModsToolStripMenuItem_Click);
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -851,6 +861,7 @@
         private System.Windows.Forms.TabPage loaderTab;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox mapBoxList;
+        private System.Windows.Forms.ToolStripMenuItem autoLoadModsToolStripMenuItem;
     }
 }
 

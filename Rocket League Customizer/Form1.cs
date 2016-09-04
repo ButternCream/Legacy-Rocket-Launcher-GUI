@@ -19,6 +19,7 @@ namespace Rocket_League_Customizer
     {
         private ManagementEventWatcher startWatcher;
         private ManagementEventWatcher endWatcher;
+        private string exePath;
 
 
         public RLCustomizer()
@@ -29,10 +30,16 @@ namespace Rocket_League_Customizer
             InitSavedSettings();
             WriteToLog("Initialized");
 
+            // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
+            exePath = System.IO.Directory.GetCurrentDirectory() + "\\";
+            WriteToLog(exePath);
+
+
             // Watcher to check for RL Start
             startWatcher = WatchForProcessStart("RocketLeague.exe");
             // Watcher to check for RL End
             endWatcher = WatchForProcessEnd("RocketLeague.exe");
+
 
         }
 
@@ -325,6 +332,10 @@ namespace Rocket_League_Customizer
         //Load saved settings from settings file
         private void InitSavedSettings()
         {
+            // Initialize settings saved to application
+            autoLoadModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoLoadMods;
+
+
             if (!File.Exists(Properties.Settings.Default.RLPath + "settings.txt") || Properties.Settings.Default.RLPath == string.Empty)
             {
                 WriteToLog("Settings do not exist.");
@@ -452,19 +463,14 @@ namespace Rocket_League_Customizer
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
         {
-            string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            exePath = exePath.Replace("\\", "\\\\");
-            string exeName = System.AppDomain.CurrentDomain.FriendlyName;
-            WriteToLog(exeName);
-            //MessageBox.Show(exeName);
-            //Added dynamic file name check
-            exePath = exePath.Remove(exePath.Length - exeName.Length);
-            //MessageBox.Show(exePath);
-            WriteToLog(exePath);
-            
+            LoadMods();
+        }
+
+        private bool LoadMods()
+        {
             String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
-           
+
             Int32 ProcID = GetProcessId(strProcessName);
             if (ProcID >= 0)
             {
@@ -472,7 +478,7 @@ namespace Rocket_League_Customizer
                 if (hProcess == null)
                 {
                     MessageBox.Show("OpenProcess() Failed!");
-                    return;
+                    return false;
                 }
                 else
                 {
@@ -480,19 +486,21 @@ namespace Rocket_League_Customizer
                     {
                         WriteToLog("Missing DLL");
                         MessageBox.Show("DLL Missing");
-                        return;
+                        return false;
                     }
                     InjectDLL(hProcess, strDLLName);
-                    
+
                 }
             }
+            return true;
         }
 
      
-        //Write to log function - Debugging
+        // Write to log function - Debugging
+        // TU - Fixed log so it appends each time.
         private void WriteToLog(string text)
         {
-            using (StreamWriter writer = new StreamWriter("log.txt"))
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 writer.WriteLine(text);
             }
@@ -602,7 +610,7 @@ namespace Rocket_League_Customizer
         {
             ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
             string processName = targetInstance.Properties["Name"].Value.ToString();
-            Console.WriteLine(String.Format("{0} process ended", processName));
+            WriteToLog("RocketLeague End detected.");
         }
 
         private void ProcessStarted(object sender, EventArrivedEventArgs e)
@@ -613,7 +621,24 @@ namespace Rocket_League_Customizer
             // Update RL path
             SavePath(false);
             // Check if autoload mods is checked
+            if(autoLoadModsToolStripMenuItem.Checked)
+            {
+                if (LoadMods())
+                    WriteToLog("Auto Loaded mods, awesome.");
+                else
+                    WriteToLog("Error auto loading mods.");
+            }
+        }
 
+        private void autoLoadModsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AutoLoadMods = autoLoadModsToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void autoLoadModsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            autoLoadModsToolStripMenuItem.Checked = !autoLoadModsToolStripMenuItem.Checked;
         }
     }
 }

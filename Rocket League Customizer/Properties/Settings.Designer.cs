@@ -46,5 +46,17 @@ namespace Rocket_League_Customizer.Properties {
                 this["FirstTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoLoadMods {
+            get {
+                return ((bool)(this["AutoLoadMods"]));
+            }
+            set {
+                this["AutoLoadMods"] = value;
+            }
+        }
     }
 }
