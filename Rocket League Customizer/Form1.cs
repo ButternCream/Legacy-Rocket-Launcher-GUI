@@ -291,7 +291,7 @@ namespace Rocket_League_Customizer
         private void saveBtn_Click(object sender, EventArgs e)
         {
             //If path isn't set save it
-            if (Properties.Settings.Default.RLPath == "")
+            if (Properties.Settings.Default.RLPath == String.Empty)
             {
                 MessageBox.Show("Please start Rocket League and click the \"Set RL Path\"");
                 return;
@@ -439,7 +439,7 @@ namespace Rocket_League_Customizer
         private void startRocketLeagueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //If the path isn't set tell them
-            if (Properties.Settings.Default.RLPath == "")
+            if (Properties.Settings.Default.RLPath == String.Empty)
             {
                 MessageBox.Show("Path not set. Please launch rocket league and press the \"Set RL Path\" button.", "Error");
                 return;
@@ -468,7 +468,9 @@ namespace Rocket_League_Customizer
         //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once).\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\tF2 requires you to be in game.\n", "Help");
+            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once)."+
+                "\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\tF2 requires you to be in game.\n\nMap Loader\n\nTo load a map go to the map loader tab a choose the map and game type."
+                + "\n\nThen click \"Save Map Settings\" and then \"Load Mods\".\n\nThen press F3 in the main menu to load the map.", "Help");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
@@ -521,6 +523,7 @@ namespace Rocket_League_Customizer
         private void setRLPathToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             SavePath(true);
+            InitMaps();
         }
         //Reset settings
         private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -675,6 +678,11 @@ namespace Rocket_League_Customizer
         //Otherwise just read the maps
         private void InitMaps()
         {
+            if (Properties.Settings.Default.RLPath == String.Empty)
+            {
+                WriteToLog("Path empty... returning from InitMaps()");
+                return;
+            }
             if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
             {
                 using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
@@ -723,6 +731,7 @@ namespace Rocket_League_Customizer
         {
             if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
             {
+                InitMaps();
                 return;
             }
             string name;
@@ -746,6 +755,10 @@ namespace Rocket_League_Customizer
             {
                 MessageBox.Show("Please select a valid setting for all fields.");
                 return;
+            }
+            else if (Properties.Settings.Default.RLPath == String.Empty)
+            {
+                MessageBox.Show("Please set your Rocket League Path");
             }
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
             {
