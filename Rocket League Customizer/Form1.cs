@@ -7,6 +7,7 @@ using System.Threading;
 using System.Management;
 using System.Net;
 using System.Text;
+using System.Collections.Generic;
 
 /*
  * When adding a new feature make sure to change:
@@ -47,9 +48,11 @@ namespace Rocket_League_Customizer
             // Watcher to check for RL End
             endWatcher = WatchForProcessEnd("RocketLeague.exe");
 
-
-            ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
-            ws.Run();
+            if (Properties.Settings.Default.LanEnabled)
+            {
+                ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
+                ws.Run();
+            }
 
         }
 
@@ -645,7 +648,8 @@ namespace Rocket_League_Customizer
             endWatcher.Stop();
 
             // End webserver
-            ws.Stop();
+            if (Properties.Settings.Default.LanEnabled)
+                ws.Stop();
         }
 
         private ManagementEventWatcher WatchForProcessStart(string processName)
@@ -748,12 +752,12 @@ namespace Rocket_League_Customizer
             {
                 using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
                 {
-                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park(Midnight)" + Environment.NewLine +
-                        "Beckwith Park(Stormy)" + Environment.NewLine + "Cosmic(Rocket Labs)" + Environment.NewLine + "DFH Stadium"
-                        + Environment.NewLine + "DFH Stadium(Snowy)" + Environment.NewLine + "Double Goal(Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
-                        "Mannfield(Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars(Rocket Labs)" + Environment.NewLine + "Test Volleyball" + Environment.NewLine + "Underpass(Rocket Labs)"
-                         + Environment.NewLine + "Underpass V0(Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central(Night)" + Environment.NewLine +
-                         "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum(Dusk)" + Environment.NewLine + "Utopia Retro(Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
+                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
+                        "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
+                        + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
+                        "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Test Volleyball" + Environment.NewLine + "Underpass (Rocket Labs)"
+                         + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +
+                         "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
                     writer.Close();
                 }
                 readMaps();
@@ -805,6 +809,73 @@ namespace Rocket_League_Customizer
             }
             WriteToLog("Read maps.txt");
         }
+        /// <summary>
+        /// Information holder for a map and its hash value
+        /// </summary>
+        public struct MapInfo
+        {
+            public string filename; public string hash;
+
+            public MapInfo(string file, string hash)
+            {
+                this.filename = file; this.hash = hash;
+            }
+        }
+
+        /// <summary>
+        /// Contains all the pre-existing maps in the game,
+        /// associated with their name file and MD5 checksum
+        /// </summary>
+        public static Dictionary<string, MapInfo> Maps = new Dictionary<string, MapInfo>()
+        {
+            {"Beckwith Park",
+                new MapInfo("Park_P.upk", "454386a16551d111da72d7654b87a325") },
+            {"Beckwith Park (Stormy)",
+                new MapInfo("Park_Rainy_P.upk", "12aceb944720f544ca2b03ad2204da49") },
+            {"Beckwith Park (Midnight)",
+                new MapInfo("Park_Night_P.upk", "36e05bf3ecc9da3b00e78b07978782be") },
+            {"Mannfield",
+                new MapInfo("EuroStadium_P.upk", "0527a5acd7661778fa7ff3e8a11c57ea") },
+            {"Mannfield (Stormy)",
+                new MapInfo("EuroStadium_Rainy_P.upk", "e1d9dc5ff839a44725d4b8c2e1a1df88") },
+            {"DFH Stadium",
+                new MapInfo("Stadium_P.upk", "0831c9ccd06df87262c78d39f624afa2") },
+            {"DFH Stadium (Snowy)",
+                new MapInfo("Stadium_Winter_P.upk", "30dee6b28fb79a4f71478bbaf8cb8007") },
+            {"Urban Central",
+                new MapInfo("TrainStation_P.upk", "44e9def6f85cef21bc8e33f9e9fd2698") },
+            {"Urban Central (Night)",
+                new MapInfo("TrainStation_Night_P.upk", "a84cc33435e278e2b914d0ea4c78ae1b") },
+            {"Utopia Coliseum",
+                new MapInfo("UtopiaStadium_P.upk", "7adf493dae2ad105c549774a1632c4c1") },
+            {"Utopia Coliseum (Dusk)",
+                new MapInfo("UtopiaStadium_Dusk_P.upk", "eb8fec01ced0f1a9b11e57396fb63dd7") },
+            {"Wasteland",
+                new MapInfo("Wasteland_P.upk", "9746df3e600b53f5a92f74546f134f52") },
+            {"Neo Tokyo",
+                new MapInfo("NeoTokyo_P.upk", "36391631356c52be0fb0012429b1a6be") },
+            {"Dunk House",
+                new MapInfo("HoopsStadium_P.upk", "86e7aa937bd1b695c9fb4059f3781676") },
+            {"Pillars (Rocket Labs)",
+                new MapInfo("Labs_CirclePillars_P.upk", "7542983ff992c8c4e10bbf92d60a5184") },
+            {"Cosmic (Rocket Labs)",
+                new MapInfo("Labs_Cosmic_P.upk", "014e1185bccb933aaab0ac43879e42ba") },
+            {"Double Goal (Rocket Labs)",
+                new MapInfo("Labs_DoubleGoal_P.upk", "cb573372da30131c8228f059f7568bdd") },
+            {"Underpass (Rocket Labs)",
+                new MapInfo("Labs_Underpass_P.upk", "812dbd0ebbc6ef05801768daa9a011f1") },
+            {"Underpass V0 (Rocket Labs)",
+                new MapInfo("Labs_Underpass_v0_p.upk", "ae429dc339c00c5c0b304123aad0cd73") },
+            {"Utopia Retro (Rocket Labs)",
+                new MapInfo("Labs_Utopia_P.upk", "2ee88af78786fee2091699e5bed979ac") },
+            {"Test Volleyball",
+                new MapInfo("test_Volleyball.upk", "99b6c052e8ac1527104445908903245f") },
+            {"Basic Tutorial",
+                new MapInfo("TutorialTest.upk", "8f05dc2abd1ccc5a350ed682cf89ad74") },
+            {"Advanced Tutorial",
+                new MapInfo("TutorialAdvanced.upk", "8223b670168244c5e7e6eb7e5e3e5acf") }
+        };
+
 
         //Save Maps Settings
         private void saveMapsSettingsBtn_Click(object sender, EventArgs e)
@@ -816,10 +887,33 @@ namespace Rocket_League_Customizer
                 MessageBox.Show("Please select a valid setting for all fields.");
                 return;
             }
+
+            String upkName = "Park_P";
+            // Get map file name from combobox
+            if (Maps.ContainsKey(mapName))
+            {
+                upkName = Maps[mapName].filename.Replace(".upk", "");
+            }
+            else
+            {
+                upkName = mapName.Replace(".upk", "");
+
+            }
+
+            String formattedGameType = "Game=TAGame.GameInfo_Tutorial_TA?Freeplay?";
+            // Formatted gametype from combobox
+            if(gameType.Equals("Freeplay"))
+            {
+                formattedGameType = "Game=TAGame.GameInfo_Tutorial_TA?Freeplay?";
+            } else if(gameType.Equals("Exhibition"))
+            {
+                formattedGameType = "Game=TAGame.GameInfo_Soccar_TA?";
+            }
+
+
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
             {
-                writer.WriteLine(mapName);
-                writer.WriteLine(gameType);
+                writer.WriteLine("open " + upkName + "?" + formattedGameType);
                 writer.Close();
                 
             }
