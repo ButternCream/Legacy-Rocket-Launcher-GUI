@@ -18,8 +18,8 @@ namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
-        private ManagementEventWatcher startWatcher;
-        private ManagementEventWatcher endWatcher;
+        //private ManagementEventWatcher startWatcher;
+        //private ManagementEventWatcher endWatcher;
         private string exePath;
 
 
@@ -42,9 +42,9 @@ namespace Rocket_League_Customizer
             WriteToLog(exePath);
 
             // Watcher to check for RL Start
-            startWatcher = WatchForProcessStart("RocketLeague.exe");
+            //startWatcher = WatchForProcessStart("RocketLeague.exe");
             // Watcher to check for RL End
-            endWatcher = WatchForProcessEnd("RocketLeague.exe");
+            //endWatcher = WatchForProcessEnd("RocketLeague.exe");
 
 
         }
@@ -257,10 +257,18 @@ namespace Rocket_League_Customizer
 
             if (processes.Length > 0)
             {
-                string rl = processes[0].MainModule.FileName;
-                rl = rl.Replace("\\", "\\\\");
-                WriteToLog("Path: " + rl);
-                return rl.Remove(rl.Length - 16);
+               try
+                {
+                    string rl = processes[0].MainModule.FileName;
+                    rl = rl.Replace("\\", "\\\\");
+                    WriteToLog("Path: " + rl);
+                    return rl.Remove(rl.Length - 16);
+                } catch(Exception e)
+                {
+                    WriteToLog(e.ToString());
+                    return String.Empty;
+                }
+                
             }
             else
             {
@@ -579,8 +587,8 @@ namespace Rocket_League_Customizer
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Clean up watcher classes
-            startWatcher.Stop();
-            endWatcher.Stop();
+            //startWatcher.Stop();
+            //endWatcher.Stop();
         }
 
         private ManagementEventWatcher WatchForProcessStart(string processName)
