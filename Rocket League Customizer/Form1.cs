@@ -250,7 +250,7 @@ namespace Rocket_League_Customizer
         }
 
         //Function get the rocket league path to exe
-        public static  string GetProcessPath(string name)
+        public static string GetProcessPath(string name)
         {
             Process[] processes = Process.GetProcessesByName(name);
 
@@ -260,8 +260,16 @@ namespace Rocket_League_Customizer
                 {
                     string rl = processes[0].MainModule.FileName;
                     rl = rl.Replace("\\", "\\\\");
-                    WriteToLog("Path: " + rl);
-                    return rl.Remove(rl.Length - 16);
+                    Console.WriteLine(rl);
+                    // Add check to make sure correct process
+                    if (rl.Contains("rocketleague"))
+                    {
+                        WriteToLog("Path: " + rl);
+                        return rl.Remove(rl.Length - 16);
+                    } else
+                    {
+                        return String.Empty;
+                    }
                 } catch(Exception e)
                 {
                     WriteToLog(e.ToString());
@@ -592,29 +600,33 @@ namespace Rocket_League_Customizer
 
         private static void CheckForProcess()
         {
-            string rlPath = GetProcessPath("RocketLeague");
-            if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
+            while (true)
             {
-                WriteToLog("RocketLeague Start detected.");
-                // Update RL path
-                if (LoadMods(true))
+                string rlPath = GetProcessPath("RocketLeague");
+                if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
                 {
-                    WriteToLog("Auto Loaded mods, awesome.");
-                    isRunning = true;
+                    WriteToLog("RocketLeague Start detected.");
+                    // Update RL path
+                    if (LoadMods(true))
+                    {
+                        WriteToLog("Auto Loaded mods, awesome.");
+                        isRunning = true;
+
+                    }
+                    else
+                    {
+                        WriteToLog("Error auto loading mods.");
+                        isRunning = false;
+
+                    }
 
                 }
-                else
+                else if (rlPath == string.Empty)
                 {
-                    WriteToLog("Error auto loading mods.");
                     isRunning = false;
-
                 }
-
-            } else
-            {
-                isRunning = false;
+                Thread.Sleep(2000);
             }
-            Thread.Sleep(5000);
 
         }
 
