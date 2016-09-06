@@ -27,6 +27,7 @@ namespace Rocket_League_Customizer
 
         private WebServer ws;
         private static bool isClosing = false;
+       
 
         public RLCustomizer()
         {
@@ -214,6 +215,12 @@ namespace Rocket_League_Customizer
 
         /* END LOAD MODS INJECTION */
 
+        //SM - Added PlaySound function to play a sound
+        private void PlaySound()
+        {
+            System.Media.SoundPlayer sound = new System.Media.SoundPlayer(@"C:\Windows\Media\chimes.wav");
+            sound.Play();
+        }
 
         //If its their first time running the program, tell them what to do.
         private void CheckFirstTime()
@@ -327,6 +334,7 @@ namespace Rocket_League_Customizer
         //Save button click event
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            //PlaySound();
             //If path isn't set save it
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
@@ -365,8 +373,11 @@ namespace Rocket_League_Customizer
                 writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine(ballGravityScaleText.Text);
                 writer.WriteLine(bounceScaleText.Text);
-                MessageBox.Show("Settings Saved");
-                
+                //MessageBox.Show("Settings Saved");
+
+                //SM -Added play sound to signify saved settings
+                PlaySound();
+
                 WriteToLog("Settings Saved");
                 writer.Close();
             }
