@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Management;
 using System.Collections.Generic;
+using System.Net;
 
 /*
  * When adding a new feature make sure to change:
@@ -23,6 +24,9 @@ namespace Rocket_League_Customizer
         Thread processWatcher = new Thread(new ThreadStart(CheckForProcess));
 
         private static bool isRunning = false;
+
+        private WebServer ws;
+        private static bool isClosing = false;
 
         public RLCustomizer()
         {
@@ -44,6 +48,12 @@ namespace Rocket_League_Customizer
 
             processWatcher.Start();
 
+            // Start LAn redirect server
+            if (Properties.Settings.Default.LanEnabled)
+            {
+                ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
+                ws.Run();
+            }
 
         }
 
@@ -126,6 +136,17 @@ namespace Rocket_League_Customizer
             {
                 MessageBox.Show("Rocket League not running");
                 return -1;
+            }
+        }
+
+        public static string SendResponse(HttpListenerRequest request)
+        {
+
+            if (request.Url.AbsolutePath.Contains("/Keys/GenerateKeys"))
+                return "Version=1&Key=ymaFdh03/Hw4rvHjr1zhlZVyNWQipDQqC1nzptiXfgE=&IV=nZ2e0bJY1YVZAgORhFbsEw==&HMACKey=Xv17y2p+hdaGbQgtnWAPbC58xeNGbNSDHr3wvODVsjE=&SessionID=9fhBAd0kBYFMMWmbA8GrkQ==";
+            else
+            {
+                return "";
             }
         }
 
@@ -595,12 +616,12 @@ namespace Rocket_League_Customizer
 
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            isClosing = true;
         }
 
         private static void CheckForProcess()
         {
-            while (true)
+            while (!isClosing && Properties.Settings.Default.AutoLoadMods)
             {
                 string rlPath = GetProcessPath("RocketLeague");
                 if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
@@ -859,6 +880,34 @@ namespace Rocket_League_Customizer
             }
             MessageBox.Show("Map loader settings saved.");
             WriteToLog("Map loader settings saved.");
+        }
+
+        private void joinServerButton_Click(object sender, EventArgs e)
+        {
+            // For now change map_settings.txt to match LAN Format
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            {
+                writer.WriteLine("open " + joinIPBox.Text);
+
+                writer.Close();
+
+            }
+            MessageBox.Show("Now press F3 in game to join the Server.");
+            WriteToLog("Join Server settings saved.");
+        }
+
+        private void startServerButton_Click(object sender, EventArgs e)
+        {
+            // For now change map_settings.txt to match LAN Format
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            {
+                writer.WriteLine("open " + "Park_P?listen?onlineprivate?");
+
+                writer.Close();
+
+            }
+            MessageBox.Show("Now press F3 in game to join the Server.");
+            WriteToLog("Create Server settings saved.");
         }
     }
 }

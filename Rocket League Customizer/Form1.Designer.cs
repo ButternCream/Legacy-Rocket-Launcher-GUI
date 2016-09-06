@@ -92,11 +92,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mapBoxList = new System.Windows.Forms.ComboBox();
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.startServerButton = new System.Windows.Forms.Button();
+            this.joinServerButton = new System.Windows.Forms.Button();
+            this.joinIPBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
             this.inGameTabs.SuspendLayout();
             this.loaderTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // jump_label
@@ -450,6 +455,7 @@
             this.autoLoadModsToolStripMenuItem.Name = "autoLoadModsToolStripMenuItem";
             this.autoLoadModsToolStripMenuItem.Size = new System.Drawing.Size(282, 32);
             this.autoLoadModsToolStripMenuItem.Text = "Auto Load Mods";
+            this.autoLoadModsToolStripMenuItem.Visible = false;
             this.autoLoadModsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.autoLoadModsToolStripMenuItem_CheckedChanged);
             this.autoLoadModsToolStripMenuItem.Click += new System.EventHandler(this.autoLoadModsToolStripMenuItem_Click);
             // 
@@ -655,6 +661,7 @@
             this.tabControl1.Controls.Add(this.menuTab);
             this.tabControl1.Controls.Add(this.inGameTabs);
             this.tabControl1.Controls.Add(this.loaderTab);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(18, 46);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
@@ -862,6 +869,47 @@
             this.mapFileDialog.FileName = "*.upk";
             this.mapFileDialog.Filter = "Map Files: (*.upk) | *.upk";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage1.Controls.Add(this.joinIPBox);
+            this.tabPage1.Controls.Add(this.joinServerButton);
+            this.tabPage1.Controls.Add(this.startServerButton);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(505, 573);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "LAN";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // startServerButton
+            // 
+            this.startServerButton.Location = new System.Drawing.Point(159, 531);
+            this.startServerButton.Name = "startServerButton";
+            this.startServerButton.Size = new System.Drawing.Size(178, 34);
+            this.startServerButton.TabIndex = 0;
+            this.startServerButton.Text = "Start LAN Server";
+            this.startServerButton.UseVisualStyleBackColor = true;
+            this.startServerButton.Click += new System.EventHandler(this.startServerButton_Click);
+            // 
+            // joinServerButton
+            // 
+            this.joinServerButton.Location = new System.Drawing.Point(159, 57);
+            this.joinServerButton.Name = "joinServerButton";
+            this.joinServerButton.Size = new System.Drawing.Size(178, 33);
+            this.joinServerButton.TabIndex = 1;
+            this.joinServerButton.Text = "Join LAN Server";
+            this.joinServerButton.UseVisualStyleBackColor = true;
+            this.joinServerButton.Click += new System.EventHandler(this.joinServerButton_Click);
+            // 
+            // joinIPBox
+            // 
+            this.joinIPBox.Location = new System.Drawing.Point(24, 25);
+            this.joinIPBox.Name = "joinIPBox";
+            this.joinIPBox.Size = new System.Drawing.Size(453, 26);
+            this.joinIPBox.TabIndex = 2;
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -891,6 +939,8 @@
             this.inGameTabs.PerformLayout();
             this.loaderTab.ResumeLayout(false);
             this.loaderTab.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -960,6 +1010,10 @@
         private System.Windows.Forms.OpenFileDialog mapFileDialog;
         private System.Windows.Forms.Label loaderLbl;
         private System.Windows.Forms.Button saveMapsSettingsBtn;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox joinIPBox;
+        private System.Windows.Forms.Button joinServerButton;
+        private System.Windows.Forms.Button startServerButton;
     }
 }
 

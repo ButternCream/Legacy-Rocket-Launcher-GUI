@@ -58,5 +58,17 @@ namespace Rocket_League_Customizer.Properties {
                 this["AutoLoadMods"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LanEnabled {
+            get {
+                return ((bool)(this["LanEnabled"]));
+            }
+            set {
+                this["LanEnabled"] = value;
+            }
+        }
     }
 }
