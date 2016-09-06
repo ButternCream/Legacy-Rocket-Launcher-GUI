@@ -18,10 +18,11 @@ namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
-        //private ManagementEventWatcher startWatcher;
-        //private ManagementEventWatcher endWatcher;
-        private string exePath;
+ 
+        private static string exePath;
+        Thread processWatcher = new Thread(new ThreadStart(CheckForProcess));
 
+        private static bool isRunning = false;
 
         public RLCustomizer()
         {
@@ -41,10 +42,7 @@ namespace Rocket_League_Customizer
             exePath = System.IO.Directory.GetCurrentDirectory() + "\\";
             WriteToLog(exePath);
 
-            // Watcher to check for RL Start
-            //startWatcher = WatchForProcessStart("RocketLeague.exe");
-            // Watcher to check for RL End
-            //endWatcher = WatchForProcessEnd("RocketLeague.exe");
+            processWatcher.Start();
 
 
         }
@@ -117,7 +115,7 @@ namespace Rocket_League_Customizer
             Int32 milliseconds
             );
 
-        public Int32 GetProcessId(String proc)
+        public static Int32 GetProcessId(String proc)
         {
             try
             {
@@ -131,7 +129,7 @@ namespace Rocket_League_Customizer
             }
         }
 
-        public void InjectDLL(IntPtr hProcess, String strDLLName)
+        public static void InjectDLL(IntPtr hProcess, String strDLLName, bool showMessages)
         {
             IntPtr bytesout;
 
@@ -187,7 +185,8 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
+            if(showMessages)
+                MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
             WriteToLog("Mods successfully loaded.");
             return;
         }
@@ -251,7 +250,7 @@ namespace Rocket_League_Customizer
         }
 
         //Function get the rocket league path to exe
-        public string GetProcessPath(string name)
+        public static  string GetProcessPath(string name)
         {
             Process[] processes = Process.GetProcessesByName(name);
 
@@ -484,10 +483,10 @@ namespace Rocket_League_Customizer
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
         {
-            LoadMods();
+            LoadMods(true);
         }
 
-        private bool LoadMods()
+        private static bool LoadMods(bool showMessages)
         {
             String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
@@ -498,7 +497,8 @@ namespace Rocket_League_Customizer
                 IntPtr hProcess = (IntPtr)OpenProcess(0x1F0FFF, 1, ProcID);
                 if (hProcess == null)
                 {
-                    MessageBox.Show("OpenProcess() Failed!");
+                    if (showMessages)
+                        MessageBox.Show("OpenProcess() Failed!");
                     return false;
                 }
                 else
@@ -506,10 +506,11 @@ namespace Rocket_League_Customizer
                     if (!File.Exists(strDLLName))
                     {
                         WriteToLog("Missing DLL");
-                        MessageBox.Show("DLL Missing");
+                        if (showMessages)
+                            MessageBox.Show("DLL Missing");
                         return false;
                     }
-                    InjectDLL(hProcess, strDLLName);
+                    InjectDLL(hProcess, strDLLName, showMessages);
 
                 }
             }
@@ -519,7 +520,7 @@ namespace Rocket_League_Customizer
      
         // Write to log function - Debugging
         // TU - Fixed log so it appends each time.
-        private void WriteToLog(string text)
+        private static void WriteToLog(string text)
         {
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
@@ -586,71 +587,42 @@ namespace Rocket_League_Customizer
 
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Clean up watcher classes
-            //startWatcher.Stop();
-            //endWatcher.Stop();
+
         }
 
-        private ManagementEventWatcher WatchForProcessStart(string processName)
+        private static void CheckForProcess()
         {
-            string queryString =
-                "SELECT TargetInstance" +
-                "  FROM __InstanceCreationEvent " +
-                "WITHIN  3 " +
-                " WHERE TargetInstance ISA 'Win32_Process' " +
-                "   AND TargetInstance.Name = '" + processName + "'";
+            string rlPath = GetProcessPath("RocketLeague");
+            if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
+            {
+                WriteToLog("RocketLeague Start detected.");
+                // Update RL path
+                if (LoadMods(true))
+                {
+                    WriteToLog("Auto Loaded mods, awesome.");
+                    isRunning = true;
 
-            // The dot in the scope means use the current machine
-            string scope = @"\\.\root\CIMV2";
+                }
+                else
+                {
+                    WriteToLog("Error auto loading mods.");
+                    isRunning = false;
 
-            // Create a watcher and listen for events
-            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
-            watcher.EventArrived += ProcessStarted;
-            watcher.Start();
-            return watcher;
-        }
+                }
 
-        private ManagementEventWatcher WatchForProcessEnd(string processName)
-        {
-            string queryString =
-                "SELECT TargetInstance" +
-                "  FROM __InstanceDeletionEvent " +
-                "WITHIN  3 " +
-                " WHERE TargetInstance ISA 'Win32_Process' " +
-                "   AND TargetInstance.Name = '" + processName + "'";
+            } else
+            {
+                isRunning = false;
+            }
+            Thread.Sleep(5000);
 
-            // The dot in the scope means use the current machine
-            string scope = @"\\.\root\CIMV2";
-
-            // Create a watcher and listen for events
-            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
-            watcher.EventArrived += ProcessEnded;
-            watcher.Start();
-            return watcher;
-        }
-
-        private void ProcessEnded(object sender, EventArrivedEventArgs e)
-        {
-            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
-            string processName = targetInstance.Properties["Name"].Value.ToString();
-            WriteToLog("RocketLeague End detected.");
         }
 
         private void ProcessStarted(object sender, EventArrivedEventArgs e)
         {
             ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
             string processName = targetInstance.Properties["Name"].Value.ToString();
-            WriteToLog("RocketLeague Start detected.");
-            // Update RL path
-            SavePath(false);
-            // Check if autoload mods is checked
-            if(autoLoadModsToolStripMenuItem.Checked)
-            {
-                if (LoadMods())
-                    WriteToLog("Auto Loaded mods, awesome.");
-                else
-                    WriteToLog("Error auto loading mods.");
-            }
+
         }
 
         private void autoLoadModsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
