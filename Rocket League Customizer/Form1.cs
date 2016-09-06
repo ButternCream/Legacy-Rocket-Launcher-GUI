@@ -605,6 +605,9 @@ namespace Rocket_League_Customizer
                 string rlPath = GetProcessPath("RocketLeague");
                 if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
                 {
+                    // Sleep enough to let process initialize
+                    Thread.Sleep(1000);
+
                     WriteToLog("RocketLeague Start detected.");
                     // Update RL path
                     if (LoadMods(true))
@@ -625,7 +628,7 @@ namespace Rocket_League_Customizer
                 {
                     isRunning = false;
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
             }
 
         }
