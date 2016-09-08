@@ -15,6 +15,15 @@ using System.Net;
  * 3. Reset button event
  */
 
+/* BUGS TO FIX
+ * 
+ * Can't leave match if you use the map loader
+ *
+ */
+ 
+
+/* Tim - Add log information for memory adresses in the dll */ 
+
 namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
@@ -27,12 +36,12 @@ namespace Rocket_League_Customizer
 
         private WebServer ws;
         private static bool isClosing = false;
-       
+
 
         public RLCustomizer()
         {
             InitializeComponent();
-
+            //MessageBox.Show("get rekt tim");
             // Since log now appends, clear log file on startup
             File.WriteAllText("log.txt", "");
 
@@ -214,6 +223,7 @@ namespace Rocket_League_Customizer
         }
 
         /* END LOAD MODS INJECTION */
+
 
         //SM - Added PlaySound function to play a sound
         private void PlaySound()
@@ -603,18 +613,19 @@ namespace Rocket_League_Customizer
         }
 
 
-        //To Implement
-        //First
+        /*
+         * TO GET RID OF
+         */
         private void spiderManCheckBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-        //Second
+       
         private void DemoOnOppCheckBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-        //Third
+        
         private void randomSizeBotsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -624,6 +635,10 @@ namespace Rocket_League_Customizer
         {
 
         }
+
+        /*
+         * END TO GET RID OF
+         */ 
 
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -893,10 +908,11 @@ namespace Rocket_League_Customizer
             WriteToLog("Map loader settings saved.");
         }
 
+        //SM - Now writes to file lan_join.txt
         private void joinServerButton_Click(object sender, EventArgs e)
         {
             // For now change map_settings.txt to match LAN Format
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
                 writer.WriteLine("open " + joinIPBox.Text);
 
@@ -907,10 +923,11 @@ namespace Rocket_League_Customizer
             WriteToLog("Join Server settings saved.");
         }
 
+        //SM - Now writes to file lan_server.txt
         private void startServerButton_Click(object sender, EventArgs e)
         {
             // For now change map_settings.txt to match LAN Format
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
                 writer.WriteLine("open " + "Park_P?listen?onlineprivate?");
 

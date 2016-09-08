@@ -633,6 +633,7 @@
             // 
             // menuTab
             // 
+            this.menuTab.AutoScroll = true;
             this.menuTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.menuTab.Controls.Add(this.title_textBox);
             this.menuTab.Controls.Add(this.Hidden_checkBox);
@@ -650,7 +651,7 @@
             this.menuTab.Controls.Add(this.youtubeURL_textBox);
             this.menuTab.Location = new System.Drawing.Point(4, 22);
             this.menuTab.Name = "menuTab";
-            this.menuTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.menuTab.Padding = new System.Windows.Forms.Padding(3);
             this.menuTab.Size = new System.Drawing.Size(334, 368);
             this.menuTab.TabIndex = 0;
             this.menuTab.Text = "Menu Mods";
@@ -658,6 +659,7 @@
             // 
             // inGameTabs
             // 
+            this.inGameTabs.AutoScroll = true;
             this.inGameTabs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.inGameTabs.Controls.Add(this.bounceScaleText);
             this.inGameTabs.Controls.Add(this.bounceScaleLbl);
@@ -683,7 +685,7 @@
             this.inGameTabs.Controls.Add(this.zombieCheckBox);
             this.inGameTabs.Location = new System.Drawing.Point(4, 22);
             this.inGameTabs.Name = "inGameTabs";
-            this.inGameTabs.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.inGameTabs.Padding = new System.Windows.Forms.Padding(3);
             this.inGameTabs.Size = new System.Drawing.Size(334, 368);
             this.inGameTabs.TabIndex = 1;
             this.inGameTabs.Text = "In Game Mods";
@@ -712,6 +714,7 @@
             // 
             // loaderTab
             // 
+            this.loaderTab.AutoScroll = true;
             this.loaderTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.loaderTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loaderTab.Controls.Add(this.saveMapsSettingsBtn);
@@ -723,7 +726,7 @@
             this.loaderTab.Controls.Add(this.mapBoxList);
             this.loaderTab.Location = new System.Drawing.Point(4, 22);
             this.loaderTab.Name = "loaderTab";
-            this.loaderTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.loaderTab.Padding = new System.Windows.Forms.Padding(3);
             this.loaderTab.Size = new System.Drawing.Size(334, 368);
             this.loaderTab.TabIndex = 2;
             this.loaderTab.Text = "Map Loader";
@@ -821,9 +824,9 @@
             this.lanTab.Controls.Add(this.joinServerButton);
             this.lanTab.Controls.Add(this.startServerButton);
             this.lanTab.Location = new System.Drawing.Point(4, 22);
-            this.lanTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lanTab.Margin = new System.Windows.Forms.Padding(2);
             this.lanTab.Name = "lanTab";
-            this.lanTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lanTab.Padding = new System.Windows.Forms.Padding(2);
             this.lanTab.Size = new System.Drawing.Size(334, 368);
             this.lanTab.TabIndex = 3;
             this.lanTab.Text = "LAN";
@@ -832,7 +835,7 @@
             // joinIPBox
             // 
             this.joinIPBox.Location = new System.Drawing.Point(16, 16);
-            this.joinIPBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.joinIPBox.Margin = new System.Windows.Forms.Padding(2);
             this.joinIPBox.Name = "joinIPBox";
             this.joinIPBox.Size = new System.Drawing.Size(303, 20);
             this.joinIPBox.TabIndex = 2;
@@ -841,7 +844,7 @@
             // 
             this.joinServerButton.ForeColor = System.Drawing.Color.Black;
             this.joinServerButton.Location = new System.Drawing.Point(106, 37);
-            this.joinServerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.joinServerButton.Margin = new System.Windows.Forms.Padding(2);
             this.joinServerButton.Name = "joinServerButton";
             this.joinServerButton.Size = new System.Drawing.Size(119, 21);
             this.joinServerButton.TabIndex = 1;
@@ -852,8 +855,8 @@
             // startServerButton
             // 
             this.startServerButton.ForeColor = System.Drawing.Color.Black;
-            this.startServerButton.Location = new System.Drawing.Point(106, 345);
-            this.startServerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startServerButton.Location = new System.Drawing.Point(106, 340);
+            this.startServerButton.Margin = new System.Windows.Forms.Padding(2);
             this.startServerButton.Name = "startServerButton";
             this.startServerButton.Size = new System.Drawing.Size(119, 22);
             this.startServerButton.TabIndex = 0;
@@ -883,7 +886,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.0";
+            this.Text = "Rocket Launcher 2.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
