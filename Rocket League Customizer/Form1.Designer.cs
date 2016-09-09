@@ -84,7 +84,34 @@
             this.bounceScaleText = new System.Windows.Forms.TextBox();
             this.bounceScaleLbl = new System.Windows.Forms.Label();
             this.loaderTab = new System.Windows.Forms.TabPage();
-            this.saveMapsSettingsBtn = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.RumbleComboBox = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.BoostAmountComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.GravityComboBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.BoostStrengthComboBox = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.respawnTimeComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.DemolishComboBox = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.BallBouncinessComboBox = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.BallSizeComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.MaxScoreComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.matchLengthComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.BallMaxSpeedComboBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.GameSpeedComboBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.BallWeightComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.BallTypeComboBox = new System.Windows.Forms.ComboBox();
             this.loaderLbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gameTypeComboBox = new System.Windows.Forms.ComboBox();
@@ -244,7 +271,7 @@
             // 
             this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.Black;
-            this.saveBtn.Location = new System.Drawing.Point(80, 430);
+            this.saveBtn.Location = new System.Drawing.Point(103, 430);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(86, 24);
             this.saveBtn.TabIndex = 12;
@@ -386,7 +413,7 @@
             this.howToUseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(361, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(388, 27);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -628,7 +655,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 30);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(342, 394);
+            this.tabControl1.Size = new System.Drawing.Size(354, 394);
             this.tabControl1.TabIndex = 38;
             // 
             // menuTab
@@ -652,7 +679,7 @@
             this.menuTab.Location = new System.Drawing.Point(4, 22);
             this.menuTab.Name = "menuTab";
             this.menuTab.Padding = new System.Windows.Forms.Padding(3);
-            this.menuTab.Size = new System.Drawing.Size(334, 368);
+            this.menuTab.Size = new System.Drawing.Size(346, 368);
             this.menuTab.TabIndex = 0;
             this.menuTab.Text = "Menu Mods";
             this.menuTab.UseVisualStyleBackColor = true;
@@ -686,7 +713,7 @@
             this.inGameTabs.Location = new System.Drawing.Point(4, 22);
             this.inGameTabs.Name = "inGameTabs";
             this.inGameTabs.Padding = new System.Windows.Forms.Padding(3);
-            this.inGameTabs.Size = new System.Drawing.Size(334, 368);
+            this.inGameTabs.Size = new System.Drawing.Size(346, 368);
             this.inGameTabs.TabIndex = 1;
             this.inGameTabs.Text = "In Game Mods";
             this.inGameTabs.UseVisualStyleBackColor = true;
@@ -717,7 +744,34 @@
             this.loaderTab.AutoScroll = true;
             this.loaderTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.loaderTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.loaderTab.Controls.Add(this.saveMapsSettingsBtn);
+            this.loaderTab.Controls.Add(this.label9);
+            this.loaderTab.Controls.Add(this.RumbleComboBox);
+            this.loaderTab.Controls.Add(this.label10);
+            this.loaderTab.Controls.Add(this.BoostAmountComboBox);
+            this.loaderTab.Controls.Add(this.label11);
+            this.loaderTab.Controls.Add(this.GravityComboBox);
+            this.loaderTab.Controls.Add(this.label12);
+            this.loaderTab.Controls.Add(this.BoostStrengthComboBox);
+            this.loaderTab.Controls.Add(this.label13);
+            this.loaderTab.Controls.Add(this.respawnTimeComboBox);
+            this.loaderTab.Controls.Add(this.label14);
+            this.loaderTab.Controls.Add(this.DemolishComboBox);
+            this.loaderTab.Controls.Add(this.label15);
+            this.loaderTab.Controls.Add(this.BallBouncinessComboBox);
+            this.loaderTab.Controls.Add(this.label16);
+            this.loaderTab.Controls.Add(this.BallSizeComboBox);
+            this.loaderTab.Controls.Add(this.label7);
+            this.loaderTab.Controls.Add(this.MaxScoreComboBox);
+            this.loaderTab.Controls.Add(this.label8);
+            this.loaderTab.Controls.Add(this.matchLengthComboBox);
+            this.loaderTab.Controls.Add(this.label5);
+            this.loaderTab.Controls.Add(this.BallMaxSpeedComboBox);
+            this.loaderTab.Controls.Add(this.label6);
+            this.loaderTab.Controls.Add(this.GameSpeedComboBox);
+            this.loaderTab.Controls.Add(this.label3);
+            this.loaderTab.Controls.Add(this.BallWeightComboBox);
+            this.loaderTab.Controls.Add(this.label4);
+            this.loaderTab.Controls.Add(this.BallTypeComboBox);
             this.loaderTab.Controls.Add(this.loaderLbl);
             this.loaderTab.Controls.Add(this.label2);
             this.loaderTab.Controls.Add(this.gameTypeComboBox);
@@ -727,22 +781,413 @@
             this.loaderTab.Location = new System.Drawing.Point(4, 22);
             this.loaderTab.Name = "loaderTab";
             this.loaderTab.Padding = new System.Windows.Forms.Padding(3);
-            this.loaderTab.Size = new System.Drawing.Size(334, 368);
+            this.loaderTab.Size = new System.Drawing.Size(346, 368);
             this.loaderTab.TabIndex = 2;
             this.loaderTab.Text = "Map Loader";
             this.loaderTab.UseVisualStyleBackColor = true;
             // 
-            // saveMapsSettingsBtn
+            // label9
             // 
-            this.saveMapsSettingsBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveMapsSettingsBtn.ForeColor = System.Drawing.Color.Black;
-            this.saveMapsSettingsBtn.Location = new System.Drawing.Point(178, 336);
-            this.saveMapsSettingsBtn.Name = "saveMapsSettingsBtn";
-            this.saveMapsSettingsBtn.Size = new System.Drawing.Size(115, 24);
-            this.saveMapsSettingsBtn.TabIndex = 39;
-            this.saveMapsSettingsBtn.Text = "Save Map Settings";
-            this.saveMapsSettingsBtn.UseVisualStyleBackColor = true;
-            this.saveMapsSettingsBtn.Click += new System.EventHandler(this.saveMapsSettingsBtn_Click);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(2, 367);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(58, 19);
+            this.label9.TabIndex = 67;
+            this.label9.Text = "Rumble:";
+            // 
+            // RumbleComboBox
+            // 
+            this.RumbleComboBox.DropDownHeight = 100;
+            this.RumbleComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RumbleComboBox.FormattingEnabled = true;
+            this.RumbleComboBox.IntegralHeight = false;
+            this.RumbleComboBox.Items.AddRange(new object[] {
+            "None",
+            "Default",
+            "Slow",
+            "Civilized",
+            "Destruction Derby",
+            "Spring Loaded"});
+            this.RumbleComboBox.Location = new System.Drawing.Point(118, 366);
+            this.RumbleComboBox.Name = "RumbleComboBox";
+            this.RumbleComboBox.Size = new System.Drawing.Size(200, 25);
+            this.RumbleComboBox.TabIndex = 66;
+            this.RumbleComboBox.Text = "None";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(2, 338);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 19);
+            this.label10.TabIndex = 65;
+            this.label10.Text = "Boost Amount:";
+            // 
+            // BoostAmountComboBox
+            // 
+            this.BoostAmountComboBox.DropDownHeight = 300;
+            this.BoostAmountComboBox.DropDownWidth = 200;
+            this.BoostAmountComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoostAmountComboBox.FormattingEnabled = true;
+            this.BoostAmountComboBox.IntegralHeight = false;
+            this.BoostAmountComboBox.Items.AddRange(new object[] {
+            "Default",
+            "No Boost",
+            "Unlimited",
+            "Recharge (Slow)",
+            "Recharge (Fast)"});
+            this.BoostAmountComboBox.Location = new System.Drawing.Point(118, 337);
+            this.BoostAmountComboBox.Name = "BoostAmountComboBox";
+            this.BoostAmountComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BoostAmountComboBox.TabIndex = 64;
+            this.BoostAmountComboBox.Text = "Default";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(2, 430);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(56, 19);
+            this.label11.TabIndex = 63;
+            this.label11.Text = "Gravity:";
+            // 
+            // GravityComboBox
+            // 
+            this.GravityComboBox.DropDownHeight = 100;
+            this.GravityComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GravityComboBox.FormattingEnabled = true;
+            this.GravityComboBox.IntegralHeight = false;
+            this.GravityComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Low",
+            "High",
+            "Super High"});
+            this.GravityComboBox.Location = new System.Drawing.Point(118, 429);
+            this.GravityComboBox.Name = "GravityComboBox";
+            this.GravityComboBox.Size = new System.Drawing.Size(200, 25);
+            this.GravityComboBox.TabIndex = 62;
+            this.GravityComboBox.Text = "Default";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(2, 398);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 19);
+            this.label12.TabIndex = 61;
+            this.label12.Text = "Boost Strength:";
+            // 
+            // BoostStrengthComboBox
+            // 
+            this.BoostStrengthComboBox.DropDownHeight = 300;
+            this.BoostStrengthComboBox.DropDownWidth = 200;
+            this.BoostStrengthComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoostStrengthComboBox.FormattingEnabled = true;
+            this.BoostStrengthComboBox.IntegralHeight = false;
+            this.BoostStrengthComboBox.Items.AddRange(new object[] {
+            "1x",
+            "1.5x",
+            "2x",
+            "10x"});
+            this.BoostStrengthComboBox.Location = new System.Drawing.Point(118, 397);
+            this.BoostStrengthComboBox.Name = "BoostStrengthComboBox";
+            this.BoostStrengthComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BoostStrengthComboBox.TabIndex = 60;
+            this.BoostStrengthComboBox.Text = "1x";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(2, 491);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 19);
+            this.label13.TabIndex = 59;
+            this.label13.Text = "Respawn Time:";
+            // 
+            // respawnTimeComboBox
+            // 
+            this.respawnTimeComboBox.DropDownHeight = 100;
+            this.respawnTimeComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.respawnTimeComboBox.FormattingEnabled = true;
+            this.respawnTimeComboBox.IntegralHeight = false;
+            this.respawnTimeComboBox.Items.AddRange(new object[] {
+            "3 Seconds",
+            "2 Seconds",
+            "1 Second",
+            "Disable Goal Reset"});
+            this.respawnTimeComboBox.Location = new System.Drawing.Point(118, 490);
+            this.respawnTimeComboBox.Name = "respawnTimeComboBox";
+            this.respawnTimeComboBox.Size = new System.Drawing.Size(200, 25);
+            this.respawnTimeComboBox.TabIndex = 58;
+            this.respawnTimeComboBox.Text = "3 Seconds";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(2, 461);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(69, 19);
+            this.label14.TabIndex = 57;
+            this.label14.Text = "Demolish:";
+            // 
+            // DemolishComboBox
+            // 
+            this.DemolishComboBox.DropDownHeight = 300;
+            this.DemolishComboBox.DropDownWidth = 200;
+            this.DemolishComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DemolishComboBox.FormattingEnabled = true;
+            this.DemolishComboBox.IntegralHeight = false;
+            this.DemolishComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Disabled",
+            "Friendly Fire",
+            "On Contact",
+            "On Contact (FF)"});
+            this.DemolishComboBox.Location = new System.Drawing.Point(118, 460);
+            this.DemolishComboBox.Name = "DemolishComboBox";
+            this.DemolishComboBox.Size = new System.Drawing.Size(200, 25);
+            this.DemolishComboBox.TabIndex = 56;
+            this.DemolishComboBox.Text = "Default";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(2, 307);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(106, 19);
+            this.label15.TabIndex = 55;
+            this.label15.Text = "Ball Bounciness:";
+            // 
+            // BallBouncinessComboBox
+            // 
+            this.BallBouncinessComboBox.DropDownHeight = 100;
+            this.BallBouncinessComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BallBouncinessComboBox.FormattingEnabled = true;
+            this.BallBouncinessComboBox.IntegralHeight = false;
+            this.BallBouncinessComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Low",
+            "High",
+            "Super High"});
+            this.BallBouncinessComboBox.Location = new System.Drawing.Point(118, 306);
+            this.BallBouncinessComboBox.Name = "BallBouncinessComboBox";
+            this.BallBouncinessComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BallBouncinessComboBox.TabIndex = 54;
+            this.BallBouncinessComboBox.Text = "Default";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(2, 277);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(61, 19);
+            this.label16.TabIndex = 53;
+            this.label16.Text = "Ball Size:";
+            // 
+            // BallSizeComboBox
+            // 
+            this.BallSizeComboBox.DropDownHeight = 300;
+            this.BallSizeComboBox.DropDownWidth = 200;
+            this.BallSizeComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BallSizeComboBox.FormattingEnabled = true;
+            this.BallSizeComboBox.IntegralHeight = false;
+            this.BallSizeComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Small",
+            "Large",
+            "Gigantic"});
+            this.BallSizeComboBox.Location = new System.Drawing.Point(118, 276);
+            this.BallSizeComboBox.Name = "BallSizeComboBox";
+            this.BallSizeComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BallSizeComboBox.TabIndex = 52;
+            this.BallSizeComboBox.Text = "Default";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(2, 122);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(78, 19);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "Max Score:";
+            // 
+            // MaxScoreComboBox
+            // 
+            this.MaxScoreComboBox.DropDownHeight = 100;
+            this.MaxScoreComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxScoreComboBox.FormattingEnabled = true;
+            this.MaxScoreComboBox.IntegralHeight = false;
+            this.MaxScoreComboBox.Items.AddRange(new object[] {
+            "1 Goal",
+            "3 Goals",
+            "5 Goals",
+            "Unlimited"});
+            this.MaxScoreComboBox.Location = new System.Drawing.Point(118, 121);
+            this.MaxScoreComboBox.Name = "MaxScoreComboBox";
+            this.MaxScoreComboBox.Size = new System.Drawing.Size(200, 25);
+            this.MaxScoreComboBox.TabIndex = 50;
+            this.MaxScoreComboBox.Text = "Unlimited";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(2, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 19);
+            this.label8.TabIndex = 49;
+            this.label8.Text = "Match Length:";
+            // 
+            // matchLengthComboBox
+            // 
+            this.matchLengthComboBox.DropDownHeight = 300;
+            this.matchLengthComboBox.DropDownWidth = 200;
+            this.matchLengthComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.matchLengthComboBox.FormattingEnabled = true;
+            this.matchLengthComboBox.IntegralHeight = false;
+            this.matchLengthComboBox.Items.AddRange(new object[] {
+            "5 Minutes",
+            "10 Minutes",
+            "20 Minutes",
+            "Unlimited"});
+            this.matchLengthComboBox.Location = new System.Drawing.Point(118, 90);
+            this.matchLengthComboBox.Name = "matchLengthComboBox";
+            this.matchLengthComboBox.Size = new System.Drawing.Size(200, 25);
+            this.matchLengthComboBox.TabIndex = 48;
+            this.matchLengthComboBox.Text = "5 Minutes";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(2, 185);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 19);
+            this.label5.TabIndex = 47;
+            this.label5.Text = "Ball Max Speed:";
+            // 
+            // BallMaxSpeedComboBox
+            // 
+            this.BallMaxSpeedComboBox.DropDownHeight = 100;
+            this.BallMaxSpeedComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BallMaxSpeedComboBox.FormattingEnabled = true;
+            this.BallMaxSpeedComboBox.IntegralHeight = false;
+            this.BallMaxSpeedComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Slow",
+            "Fast",
+            "Super Fast"});
+            this.BallMaxSpeedComboBox.Location = new System.Drawing.Point(118, 184);
+            this.BallMaxSpeedComboBox.Name = "BallMaxSpeedComboBox";
+            this.BallMaxSpeedComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BallMaxSpeedComboBox.TabIndex = 46;
+            this.BallMaxSpeedComboBox.Text = "Default";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(2, 153);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 19);
+            this.label6.TabIndex = 45;
+            this.label6.Text = "Game Speed:";
+            // 
+            // GameSpeedComboBox
+            // 
+            this.GameSpeedComboBox.DropDownHeight = 300;
+            this.GameSpeedComboBox.DropDownWidth = 200;
+            this.GameSpeedComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameSpeedComboBox.FormattingEnabled = true;
+            this.GameSpeedComboBox.IntegralHeight = false;
+            this.GameSpeedComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Slo-Mo",
+            "Time Warp"});
+            this.GameSpeedComboBox.Location = new System.Drawing.Point(118, 152);
+            this.GameSpeedComboBox.Name = "GameSpeedComboBox";
+            this.GameSpeedComboBox.Size = new System.Drawing.Size(200, 25);
+            this.GameSpeedComboBox.TabIndex = 44;
+            this.GameSpeedComboBox.Text = "Default";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(2, 246);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 19);
+            this.label3.TabIndex = 43;
+            this.label3.Text = "Ball Weight:";
+            // 
+            // BallWeightComboBox
+            // 
+            this.BallWeightComboBox.DropDownHeight = 100;
+            this.BallWeightComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BallWeightComboBox.FormattingEnabled = true;
+            this.BallWeightComboBox.IntegralHeight = false;
+            this.BallWeightComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Light",
+            "Heavy",
+            "Super Light"});
+            this.BallWeightComboBox.Location = new System.Drawing.Point(118, 245);
+            this.BallWeightComboBox.Name = "BallWeightComboBox";
+            this.BallWeightComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BallWeightComboBox.TabIndex = 42;
+            this.BallWeightComboBox.Text = "Default";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(2, 216);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 19);
+            this.label4.TabIndex = 41;
+            this.label4.Text = "Ball Type:";
+            // 
+            // BallTypeComboBox
+            // 
+            this.BallTypeComboBox.DropDownHeight = 300;
+            this.BallTypeComboBox.DropDownWidth = 200;
+            this.BallTypeComboBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BallTypeComboBox.FormattingEnabled = true;
+            this.BallTypeComboBox.IntegralHeight = false;
+            this.BallTypeComboBox.Items.AddRange(new object[] {
+            "Default",
+            "Cube",
+            "Puck",
+            "Basketball"});
+            this.BallTypeComboBox.Location = new System.Drawing.Point(118, 215);
+            this.BallTypeComboBox.Name = "BallTypeComboBox";
+            this.BallTypeComboBox.Size = new System.Drawing.Size(200, 25);
+            this.BallTypeComboBox.TabIndex = 40;
+            this.BallTypeComboBox.Text = "Default";
+            this.BallTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // loaderLbl
             // 
@@ -775,16 +1220,18 @@
             this.gameTypeComboBox.Items.AddRange(new object[] {
             "Freeplay",
             "Exhibition"});
-            this.gameTypeComboBox.Location = new System.Drawing.Point(93, 60);
+            this.gameTypeComboBox.Location = new System.Drawing.Point(118, 59);
             this.gameTypeComboBox.Name = "gameTypeComboBox";
             this.gameTypeComboBox.Size = new System.Drawing.Size(200, 25);
             this.gameTypeComboBox.TabIndex = 5;
+            this.gameTypeComboBox.Text = "Freeplay";
+            this.gameTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.gameTypeComboBox_SelectedIndexChanged);
             // 
             // addMapsButton
             // 
             this.addMapsButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addMapsButton.ForeColor = System.Drawing.Color.Black;
-            this.addMapsButton.Location = new System.Drawing.Point(40, 337);
+            this.addMapsButton.Location = new System.Drawing.Point(209, 5);
             this.addMapsButton.Name = "addMapsButton";
             this.addMapsButton.Size = new System.Drawing.Size(109, 23);
             this.addMapsButton.TabIndex = 4;
@@ -812,10 +1259,11 @@
             this.mapBoxList.IntegralHeight = false;
             this.mapBoxList.Items.AddRange(new object[] {
             "[Official Maps]"});
-            this.mapBoxList.Location = new System.Drawing.Point(93, 30);
+            this.mapBoxList.Location = new System.Drawing.Point(118, 29);
             this.mapBoxList.Name = "mapBoxList";
             this.mapBoxList.Size = new System.Drawing.Size(200, 25);
             this.mapBoxList.TabIndex = 2;
+            this.mapBoxList.Text = "Beckwith Park";
             // 
             // lanTab
             // 
@@ -827,7 +1275,7 @@
             this.lanTab.Margin = new System.Windows.Forms.Padding(2);
             this.lanTab.Name = "lanTab";
             this.lanTab.Padding = new System.Windows.Forms.Padding(2);
-            this.lanTab.Size = new System.Drawing.Size(334, 368);
+            this.lanTab.Size = new System.Drawing.Size(346, 368);
             this.lanTab.TabIndex = 3;
             this.lanTab.Text = "LAN";
             this.lanTab.UseVisualStyleBackColor = true;
@@ -875,7 +1323,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(361, 466);
+            this.ClientSize = new System.Drawing.Size(388, 467);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dllButton);
             this.Controls.Add(this.saveBtn);
@@ -967,11 +1415,38 @@
         private System.Windows.Forms.Button addMapsButton;
         private System.Windows.Forms.OpenFileDialog mapFileDialog;
         private System.Windows.Forms.Label loaderLbl;
-        private System.Windows.Forms.Button saveMapsSettingsBtn;
         private System.Windows.Forms.TabPage lanTab;
         private System.Windows.Forms.TextBox joinIPBox;
         private System.Windows.Forms.Button joinServerButton;
         private System.Windows.Forms.Button startServerButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox RumbleComboBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox BoostAmountComboBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox GravityComboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox BoostStrengthComboBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox respawnTimeComboBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox DemolishComboBox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox BallBouncinessComboBox;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox BallSizeComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox MaxScoreComboBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox matchLengthComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox BallMaxSpeedComboBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox GameSpeedComboBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox BallWeightComboBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox BallTypeComboBox;
     }
 }
 

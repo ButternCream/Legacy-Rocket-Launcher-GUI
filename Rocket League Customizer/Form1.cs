@@ -50,6 +50,7 @@ namespace Rocket_League_Customizer
             CheckFirstTime();
             InitSavedSettings();
             InitMaps();
+            InitMutators();
             WriteToLog("Initialized");
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
@@ -232,6 +233,24 @@ namespace Rocket_League_Customizer
             sound.Play();
         }
 
+        private void InitMutators()
+        {
+            matchLengthComboBox.Enabled = false;
+            MaxScoreComboBox.Enabled = false;
+            GameSpeedComboBox.Enabled = false;
+            BallMaxSpeedComboBox.Enabled = false;
+            BallTypeComboBox.Enabled = false;
+            BallWeightComboBox.Enabled = false;
+            BallSizeComboBox.Enabled = false;
+            BallBouncinessComboBox.Enabled = false;
+            BoostAmountComboBox.Enabled = false;
+            RumbleComboBox.Enabled = false;
+            BoostStrengthComboBox.Enabled = false;
+            GravityComboBox.Enabled = false;
+            DemolishComboBox.Enabled = false;
+            respawnTimeComboBox.Enabled = false;
+        }
+
         //If its their first time running the program, tell them what to do.
         private void CheckFirstTime()
         {
@@ -386,12 +405,38 @@ namespace Rocket_League_Customizer
                 //MessageBox.Show("Settings Saved");
 
                 //SM -Added play sound to signify saved settings
-                PlaySound();
+                
 
-                WriteToLog("Settings Saved");
+                WriteToLog("Mod Settings Saved");
                 writer.Close();
             }
-            
+            //SM - Map settings now save when "Save" is pressed not "Save Map Settings"
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            {
+                writer.WriteLine(mapBoxList.Text);
+                writer.WriteLine(gameTypeComboBox.Text);
+                if (gameTypeComboBox.Text == "Exhibition")
+                {
+                    writer.WriteLine(matchLengthComboBox.Text);
+                    writer.WriteLine(MaxScoreComboBox.Text);
+                    writer.WriteLine(GameSpeedComboBox.Text);
+                    writer.WriteLine(BallMaxSpeedComboBox.Text);
+                    writer.WriteLine(BallTypeComboBox.Text);
+                    writer.WriteLine(BallWeightComboBox.Text);
+                    writer.WriteLine(BallSizeComboBox.Text);
+                    writer.WriteLine(BallBouncinessComboBox.Text);
+                    writer.WriteLine(BoostAmountComboBox.Text);
+                    writer.WriteLine(RumbleComboBox.Text);
+                    writer.WriteLine(BoostStrengthComboBox.Text);
+                    writer.WriteLine(GravityComboBox.Text);
+                    writer.WriteLine(DemolishComboBox.Text);
+                    writer.WriteLine(respawnTimeComboBox.Text);
+                }
+
+                WriteToLog("Map Settings Saved");
+                writer.Close();
+            }
+            PlaySound();
         }
 
         //Load saved settings from settings file
@@ -908,10 +953,11 @@ namespace Rocket_League_Customizer
             WriteToLog("Map loader settings saved.");
         }
 
-        //SM - Now writes to file lan_join.txt
+        
         private void joinServerButton_Click(object sender, EventArgs e)
         {
             // For now change map_settings.txt to match LAN Format
+            //SM - Now writes to file lan_join.txt
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
                 writer.WriteLine("open " + joinIPBox.Text);
@@ -923,10 +969,11 @@ namespace Rocket_League_Customizer
             WriteToLog("Join Server settings saved.");
         }
 
-        //SM - Now writes to file lan_server.txt
+        
         private void startServerButton_Click(object sender, EventArgs e)
         {
             // For now change map_settings.txt to match LAN Format
+            // SM - Now writes to file lan_server.txt
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
                 writer.WriteLine("open " + "Park_P?listen?onlineprivate?");
@@ -936,6 +983,36 @@ namespace Rocket_League_Customizer
             }
             MessageBox.Show("Now press F3 in game to join the Server.");
             WriteToLog("Create Server settings saved.");
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gameTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gameTypeComboBox.Text == "Exhibition")
+            {
+                matchLengthComboBox.Enabled = true;
+                MaxScoreComboBox.Enabled = true;
+                GameSpeedComboBox.Enabled = true;
+                BallMaxSpeedComboBox.Enabled = true;
+                BallTypeComboBox.Enabled = true;
+                BallWeightComboBox.Enabled = true;
+                BallSizeComboBox.Enabled = true;
+                BallBouncinessComboBox.Enabled = true;
+                BoostAmountComboBox.Enabled = true;
+                RumbleComboBox.Enabled = true;
+                BoostStrengthComboBox.Enabled = true;
+                GravityComboBox.Enabled = true;
+                DemolishComboBox.Enabled = true;
+                respawnTimeComboBox.Enabled = true;
+            }
+            else
+            {
+                InitMutators();
+            }
         }
     }
 }
