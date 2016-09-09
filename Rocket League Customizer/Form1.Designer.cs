@@ -123,12 +123,17 @@
             this.joinServerButton = new System.Windows.Forms.Button();
             this.startServerButton = new System.Windows.Forms.Button();
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label17 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label18 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
             this.inGameTabs.SuspendLayout();
             this.loaderTab.SuspendLayout();
             this.lanTab.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // jump_label
@@ -1268,6 +1273,8 @@
             // lanTab
             // 
             this.lanTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lanTab.Controls.Add(this.label18);
+            this.lanTab.Controls.Add(this.label17);
             this.lanTab.Controls.Add(this.joinIPBox);
             this.lanTab.Controls.Add(this.joinServerButton);
             this.lanTab.Controls.Add(this.startServerButton);
@@ -1282,16 +1289,16 @@
             // 
             // joinIPBox
             // 
-            this.joinIPBox.Location = new System.Drawing.Point(16, 16);
+            this.joinIPBox.Location = new System.Drawing.Point(9, 25);
             this.joinIPBox.Margin = new System.Windows.Forms.Padding(2);
             this.joinIPBox.Name = "joinIPBox";
-            this.joinIPBox.Size = new System.Drawing.Size(303, 20);
+            this.joinIPBox.Size = new System.Drawing.Size(331, 20);
             this.joinIPBox.TabIndex = 2;
             // 
             // joinServerButton
             // 
             this.joinServerButton.ForeColor = System.Drawing.Color.Black;
-            this.joinServerButton.Location = new System.Drawing.Point(106, 37);
+            this.joinServerButton.Location = new System.Drawing.Point(106, 49);
             this.joinServerButton.Margin = new System.Windows.Forms.Padding(2);
             this.joinServerButton.Name = "joinServerButton";
             this.joinServerButton.Size = new System.Drawing.Size(119, 21);
@@ -1303,7 +1310,7 @@
             // startServerButton
             // 
             this.startServerButton.ForeColor = System.Drawing.Color.Black;
-            this.startServerButton.Location = new System.Drawing.Point(106, 340);
+            this.startServerButton.Location = new System.Drawing.Point(106, 104);
             this.startServerButton.Margin = new System.Windows.Forms.Padding(2);
             this.startServerButton.Name = "startServerButton";
             this.startServerButton.Size = new System.Drawing.Size(119, 22);
@@ -1317,13 +1324,54 @@
             this.mapFileDialog.FileName = "*.upk";
             this.mapFileDialog.Filter = "Map Files: (*.upk) | *.upk";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(5, 2);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(154, 21);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Join LAN (Press F4)";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 460);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(388, 22);
+            this.statusStrip1.TabIndex = 39;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.AutoSize = false;
+            this.toolStripStatusLabel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(375, 17);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(5, 81);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(159, 21);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Host LAN (Press F5)";
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(388, 467);
+            this.ClientSize = new System.Drawing.Size(388, 482);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dllButton);
             this.Controls.Add(this.saveBtn);
@@ -1347,6 +1395,8 @@
             this.loaderTab.PerformLayout();
             this.lanTab.ResumeLayout(false);
             this.lanTab.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1447,6 +1497,10 @@
         private System.Windows.Forms.ComboBox BallWeightComboBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox BallTypeComboBox;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

@@ -541,6 +541,7 @@ namespace Rocket_League_Customizer
         //Start rocket league button event
         private void startRocketLeagueToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string admin = "runas.exec"
             //If the path isn't set tell them
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
@@ -573,7 +574,9 @@ namespace Rocket_League_Customizer
         {
             MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once)."+
                 "\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\tF2 requires you to be in game.\n\nMap Loader\n\nTo load a map go to the map loader tab a choose the map and game type."
-                + "\n\nThen click \"Save Map Settings\" and then \"Load Mods\".\n\nThen press F3 in the main menu to load the map.", "Help");
+                + "\n\nThen click \"Save\" and then \"Load Mods\".\n\nThen press F3 in the main menu to load the map.\n\n" +
+                "LAN\nJoining\n\nType in the IP in the box and click join. (e.g 127.0.0.1:7777 - IP:Port). Then press F4 in the main menu." +
+                "\n\nHosting\n\nAssuming you the know and have done the pre-reqs for hosting. (e.g hamachi / port forwarding)\n\nClick Start LAN Server.\nThen press F5 in the main menu", "Help");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
