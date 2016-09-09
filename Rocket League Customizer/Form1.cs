@@ -979,7 +979,7 @@ namespace Rocket_League_Customizer
             // SM - Now writes to file lan_server.txt
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
-                writer.WriteLine("open " + "Park_P?listen?onlineprivate?");
+                writer.WriteLine("open " + "Park_P?listen?Private?");
 
                 writer.Close();
 
