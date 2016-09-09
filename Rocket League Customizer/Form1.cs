@@ -541,7 +541,7 @@ namespace Rocket_League_Customizer
         //Start rocket league button event
         private void startRocketLeagueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string admin = "runas.exec"
+            
             //If the path isn't set tell them
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
