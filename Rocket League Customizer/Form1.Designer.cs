@@ -59,6 +59,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,25 +116,51 @@
             this.loaderLbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gameTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.addMapsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.mapBoxList = new System.Windows.Forms.ComboBox();
             this.lanTab = new System.Windows.Forms.TabPage();
-            this.joinIPBox = new System.Windows.Forms.TextBox();
-            this.joinServerButton = new System.Windows.Forms.Button();
-            this.startServerButton = new System.Windows.Forms.Button();
-            this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label17 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label30 = new System.Windows.Forms.Label();
+            this.LANRumble = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.LANGravity = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.LANBoostStrength = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.LANRespawnTime = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.LanDemolish = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.LANBoostAmount = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.LANBallBounciness = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.LANBallSize = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.LANMaxScore = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.LANMatchLength = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.LANBallMaxSpeed = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.LANGameSpeed = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.LANBallWeight = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.LANBallType = new System.Windows.Forms.ComboBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.LANMap = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.joinIPBox = new System.Windows.Forms.TextBox();
+            this.addMapsButton = new System.Windows.Forms.Button();
+            this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.ClearMapsButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
             this.inGameTabs.SuspendLayout();
             this.loaderTab.SuspendLayout();
             this.lanTab.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // jump_label
@@ -247,7 +274,8 @@
             // Hidden_checkBox
             // 
             this.Hidden_checkBox.AutoSize = true;
-            this.Hidden_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Hidden_checkBox.Enabled = false;
+            this.Hidden_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Hidden_checkBox.ForeColor = System.Drawing.Color.Black;
             this.Hidden_checkBox.Location = new System.Drawing.Point(10, 27);
             this.Hidden_checkBox.Name = "Hidden_checkBox";
@@ -276,9 +304,9 @@
             // 
             this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.Black;
-            this.saveBtn.Location = new System.Drawing.Point(103, 430);
+            this.saveBtn.Location = new System.Drawing.Point(17, 513);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(86, 24);
+            this.saveBtn.Size = new System.Drawing.Size(86, 23);
             this.saveBtn.TabIndex = 12;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -418,7 +446,7 @@
             this.howToUseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(388, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(392, 27);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -436,6 +464,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setRLPathToolStripMenuItem1,
             this.resetToolStripMenuItem1,
+            this.resetMapSettingsToolStripMenuItem,
             this.autoLoadModsToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -456,13 +485,19 @@
             this.resetToolStripMenuItem1.Text = "Reset Mod Settings";
             this.resetToolStripMenuItem1.Click += new System.EventHandler(this.resetToolStripMenuItem1_Click);
             // 
+            // resetMapSettingsToolStripMenuItem
+            // 
+            this.resetMapSettingsToolStripMenuItem.Name = "resetMapSettingsToolStripMenuItem";
+            this.resetMapSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.resetMapSettingsToolStripMenuItem.Text = "Reset Mutators";
+            this.resetMapSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetMapSettingsToolStripMenuItem_Click);
+            // 
             // autoLoadModsToolStripMenuItem
             // 
             this.autoLoadModsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.autoLoadModsToolStripMenuItem.Name = "autoLoadModsToolStripMenuItem";
             this.autoLoadModsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.autoLoadModsToolStripMenuItem.Text = "Auto Load Mods";
-            this.autoLoadModsToolStripMenuItem.Visible = false;
             this.autoLoadModsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.autoLoadModsToolStripMenuItem_CheckedChanged);
             this.autoLoadModsToolStripMenuItem.Click += new System.EventHandler(this.autoLoadModsToolStripMenuItem_Click);
             // 
@@ -525,9 +560,9 @@
             // 
             this.dllButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dllButton.ForeColor = System.Drawing.Color.Black;
-            this.dllButton.Location = new System.Drawing.Point(195, 430);
+            this.dllButton.Location = new System.Drawing.Point(290, 513);
             this.dllButton.Name = "dllButton";
-            this.dllButton.Size = new System.Drawing.Size(86, 24);
+            this.dllButton.Size = new System.Drawing.Size(86, 23);
             this.dllButton.TabIndex = 28;
             this.dllButton.Text = "Load Mods";
             this.dllButton.UseVisualStyleBackColor = true;
@@ -660,7 +695,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 30);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(354, 394);
+            this.tabControl1.Size = new System.Drawing.Size(374, 476);
             this.tabControl1.TabIndex = 38;
             // 
             // menuTab
@@ -684,7 +719,7 @@
             this.menuTab.Location = new System.Drawing.Point(4, 22);
             this.menuTab.Name = "menuTab";
             this.menuTab.Padding = new System.Windows.Forms.Padding(3);
-            this.menuTab.Size = new System.Drawing.Size(346, 368);
+            this.menuTab.Size = new System.Drawing.Size(366, 450);
             this.menuTab.TabIndex = 0;
             this.menuTab.Text = "Menu Mods";
             this.menuTab.UseVisualStyleBackColor = true;
@@ -718,7 +753,7 @@
             this.inGameTabs.Location = new System.Drawing.Point(4, 22);
             this.inGameTabs.Name = "inGameTabs";
             this.inGameTabs.Padding = new System.Windows.Forms.Padding(3);
-            this.inGameTabs.Size = new System.Drawing.Size(346, 368);
+            this.inGameTabs.Size = new System.Drawing.Size(366, 450);
             this.inGameTabs.TabIndex = 1;
             this.inGameTabs.Text = "In Game Mods";
             this.inGameTabs.UseVisualStyleBackColor = true;
@@ -780,13 +815,12 @@
             this.loaderTab.Controls.Add(this.loaderLbl);
             this.loaderTab.Controls.Add(this.label2);
             this.loaderTab.Controls.Add(this.gameTypeComboBox);
-            this.loaderTab.Controls.Add(this.addMapsButton);
             this.loaderTab.Controls.Add(this.label1);
             this.loaderTab.Controls.Add(this.mapBoxList);
             this.loaderTab.Location = new System.Drawing.Point(4, 22);
             this.loaderTab.Name = "loaderTab";
             this.loaderTab.Padding = new System.Windows.Forms.Padding(3);
-            this.loaderTab.Size = new System.Drawing.Size(346, 368);
+            this.loaderTab.Size = new System.Drawing.Size(366, 450);
             this.loaderTab.TabIndex = 2;
             this.loaderTab.Text = "Map Loader";
             this.loaderTab.UseVisualStyleBackColor = true;
@@ -1232,18 +1266,6 @@
             this.gameTypeComboBox.Text = "Freeplay";
             this.gameTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.gameTypeComboBox_SelectedIndexChanged);
             // 
-            // addMapsButton
-            // 
-            this.addMapsButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addMapsButton.ForeColor = System.Drawing.Color.Black;
-            this.addMapsButton.Location = new System.Drawing.Point(209, 5);
-            this.addMapsButton.Name = "addMapsButton";
-            this.addMapsButton.Size = new System.Drawing.Size(109, 23);
-            this.addMapsButton.TabIndex = 4;
-            this.addMapsButton.Text = "Add Maps";
-            this.addMapsButton.UseVisualStyleBackColor = true;
-            this.addMapsButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -1272,57 +1294,488 @@
             // 
             // lanTab
             // 
+            this.lanTab.AutoScroll = true;
             this.lanTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lanTab.Controls.Add(this.label30);
+            this.lanTab.Controls.Add(this.LANRumble);
+            this.lanTab.Controls.Add(this.label31);
+            this.lanTab.Controls.Add(this.LANGravity);
+            this.lanTab.Controls.Add(this.label32);
+            this.lanTab.Controls.Add(this.LANBoostStrength);
+            this.lanTab.Controls.Add(this.label33);
+            this.lanTab.Controls.Add(this.LANRespawnTime);
+            this.lanTab.Controls.Add(this.label34);
+            this.lanTab.Controls.Add(this.LanDemolish);
+            this.lanTab.Controls.Add(this.label19);
+            this.lanTab.Controls.Add(this.LANBoostAmount);
+            this.lanTab.Controls.Add(this.label20);
+            this.lanTab.Controls.Add(this.LANBallBounciness);
+            this.lanTab.Controls.Add(this.label21);
+            this.lanTab.Controls.Add(this.LANBallSize);
+            this.lanTab.Controls.Add(this.label22);
+            this.lanTab.Controls.Add(this.LANMaxScore);
+            this.lanTab.Controls.Add(this.label23);
+            this.lanTab.Controls.Add(this.LANMatchLength);
+            this.lanTab.Controls.Add(this.label24);
+            this.lanTab.Controls.Add(this.LANBallMaxSpeed);
+            this.lanTab.Controls.Add(this.label25);
+            this.lanTab.Controls.Add(this.LANGameSpeed);
+            this.lanTab.Controls.Add(this.label26);
+            this.lanTab.Controls.Add(this.LANBallWeight);
+            this.lanTab.Controls.Add(this.label27);
+            this.lanTab.Controls.Add(this.LANBallType);
+            this.lanTab.Controls.Add(this.label29);
+            this.lanTab.Controls.Add(this.LANMap);
             this.lanTab.Controls.Add(this.label18);
             this.lanTab.Controls.Add(this.label17);
             this.lanTab.Controls.Add(this.joinIPBox);
-            this.lanTab.Controls.Add(this.joinServerButton);
-            this.lanTab.Controls.Add(this.startServerButton);
             this.lanTab.Location = new System.Drawing.Point(4, 22);
             this.lanTab.Margin = new System.Windows.Forms.Padding(2);
             this.lanTab.Name = "lanTab";
             this.lanTab.Padding = new System.Windows.Forms.Padding(2);
-            this.lanTab.Size = new System.Drawing.Size(346, 368);
+            this.lanTab.Size = new System.Drawing.Size(366, 450);
             this.lanTab.TabIndex = 3;
             this.lanTab.Text = "LAN";
             this.lanTab.UseVisualStyleBackColor = true;
             // 
-            // joinIPBox
+            // label30
             // 
-            this.joinIPBox.Location = new System.Drawing.Point(9, 25);
-            this.joinIPBox.Margin = new System.Windows.Forms.Padding(2);
-            this.joinIPBox.Name = "joinIPBox";
-            this.joinIPBox.Size = new System.Drawing.Size(331, 20);
-            this.joinIPBox.TabIndex = 2;
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.ForeColor = System.Drawing.Color.Black;
+            this.label30.Location = new System.Drawing.Point(7, 381);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(58, 19);
+            this.label30.TabIndex = 97;
+            this.label30.Text = "Rumble:";
             // 
-            // joinServerButton
+            // LANRumble
             // 
-            this.joinServerButton.ForeColor = System.Drawing.Color.Black;
-            this.joinServerButton.Location = new System.Drawing.Point(106, 49);
-            this.joinServerButton.Margin = new System.Windows.Forms.Padding(2);
-            this.joinServerButton.Name = "joinServerButton";
-            this.joinServerButton.Size = new System.Drawing.Size(119, 21);
-            this.joinServerButton.TabIndex = 1;
-            this.joinServerButton.Text = "Join LAN Server";
-            this.joinServerButton.UseVisualStyleBackColor = true;
-            this.joinServerButton.Click += new System.EventHandler(this.joinServerButton_Click);
+            this.LANRumble.DropDownHeight = 100;
+            this.LANRumble.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANRumble.FormattingEnabled = true;
+            this.LANRumble.IntegralHeight = false;
+            this.LANRumble.Items.AddRange(new object[] {
+            "None",
+            "Default",
+            "Slow",
+            "Civilized",
+            "Destruction Derby",
+            "Spring Loaded"});
+            this.LANRumble.Location = new System.Drawing.Point(123, 380);
+            this.LANRumble.Name = "LANRumble";
+            this.LANRumble.Size = new System.Drawing.Size(200, 25);
+            this.LANRumble.TabIndex = 96;
+            this.LANRumble.Text = "None";
             // 
-            // startServerButton
+            // label31
             // 
-            this.startServerButton.ForeColor = System.Drawing.Color.Black;
-            this.startServerButton.Location = new System.Drawing.Point(106, 104);
-            this.startServerButton.Margin = new System.Windows.Forms.Padding(2);
-            this.startServerButton.Name = "startServerButton";
-            this.startServerButton.Size = new System.Drawing.Size(119, 22);
-            this.startServerButton.TabIndex = 0;
-            this.startServerButton.Text = "Start LAN Server";
-            this.startServerButton.UseVisualStyleBackColor = true;
-            this.startServerButton.Click += new System.EventHandler(this.startServerButton_Click);
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.Color.Black;
+            this.label31.Location = new System.Drawing.Point(7, 444);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(56, 19);
+            this.label31.TabIndex = 95;
+            this.label31.Text = "Gravity:";
             // 
-            // mapFileDialog
+            // LANGravity
             // 
-            this.mapFileDialog.FileName = "*.upk";
-            this.mapFileDialog.Filter = "Map Files: (*.upk) | *.upk";
+            this.LANGravity.DropDownHeight = 100;
+            this.LANGravity.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANGravity.FormattingEnabled = true;
+            this.LANGravity.IntegralHeight = false;
+            this.LANGravity.Items.AddRange(new object[] {
+            "Default",
+            "Low",
+            "High",
+            "Super High"});
+            this.LANGravity.Location = new System.Drawing.Point(123, 443);
+            this.LANGravity.Name = "LANGravity";
+            this.LANGravity.Size = new System.Drawing.Size(200, 25);
+            this.LANGravity.TabIndex = 94;
+            this.LANGravity.Text = "Default";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.Color.Black;
+            this.label32.Location = new System.Drawing.Point(7, 412);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(105, 19);
+            this.label32.TabIndex = 93;
+            this.label32.Text = "Boost Strength:";
+            // 
+            // LANBoostStrength
+            // 
+            this.LANBoostStrength.DropDownHeight = 300;
+            this.LANBoostStrength.DropDownWidth = 200;
+            this.LANBoostStrength.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBoostStrength.FormattingEnabled = true;
+            this.LANBoostStrength.IntegralHeight = false;
+            this.LANBoostStrength.Items.AddRange(new object[] {
+            "1x",
+            "1.5x",
+            "2x",
+            "10x"});
+            this.LANBoostStrength.Location = new System.Drawing.Point(123, 411);
+            this.LANBoostStrength.Name = "LANBoostStrength";
+            this.LANBoostStrength.Size = new System.Drawing.Size(200, 25);
+            this.LANBoostStrength.TabIndex = 92;
+            this.LANBoostStrength.Text = "1x";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.ForeColor = System.Drawing.Color.Black;
+            this.label33.Location = new System.Drawing.Point(7, 505);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(99, 19);
+            this.label33.TabIndex = 91;
+            this.label33.Text = "Respawn Time:";
+            // 
+            // LANRespawnTime
+            // 
+            this.LANRespawnTime.DropDownHeight = 100;
+            this.LANRespawnTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANRespawnTime.FormattingEnabled = true;
+            this.LANRespawnTime.IntegralHeight = false;
+            this.LANRespawnTime.Items.AddRange(new object[] {
+            "3 Seconds",
+            "2 Seconds",
+            "1 Second",
+            "Disable Goal Reset"});
+            this.LANRespawnTime.Location = new System.Drawing.Point(123, 504);
+            this.LANRespawnTime.Name = "LANRespawnTime";
+            this.LANRespawnTime.Size = new System.Drawing.Size(200, 25);
+            this.LANRespawnTime.TabIndex = 90;
+            this.LANRespawnTime.Text = "3 Seconds";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.Black;
+            this.label34.Location = new System.Drawing.Point(7, 475);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(69, 19);
+            this.label34.TabIndex = 89;
+            this.label34.Text = "Demolish:";
+            // 
+            // LanDemolish
+            // 
+            this.LanDemolish.DropDownHeight = 300;
+            this.LanDemolish.DropDownWidth = 200;
+            this.LanDemolish.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LanDemolish.FormattingEnabled = true;
+            this.LanDemolish.IntegralHeight = false;
+            this.LanDemolish.Items.AddRange(new object[] {
+            "Default",
+            "Disabled",
+            "Friendly Fire",
+            "On Contact",
+            "On Contact (FF)"});
+            this.LanDemolish.Location = new System.Drawing.Point(123, 474);
+            this.LanDemolish.Name = "LanDemolish";
+            this.LanDemolish.Size = new System.Drawing.Size(200, 25);
+            this.LanDemolish.TabIndex = 88;
+            this.LanDemolish.Text = "Default";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Black;
+            this.label19.Location = new System.Drawing.Point(7, 350);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(101, 19);
+            this.label19.TabIndex = 87;
+            this.label19.Text = "Boost Amount:";
+            // 
+            // LANBoostAmount
+            // 
+            this.LANBoostAmount.DropDownHeight = 300;
+            this.LANBoostAmount.DropDownWidth = 200;
+            this.LANBoostAmount.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBoostAmount.FormattingEnabled = true;
+            this.LANBoostAmount.IntegralHeight = false;
+            this.LANBoostAmount.Items.AddRange(new object[] {
+            "Default",
+            "No Boost",
+            "Unlimited",
+            "Recharge (Slow)",
+            "Recharge (Fast)"});
+            this.LANBoostAmount.Location = new System.Drawing.Point(123, 349);
+            this.LANBoostAmount.Name = "LANBoostAmount";
+            this.LANBoostAmount.Size = new System.Drawing.Size(200, 25);
+            this.LANBoostAmount.TabIndex = 86;
+            this.LANBoostAmount.Text = "Default";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Black;
+            this.label20.Location = new System.Drawing.Point(7, 319);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(106, 19);
+            this.label20.TabIndex = 85;
+            this.label20.Text = "Ball Bounciness:";
+            // 
+            // LANBallBounciness
+            // 
+            this.LANBallBounciness.DropDownHeight = 100;
+            this.LANBallBounciness.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBallBounciness.FormattingEnabled = true;
+            this.LANBallBounciness.IntegralHeight = false;
+            this.LANBallBounciness.Items.AddRange(new object[] {
+            "Default",
+            "Low",
+            "High",
+            "Super High"});
+            this.LANBallBounciness.Location = new System.Drawing.Point(123, 318);
+            this.LANBallBounciness.Name = "LANBallBounciness";
+            this.LANBallBounciness.Size = new System.Drawing.Size(200, 25);
+            this.LANBallBounciness.TabIndex = 84;
+            this.LANBallBounciness.Text = "Default";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Black;
+            this.label21.Location = new System.Drawing.Point(7, 289);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 19);
+            this.label21.TabIndex = 83;
+            this.label21.Text = "Ball Size:";
+            // 
+            // LANBallSize
+            // 
+            this.LANBallSize.DropDownHeight = 300;
+            this.LANBallSize.DropDownWidth = 200;
+            this.LANBallSize.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBallSize.FormattingEnabled = true;
+            this.LANBallSize.IntegralHeight = false;
+            this.LANBallSize.Items.AddRange(new object[] {
+            "Default",
+            "Small",
+            "Large",
+            "Gigantic"});
+            this.LANBallSize.Location = new System.Drawing.Point(123, 288);
+            this.LANBallSize.Name = "LANBallSize";
+            this.LANBallSize.Size = new System.Drawing.Size(200, 25);
+            this.LANBallSize.TabIndex = 82;
+            this.LANBallSize.Text = "Default";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Black;
+            this.label22.Location = new System.Drawing.Point(7, 134);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(78, 19);
+            this.label22.TabIndex = 81;
+            this.label22.Text = "Max Score:";
+            // 
+            // LANMaxScore
+            // 
+            this.LANMaxScore.DropDownHeight = 100;
+            this.LANMaxScore.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANMaxScore.FormattingEnabled = true;
+            this.LANMaxScore.IntegralHeight = false;
+            this.LANMaxScore.Items.AddRange(new object[] {
+            "1 Goal",
+            "3 Goals",
+            "5 Goals",
+            "Unlimited"});
+            this.LANMaxScore.Location = new System.Drawing.Point(123, 133);
+            this.LANMaxScore.Name = "LANMaxScore";
+            this.LANMaxScore.Size = new System.Drawing.Size(200, 25);
+            this.LANMaxScore.TabIndex = 80;
+            this.LANMaxScore.Text = "Unlimited";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Black;
+            this.label23.Location = new System.Drawing.Point(7, 103);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(99, 19);
+            this.label23.TabIndex = 79;
+            this.label23.Text = "Match Length:";
+            // 
+            // LANMatchLength
+            // 
+            this.LANMatchLength.DropDownHeight = 300;
+            this.LANMatchLength.DropDownWidth = 200;
+            this.LANMatchLength.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANMatchLength.FormattingEnabled = true;
+            this.LANMatchLength.IntegralHeight = false;
+            this.LANMatchLength.Items.AddRange(new object[] {
+            "5 Minutes",
+            "10 Minutes",
+            "20 Minutes",
+            "Unlimited"});
+            this.LANMatchLength.Location = new System.Drawing.Point(123, 102);
+            this.LANMatchLength.Name = "LANMatchLength";
+            this.LANMatchLength.Size = new System.Drawing.Size(200, 25);
+            this.LANMatchLength.TabIndex = 78;
+            this.LANMatchLength.Text = "5 Minutes";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Black;
+            this.label24.Location = new System.Drawing.Point(7, 197);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(106, 19);
+            this.label24.TabIndex = 77;
+            this.label24.Text = "Ball Max Speed:";
+            // 
+            // LANBallMaxSpeed
+            // 
+            this.LANBallMaxSpeed.DropDownHeight = 100;
+            this.LANBallMaxSpeed.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBallMaxSpeed.FormattingEnabled = true;
+            this.LANBallMaxSpeed.IntegralHeight = false;
+            this.LANBallMaxSpeed.Items.AddRange(new object[] {
+            "Default",
+            "Slow",
+            "Fast",
+            "Super Fast"});
+            this.LANBallMaxSpeed.Location = new System.Drawing.Point(123, 196);
+            this.LANBallMaxSpeed.Name = "LANBallMaxSpeed";
+            this.LANBallMaxSpeed.Size = new System.Drawing.Size(200, 25);
+            this.LANBallMaxSpeed.TabIndex = 76;
+            this.LANBallMaxSpeed.Text = "Default";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Black;
+            this.label25.Location = new System.Drawing.Point(7, 165);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(90, 19);
+            this.label25.TabIndex = 75;
+            this.label25.Text = "Game Speed:";
+            // 
+            // LANGameSpeed
+            // 
+            this.LANGameSpeed.DropDownHeight = 300;
+            this.LANGameSpeed.DropDownWidth = 200;
+            this.LANGameSpeed.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANGameSpeed.FormattingEnabled = true;
+            this.LANGameSpeed.IntegralHeight = false;
+            this.LANGameSpeed.Items.AddRange(new object[] {
+            "Default",
+            "Slo-Mo",
+            "Time Warp"});
+            this.LANGameSpeed.Location = new System.Drawing.Point(123, 164);
+            this.LANGameSpeed.Name = "LANGameSpeed";
+            this.LANGameSpeed.Size = new System.Drawing.Size(200, 25);
+            this.LANGameSpeed.TabIndex = 74;
+            this.LANGameSpeed.Text = "Default";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Black;
+            this.label26.Location = new System.Drawing.Point(7, 258);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(81, 19);
+            this.label26.TabIndex = 73;
+            this.label26.Text = "Ball Weight:";
+            // 
+            // LANBallWeight
+            // 
+            this.LANBallWeight.DropDownHeight = 100;
+            this.LANBallWeight.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBallWeight.FormattingEnabled = true;
+            this.LANBallWeight.IntegralHeight = false;
+            this.LANBallWeight.Items.AddRange(new object[] {
+            "Default",
+            "Light",
+            "Heavy",
+            "Super Light"});
+            this.LANBallWeight.Location = new System.Drawing.Point(123, 257);
+            this.LANBallWeight.Name = "LANBallWeight";
+            this.LANBallWeight.Size = new System.Drawing.Size(200, 25);
+            this.LANBallWeight.TabIndex = 72;
+            this.LANBallWeight.Text = "Default";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Black;
+            this.label27.Location = new System.Drawing.Point(7, 228);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(66, 19);
+            this.label27.TabIndex = 71;
+            this.label27.Text = "Ball Type:";
+            // 
+            // LANBallType
+            // 
+            this.LANBallType.DropDownHeight = 300;
+            this.LANBallType.DropDownWidth = 200;
+            this.LANBallType.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANBallType.FormattingEnabled = true;
+            this.LANBallType.IntegralHeight = false;
+            this.LANBallType.Items.AddRange(new object[] {
+            "Default",
+            "Cube",
+            "Puck",
+            "Basketball"});
+            this.LANBallType.Location = new System.Drawing.Point(123, 227);
+            this.LANBallType.Name = "LANBallType";
+            this.LANBallType.Size = new System.Drawing.Size(200, 25);
+            this.LANBallType.TabIndex = 70;
+            this.LANBallType.Text = "Default";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.Color.Black;
+            this.label29.Location = new System.Drawing.Point(7, 72);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(40, 19);
+            this.label29.TabIndex = 67;
+            this.label29.Text = "Map:";
+            // 
+            // LANMap
+            // 
+            this.LANMap.DropDownHeight = 300;
+            this.LANMap.DropDownWidth = 200;
+            this.LANMap.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANMap.FormattingEnabled = true;
+            this.LANMap.IntegralHeight = false;
+            this.LANMap.Items.AddRange(new object[] {
+            "[Official Maps]"});
+            this.LANMap.Location = new System.Drawing.Point(123, 71);
+            this.LANMap.Name = "LANMap";
+            this.LANMap.Size = new System.Drawing.Size(200, 25);
+            this.LANMap.TabIndex = 66;
+            this.LANMap.Text = "Beckwith Park";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(7, 47);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(159, 21);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Host LAN (Press F5)";
             // 
             // label17
             // 
@@ -1335,34 +1788,43 @@
             this.label17.TabIndex = 8;
             this.label17.Text = "Join LAN (Press F4)";
             // 
-            // statusStrip1
+            // joinIPBox
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 460);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(388, 22);
-            this.statusStrip1.TabIndex = 39;
-            this.statusStrip1.Text = "statusStrip1";
+            this.joinIPBox.Location = new System.Drawing.Point(9, 25);
+            this.joinIPBox.Margin = new System.Windows.Forms.Padding(2);
+            this.joinIPBox.Name = "joinIPBox";
+            this.joinIPBox.Size = new System.Drawing.Size(331, 20);
+            this.joinIPBox.TabIndex = 2;
+            this.joinIPBox.Text = "127.0.0.1:7777";
             // 
-            // toolStripStatusLabel1
+            // addMapsButton
             // 
-            this.toolStripStatusLabel1.AutoSize = false;
-            this.toolStripStatusLabel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(375, 17);
+            this.addMapsButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addMapsButton.ForeColor = System.Drawing.Color.Black;
+            this.addMapsButton.Location = new System.Drawing.Point(108, 513);
+            this.addMapsButton.Name = "addMapsButton";
+            this.addMapsButton.Size = new System.Drawing.Size(86, 23);
+            this.addMapsButton.TabIndex = 4;
+            this.addMapsButton.Text = "Add Maps";
+            this.addMapsButton.UseVisualStyleBackColor = true;
+            this.addMapsButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label18
+            // mapFileDialog
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(5, 81);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(159, 21);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Host LAN (Press F5)";
+            this.mapFileDialog.FileName = "*.upk";
+            this.mapFileDialog.Filter = "Map Files: (*.upk) | *.upk";
+            // 
+            // ClearMapsButton
+            // 
+            this.ClearMapsButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClearMapsButton.ForeColor = System.Drawing.Color.Black;
+            this.ClearMapsButton.Location = new System.Drawing.Point(199, 513);
+            this.ClearMapsButton.Name = "ClearMapsButton";
+            this.ClearMapsButton.Size = new System.Drawing.Size(86, 23);
+            this.ClearMapsButton.TabIndex = 39;
+            this.ClearMapsButton.Text = "Clear Maps";
+            this.ClearMapsButton.UseVisualStyleBackColor = true;
+            this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
             // RLCustomizer
             // 
@@ -1370,19 +1832,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(388, 482);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(392, 551);
+            this.Controls.Add(this.ClearMapsButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dllButton);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.addMapsButton);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.1";
+            this.Text = "Rocket Launcher 2.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1395,8 +1858,6 @@
             this.loaderTab.PerformLayout();
             this.lanTab.ResumeLayout(false);
             this.lanTab.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1467,8 +1928,6 @@
         private System.Windows.Forms.Label loaderLbl;
         private System.Windows.Forms.TabPage lanTab;
         private System.Windows.Forms.TextBox joinIPBox;
-        private System.Windows.Forms.Button joinServerButton;
-        private System.Windows.Forms.Button startServerButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox RumbleComboBox;
         private System.Windows.Forms.Label label10;
@@ -1499,8 +1958,38 @@
         private System.Windows.Forms.ComboBox BallTypeComboBox;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox LANRumble;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox LANGravity;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox LANBoostStrength;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ComboBox LANRespawnTime;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox LanDemolish;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox LANBoostAmount;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox LANBallBounciness;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox LANBallSize;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox LANMaxScore;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox LANMatchLength;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ComboBox LANBallMaxSpeed;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox LANGameSpeed;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ComboBox LANBallWeight;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox LANBallType;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ComboBox LANMap;
+        private System.Windows.Forms.Button ClearMapsButton;
+        private System.Windows.Forms.ToolStripMenuItem resetMapSettingsToolStripMenuItem;
     }
 }
 

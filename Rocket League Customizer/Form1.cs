@@ -49,7 +49,7 @@ namespace Rocket_League_Customizer
             InitCustomBlog();
             CheckFirstTime();
             InitSavedSettings();
-            InitMaps();
+            InitMaps(false);
             InitMutators();
             WriteToLog("Initialized");
 
@@ -65,6 +65,19 @@ namespace Rocket_League_Customizer
                 ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
                 ws.Run();
             }
+
+        }
+
+        // Write to log function - Debugging
+        // TU - Fixed log so it appends each time.
+        private static void WriteToLog(string text)
+        {
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                writer.WriteLine(text);
+                writer.Close();
+            }
+            
 
         }
 
@@ -194,7 +207,7 @@ namespace Rocket_League_Customizer
             // Time-out is 10 seconds...
             int Result = WaitForSingleObject(hThread, 10 * 1000);
             // Check whether thread timed out...
-            if (Result == 0x00000080L || Result == 0x00000102L || Result == 0xFFFFFFFF)
+            if (Result == 0x00000080L || Result == 0x00000102L || Result == 0xFFFFFFF)
             {
                 /* Thread timed out... */
                 MessageBox.Show(" hThread [ 2 ] Error! \n ");
@@ -256,7 +269,12 @@ namespace Rocket_League_Customizer
         {
             if (Properties.Settings.Default.FirstTime)
             {
-                MessageBox.Show("Welcome! To get everything properly set up, please start Rocket League through steam and then press the \"Set RL Path\" button under Settings.", "Welcome");
+                if(MessageBox.Show("Welcome! To get everything properly setup please start Rocket League and then hit the 'Ok' button", "Welcome") == DialogResult.OK)
+                {
+                    SavePath(true);
+                    WriteToLog("Saved path on first time startup");
+                }
+                
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
             }
@@ -370,72 +388,12 @@ namespace Rocket_League_Customizer
                 MessageBox.Show("Please start Rocket League and click the \"Set RL Path\"");
                 return;
             }
-            //Write custom data to file
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "settings.txt"))
-            {
-                writer.WriteLine(jump_text.Text);
-                writer.WriteLine(ball_text.Text);
-                writer.WriteLine(car_text.Text);
-                writer.WriteLine(goal_text.Text);
-                writer.WriteLine((unlJumps_checkBox.Checked) ? "1" : "0");
-                writer.WriteLine((zombieCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((Hidden_checkBox.Checked) ? "1" : "0");
-                writer.WriteLine((nameChange_CheckBox.Checked) ? "1" : "0");
-                if (customBlog_checkBox.Checked)
-                {
-                    writer.WriteLine("1");
-                    writer.WriteLine(title_textBox.Text);
-                    writer.WriteLine(body_textBox.Text);
-                    //Stops the getline function in the dll when reading multi line body
-                    writer.WriteLine("xxx");
-                    writer.WriteLine(motd_textBox.Text);
-                    writer.WriteLine(youtubeTitle_textBox.Text);
-                    writer.WriteLine(youtubeURL_textBox.Text);
 
-                } else {
-                    writer.WriteLine("0");
-                }
-                writer.WriteLine(spinRateText.Text);
-                writer.WriteLine(speedText.Text);
-                writer.WriteLine((spiderManCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine(ballGravityScaleText.Text);
-                writer.WriteLine(bounceScaleText.Text);
-                //MessageBox.Show("Settings Saved");
-
-                //SM -Added play sound to signify saved settings
-                
-
-                WriteToLog("Mod Settings Saved");
-                writer.Close();
-            }
             //SM - Map settings now save when "Save" is pressed not "Save Map Settings"
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
-            {
-                writer.WriteLine(mapBoxList.Text);
-                writer.WriteLine(gameTypeComboBox.Text);
-                if (gameTypeComboBox.Text == "Exhibition")
-                {
-                    writer.WriteLine(matchLengthComboBox.Text);
-                    writer.WriteLine(MaxScoreComboBox.Text);
-                    writer.WriteLine(GameSpeedComboBox.Text);
-                    writer.WriteLine(BallMaxSpeedComboBox.Text);
-                    writer.WriteLine(BallTypeComboBox.Text);
-                    writer.WriteLine(BallWeightComboBox.Text);
-                    writer.WriteLine(BallSizeComboBox.Text);
-                    writer.WriteLine(BallBouncinessComboBox.Text);
-                    writer.WriteLine(BoostAmountComboBox.Text);
-                    writer.WriteLine(RumbleComboBox.Text);
-                    writer.WriteLine(BoostStrengthComboBox.Text);
-                    writer.WriteLine(GravityComboBox.Text);
-                    writer.WriteLine(DemolishComboBox.Text);
-                    writer.WriteLine(respawnTimeComboBox.Text);
-                }
-
-                WriteToLog("Map Settings Saved");
-                writer.Close();
-            }
+            WriteModSettings();
+            WriteMapLoaderSettings();
+            WriteLANServerSettings();
+            WriteLANJoinSettings();
             PlaySound();
         }
 
@@ -554,19 +512,30 @@ namespace Rocket_League_Customizer
             }
             else
             {
-                System.Diagnostics.Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
+                //SM - Runs RL as admin
+                try
+                {
+                    Process RL = new Process();
+                    RL.StartInfo.FileName = Properties.Settings.Default.RLPath + "RocketLeague.exe";
+                    RL.StartInfo.Verb = "runas";
+                    RL.Start();
+                } catch (Exception exc)
+                {
+                    WriteToLog(exc.Data.ToString());
+                }
+                //Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
             }
            
         }
         //Go to our reddit page
         private void redditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.reddit.com/r/RocketLeagueMods");
+            Process.Start("https://www.reddit.com/r/RocketLeagueMods");
         }
         //Our website
         private void websiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://rocketleaguemods.com/");
+            Process.Start("http://rocketleaguemods.com/");
         }
 
         //Help button
@@ -615,23 +584,11 @@ namespace Rocket_League_Customizer
             return true;
         }
 
-     
-        // Write to log function - Debugging
-        // TU - Fixed log so it appends each time.
-        private static void WriteToLog(string text)
-        {
-            using (StreamWriter writer = new StreamWriter("log.txt", true))
-            {
-                writer.WriteLine(text);
-            }
-
-        }
-
         //Set RL Path
         private void setRLPathToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             SavePath(true);
-            InitMaps();
+            InitMaps(true);
         }
         //Reset settings
         private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -746,12 +703,6 @@ namespace Rocket_League_Customizer
             autoLoadModsToolStripMenuItem.Checked = !autoLoadModsToolStripMenuItem.Checked;
         }
 
-        /* All functions related to the map loader
-         * 
-         *  BEGIN
-         *  
-         */
-
          //Add Maps Button
         private void button1_Click(object sender, EventArgs e)
         {
@@ -768,28 +719,31 @@ namespace Rocket_League_Customizer
         //Checks if it exists and if not create the map file
         //Otherwise just read the maps
         // TU - changed map names to have spaces to match dictionary
-        private void InitMaps()
+        //SM - Added boolean for clearing map list & new maps
+        private void InitMaps(bool resetMaps)
         {
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
                 WriteToLog("Path empty... returning from InitMaps()");
                 return;
             }
-            if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
+            if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt") || resetMaps)
             {
-                using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
+                using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt"))
                 {
                     writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
-                        + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
+                        + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Foggy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
                         "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Test Volleyball" + Environment.NewLine + "Underpass (Rocket Labs)"
-                         + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +
+                         + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +
                          "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
                     writer.Close();
                 }
+                mapBoxList.Items.Clear();
+                LANMap.Items.Clear();
                 readMaps();
 
-                WriteToLog("maps.txt created");
+                WriteToLog("maps.txt created / reset");
             }
             else
             {
@@ -811,9 +765,10 @@ namespace Rocket_League_Customizer
             {
                 
                 mapBoxList.Items.Add(mapName);
+                LANMap.Items.Add(mapName);
                 writer.WriteLine(mapName);
                 writer.Close();
-                MessageBox.Show(mapName + " Added");
+                //MessageBox.Show(mapName + " Added");
                 WriteToLog(mapName + "added to the list.");
             }
         }
@@ -823,7 +778,7 @@ namespace Rocket_League_Customizer
         {
             if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
             {
-                InitMaps();
+                InitMaps(false);
                 return;
             }
             string name;
@@ -832,12 +787,83 @@ namespace Rocket_League_Customizer
                 while((name = reader.ReadLine()) != null)
                 {
                     mapBoxList.Items.Add(name);
+                    LANMap.Items.Add(name);
                 }
                 reader.Close();
             }
             WriteToLog("Read maps.txt");
         }
+        //SM - Mutator Dictionary
+        public static Dictionary<string, string> mutators = new Dictionary<string, string>()
+        {
+            //Default
+            {"Default", "" },
+            //Time
+            {"5 MinutesTime", ""},
+            {"10 MinutesTime", "10Minutes,"},
+            {"20 MinutesTime", "20Minutes,"},
+            {"UnlimitedTime", "UnlimitedTime,"},
+            //Score
+            {"1 GoalScore", "Max1,"},
+            {"3 GoalsScore", "Max3," },
+            {"5 GoalsScore", "Max5," },
+            {"UnlimitedScore", "" },
+            //Game Speed
+            {"Slo-Mo", "SloMoGameSpeed," },
+            {"Time Warp", "SloMoDistanceBallLowCD" },
+            //Ball Speed
+            {"SlowBall", "SlowBall,"},
+            {"FastBall", "FastBall,"},
+            {"Super FastBall", "SuperFastBall,"},
+            //Ball Type
+            {"Cube", "Ball_CubeBall," },
+            {"Puck", "Ball_Puck," },
+            {"Basketball", "Ball_Basketball," },
+            //Ball Weight
+            {"Light", "LightBall," },
+            {"Heavy", "HeavyBall," },
+            {"Super Light", "SuperLightBall," },
+            //Ball Size
+            {"Small", "SmallBall," },
+            {"Large", "BigBall," },
+            {"Gigantic", "GiantBall," },
+            //Ball Bounciness
+            {"LowBounce", "LowBounciness," },
+            {"HighBounce", "HighBounciness," },
+            {"Super HighBounce", "SuperBounciness," },
+            //Boost Amount
+            {"No BoostBoost", "NoBooster," },
+            {"UnlimitedBoost", "UnlimitedBooster," },
+            {"Recharge (Slow)Boost", "SlowRecharge," },
+            {"Recharge (Fast)Boost", "RapidRecharge," },
+            //Rumble
+            {"Slow", "ItemsModeSlow," },
+            {"Civilized", "ItemsModeQuick," },
+            {"Destruction Derby", "ItemsModeCarManipulators," },
+            {"Spring Loaded", "ItemsModeSprings," },
+            {"None", "" },
+            //Boost Strength
+            {"1x", "" },
+            {"1.5x", "BoostMultiplier1_5x," },
+            {"2x", "BoostMultiplier2x," },
+            {"10x", "BoostMultiplier10x," },
+            //Gravity
+            {"Low", "LowGravity," },
+            {"High", "HighGravity," },
+            {"Super High", "SuperGravity," },
+            //Demolish
+            {"Disabled", "NoDemolish," },
+            {"Friendly Fire", "AlwaysDemolish," },
+            {"On Contact", "ExplodeOpposing," },
+            {"On Contact (FF)", "ExplodeOnTouch," },
+            //Respawn Time
+            {"3 Seconds", "" },
+            {"2 Seconds", "TwoSecondsRespawn," },
+            {"1 Second", "OneSecondsRespawn," },
+            {"Disable Goal Reset", "DisableGoalDelay," },
 
+        };
+            
         /// <summary>
         /// Information holder for a map and its hash value
         /// </summary>
@@ -855,6 +881,7 @@ namespace Rocket_League_Customizer
         /// Contains all the pre-existing maps in the game,
         /// associated with their name file and MD5 checksum
         /// </summary>
+        //SM - Added new maps
         public static Dictionary<string, MapInfo> Maps = new Dictionary<string, MapInfo>()
         {
             {"Beckwith Park",
@@ -902,91 +929,13 @@ namespace Rocket_League_Customizer
             {"Basic Tutorial",
                 new MapInfo("TutorialTest.upk", "8f05dc2abd1ccc5a350ed682cf89ad74") },
             {"Advanced Tutorial",
-                new MapInfo("TutorialAdvanced.upk", "8223b670168244c5e7e6eb7e5e3e5acf") }
+                new MapInfo("TutorialAdvanced.upk", "8223b670168244c5e7e6eb7e5e3e5acf") },
+            {"DFH Stadium (Foggy)",
+                new MapInfo("Stadium_Foggy_P.upk", "7092D0BD81BFF56939BD1C0550C72650")},
+            {"Urban Central (Dawn)",
+                new MapInfo("TrainStation_Dawn_P.upk", "703020DE94DB2CA4B316F9895498569E") },
         };
-
-
-        //Save Maps Settings
-        private void saveMapsSettingsBtn_Click(object sender, EventArgs e)
-        {
-            string mapName = mapBoxList.Text;
-            string gameType = gameTypeComboBox.Text;
-            if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
-            {
-                MessageBox.Show("Please select a valid setting for all fields.");
-                return;
-            }
-            else if (Properties.Settings.Default.RLPath == String.Empty)
-            {
-                MessageBox.Show("Please set your Rocket League Path");
-            }
-
-
-            String upkName = "Park_P";
-            // Get map file name from combobox
-            if (Maps.ContainsKey(mapName))
-            {
-                upkName = Maps[mapName].filename.Replace(".upk", "");
-            }
-            else
-            {
-                upkName = mapName.Replace(".upk", "");
-
-            }
-
-            String formattedGameType = "Game=TAGame.GameInfo_Tutorial_TA?Freeplay?";
-            // Formatted gametype from combobox
-            if (gameType.Equals("Freeplay"))
-            {
-                formattedGameType = "Game=TAGame.GameInfo_Tutorial_TA?Freeplay?";
-            }
-            else if (gameType.Equals("Exhibition"))
-            {
-                formattedGameType = "Game=TAGame.GameInfo_Soccar_TA?";
-            }
-
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
-            {
-                writer.WriteLine("open " + upkName + "?" + formattedGameType);
-
-                writer.Close();
-                
-            }
-            MessageBox.Show("Map loader settings saved.");
-            WriteToLog("Map loader settings saved.");
-        }
-
-        
-        private void joinServerButton_Click(object sender, EventArgs e)
-        {
-            // For now change map_settings.txt to match LAN Format
-            //SM - Now writes to file lan_join.txt
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
-            {
-                writer.WriteLine("open " + joinIPBox.Text);
-
-                writer.Close();
-
-            }
-            MessageBox.Show("Now press F3 in game to join the Server.");
-            WriteToLog("Join Server settings saved.");
-        }
-
-        
-        private void startServerButton_Click(object sender, EventArgs e)
-        {
-            // For now change map_settings.txt to match LAN Format
-            // SM - Now writes to file lan_server.txt
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
-            {
-                writer.WriteLine("open " + "Park_P?listen?Private?");
-
-                writer.Close();
-
-            }
-            MessageBox.Show("Now press F3 in game to join the Server.");
-            WriteToLog("Create Server settings saved.");
-        }
+      
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1016,6 +965,220 @@ namespace Rocket_League_Customizer
             {
                 InitMutators();
             }
+        }
+        //SM - Writes the mod settings
+        private void WriteModSettings()
+        {
+            //Write custom data to file
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "settings.txt"))
+            {
+                writer.WriteLine(jump_text.Text);
+                writer.WriteLine(ball_text.Text);
+                writer.WriteLine(car_text.Text);
+                writer.WriteLine(goal_text.Text);
+                writer.WriteLine((unlJumps_checkBox.Checked) ? "1" : "0");
+                writer.WriteLine((zombieCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine((Hidden_checkBox.Checked) ? "1" : "0");
+                writer.WriteLine((nameChange_CheckBox.Checked) ? "1" : "0");
+                if (customBlog_checkBox.Checked)
+                {
+                    writer.WriteLine("1");
+                    writer.WriteLine(title_textBox.Text);
+                    writer.WriteLine(body_textBox.Text);
+                    //Stops the getline function in the dll when reading multi line body
+                    writer.WriteLine("xxx");
+                    writer.WriteLine(motd_textBox.Text);
+                    writer.WriteLine(youtubeTitle_textBox.Text);
+                    writer.WriteLine(youtubeURL_textBox.Text);
+
+                }
+                else
+                {
+                    writer.WriteLine("0");
+                }
+                writer.WriteLine(spinRateText.Text);
+                writer.WriteLine(speedText.Text);
+                writer.WriteLine((spiderManCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
+                writer.WriteLine(ballGravityScaleText.Text);
+                writer.WriteLine(bounceScaleText.Text);
+
+
+                //SM -Added play sound to signify saved settings
+
+                WriteToLog("Mod Settings Saved");
+                writer.Close();
+            }
+        }
+        //SM - Writes settings for map loader
+        private void WriteMapLoaderSettings()
+        {
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            {
+                string mapName = mapBoxList.Text;
+                string gameType = gameTypeComboBox.Text;
+                if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
+                {
+                    MessageBox.Show("Please select a valid setting for all fields.");
+                    return;
+                }
+
+                if (Maps.ContainsKey(mapName))
+                {
+                    mapName = Maps[mapName].filename.Replace(".upk", "");
+                }
+                else
+                {
+                    mapName = mapName.Replace(".upk", "");
+
+                }
+                if (gameType.Equals("Freeplay"))
+                {
+                    writer.WriteLine("start " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    return;
+                }
+                string gameTags = "GameTags=,";
+                gameTags += mutators[matchLengthComboBox.Text + "Time"];
+                gameTags += mutators[MaxScoreComboBox.Text + "Score"];
+                gameTags += mutators[GameSpeedComboBox.Text];
+                if (BallMaxSpeedComboBox.Text != "Default")
+                    gameTags += mutators[BallMaxSpeedComboBox.Text + "Ball"];
+                else
+                    gameTags += mutators[BallMaxSpeedComboBox.Text];
+                gameTags += mutators[BallTypeComboBox.Text];
+                gameTags += mutators[BallWeightComboBox.Text];
+                gameTags += mutators[BallSizeComboBox.Text];
+                if (BallBouncinessComboBox.Text != "Default")
+                    gameTags += mutators[BallBouncinessComboBox.Text + "Bounce"];
+                else
+                    gameTags += mutators[BallBouncinessComboBox.Text];
+                if (BoostAmountComboBox.Text != "Default")
+                    gameTags += mutators[BoostAmountComboBox.Text + "Boost"];
+                else
+                    gameTags += mutators[BoostAmountComboBox.Text];
+                if (RumbleComboBox.Text == "Default")
+                    gameTags += "ItemsMode,";
+                else
+                    gameTags += mutators[RumbleComboBox.Text];
+                gameTags += mutators[BoostStrengthComboBox.Text];
+                gameTags += mutators[GravityComboBox.Text];
+                gameTags += mutators[DemolishComboBox.Text];
+                gameTags += mutators[respawnTimeComboBox.Text];
+
+                writer.WriteLine("start " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+
+                WriteToLog("Map Settings Saved");
+                writer.Close();
+            }
+        }
+        //SM - Writes LAN Server settings
+        private void WriteLANServerSettings()
+        {
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
+            {
+                string mapName = LANMap.Text;
+
+                if (Maps.ContainsKey(mapName))
+                {
+                    mapName = Maps[mapName].filename.Replace(".upk", "");
+                }
+                else
+                {
+                    mapName = mapName.Replace(".upk", "");
+
+                }
+
+                string gameTags = "GameTags=,";
+                gameTags += mutators[LANMatchLength.Text + "Time"];
+                gameTags += mutators[LANMaxScore.Text + "Score"];
+                gameTags += mutators[LANGameSpeed.Text];
+                if (LANBallMaxSpeed.Text != "Default")
+                    gameTags += mutators[LANBallMaxSpeed.Text + "Ball"];
+                else
+                    gameTags += mutators[LANBallMaxSpeed.Text];
+                gameTags += mutators[LANBallType.Text];
+                gameTags += mutators[LANBallWeight.Text];
+                gameTags += mutators[LANBallSize.Text];
+                if (LANBallBounciness.Text != "Default")
+                    gameTags += mutators[LANBallBounciness.Text + "Bounce"];
+                else
+                    gameTags += mutators[LANBallBounciness.Text];
+                if (LANBoostAmount.Text != "Default")
+                    gameTags += mutators[LANBoostAmount.Text + "Boost"];
+                else
+                    gameTags += mutators[LANBoostAmount.Text];
+                if (LANRumble.Text == "Default")
+                    gameTags += "ItemsMode,";
+                gameTags += mutators[LANBoostStrength.Text];
+                gameTags += mutators[LANGravity.Text];
+                gameTags += mutators[LanDemolish.Text];
+                gameTags += mutators[LANRespawnTime.Text];
+
+                writer.WriteLine("start " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+
+                writer.Close();
+
+            }
+        }
+        //SM - Writes LAN join settings
+        private void WriteLANJoinSettings()
+        {
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
+            {
+                writer.WriteLine("start " + joinIPBox.Text);
+
+                writer.Close();
+
+            }
+        }
+
+        private void ClearMapsButton_Click(object sender, EventArgs e)
+        {
+            InitMaps(true);
+        }
+
+        private void ResetMapSettings()
+        {
+            mapBoxList.Text = "Beckwith Park";
+            gameTypeComboBox.Text = "Freeplay";
+            matchLengthComboBox.Text = "5 Minutes";
+            MaxScoreComboBox.Text = "Unlimited";
+            GameSpeedComboBox.Text = "Default";
+            BallMaxSpeedComboBox.Text = "Default";
+            BallTypeComboBox.Text = "Default";
+            BallWeightComboBox.Text = "Default";
+            BallSizeComboBox.Text = "Default";
+            BallBouncinessComboBox.Text = "Default";
+            BoostAmountComboBox.Text = "Default";
+            RumbleComboBox.Text = "None";
+            BoostStrengthComboBox.Text = "1x";
+            GravityComboBox.Text = "Default";
+            DemolishComboBox.Text = "Default";
+            respawnTimeComboBox.Text = "3 Seconds";
+
+            LANMap.Text = "Beckwith Park";
+            LANMatchLength.Text = "5 Minutes";
+            LANMaxScore.Text = "Unlimited";
+            LANGameSpeed.Text = "Default";
+            LANBallMaxSpeed.Text = "Default";
+            LANBallType.Text = "Default";
+            LANBallWeight.Text = "Default";
+            LANBallSize.Text = "Default";
+            LANBallBounciness.Text = "Default";
+            LANBoostAmount.Text = "Default";
+            LANRumble.Text = "None";
+            LANBoostStrength.Text = "1x";
+            LANGravity.Text = "Default";
+            LanDemolish.Text = "Default";
+            LANRespawnTime.Text = "3 Seconds";
+        }
+
+        private void resetMapSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetMapSettings();
+            //WriteMapLoaderSettings();
+            //WriteLANServerSettings();
         }
     }
 }
