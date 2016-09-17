@@ -54,6 +54,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IrcDotNet">
+      <HintPath>..\..\..\..\..\Desktop\RL Mods\TwitchChatBot\Resources\IrcDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -68,17 +71,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="RL.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RL.Designer.cs">
+      <DependentUpon>RL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Twitch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Twitch.Designer.cs">
+      <DependentUpon>Twitch.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwitchIRC.cs" />
     <Compile Include="WebServer.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="RL.resx">
+      <DependentUpon>RL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitch.resx">
+      <DependentUpon>Twitch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

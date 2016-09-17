@@ -70,5 +70,29 @@ namespace Rocket_League_Customizer.Properties {
                 this["LanEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string twitchUsername {
+            get {
+                return ((string)(this["twitchUsername"]));
+            }
+            set {
+                this["twitchUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string twitchAuth {
+            get {
+                return ((string)(this["twitchAuth"]));
+            }
+            set {
+                this["twitchAuth"] = value;
+            }
+        }
     }
 }

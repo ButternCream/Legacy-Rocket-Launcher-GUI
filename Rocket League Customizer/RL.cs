@@ -37,6 +37,8 @@ namespace Rocket_League_Customizer
         private WebServer ws;
         private static bool isClosing = false;
 
+        //Create twitch var
+        TwitchIRC twitch;
 
         public RLCustomizer()
         {
@@ -45,12 +47,14 @@ namespace Rocket_League_Customizer
             // Since log now appends, clear log file on startup
             File.WriteAllText("log.txt", "");
 
+            
 
             InitCustomBlog();
             CheckFirstTime();
             InitSavedSettings();
             InitMaps(false);
             InitMutators();
+            LoadLANIP();
             WriteToLog("Initialized");
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
@@ -980,7 +984,7 @@ namespace Rocket_League_Customizer
                 writer.WriteLine((zombieCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine((Hidden_checkBox.Checked) ? "1" : "0");
                 writer.WriteLine((nameChange_CheckBox.Checked) ? "1" : "0");
-                if (customBlog_checkBox.Checked)
+                if (customBlog_checkBox.Checked && !enableTwitchChat.Checked)
                 {
                     writer.WriteLine("1");
                     writer.WriteLine(title_textBox.Text);
@@ -1003,6 +1007,8 @@ namespace Rocket_League_Customizer
                 writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
                 writer.WriteLine(ballGravityScaleText.Text);
                 writer.WriteLine(bounceScaleText.Text);
+                //Add twitch chat
+                writer.WriteLine((enableTwitchChat.Checked) ? "1" : "0");
 
 
                 //SM -Added play sound to signify saved settings
@@ -1121,6 +1127,23 @@ namespace Rocket_League_Customizer
 
             }
         }
+
+        //SM - Reload LAN IP
+        private void LoadLANIP()
+        {
+            if (!File.Exists(Properties.Settings.Default.RLPath + "lan_join.txt"))
+            {
+                MessageBox.Show("Doesn't exist");
+                return;
+            }
+            using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "lan_join.txt"))
+            {
+                string ip = reader.ReadLine();
+                ip = ip.Replace("start ", "");
+                joinIPBox.Text = ip;
+            }
+        }
+
         //SM - Writes LAN join settings
         private void WriteLANJoinSettings()
         {
@@ -1179,6 +1202,49 @@ namespace Rocket_League_Customizer
             ResetMapSettings();
             //WriteMapLoaderSettings();
             //WriteLANServerSettings();
+        }
+
+        private void twitchSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Enable 
+        private void enableTwitchChat_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.twitchUsername.Equals(String.Empty) || Properties.Settings.Default.twitchAuth.Equals(String.Empty))
+            {
+                MessageBox.Show("Please set your twitch settings first under 'Settings' -> 'Twitch' -> 'Settings'");
+                return;
+            }
+
+            string username = Properties.Settings.Default.twitchUsername;
+            string password = Properties.Settings.Default.twitchAuth;
+            
+            if (!enableTwitchChat.Checked)
+            {
+                enableTwitchChat.Checked = true;
+                customBlog_checkBox.Checked = false;
+                saveBtn.PerformClick();
+                twitch = new TwitchIRC(username, password);
+               
+            }
+            else
+            {
+                enableTwitchChat.Checked = false;
+                twitch.Disconnect();
+                
+            }
+            
+            
+        }
+
+        private void twitchSettings_Click(object sender, EventArgs e)
+        {
+            Twitch twitch = new Twitch();
+            twitch.usernameText.Text = Properties.Settings.Default.twitchUsername;
+            twitch.authText.Text = Properties.Settings.Default.twitchAuth;
+            twitch.Show();
         }
     }
 }

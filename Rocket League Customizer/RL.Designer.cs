@@ -60,6 +60,7 @@
             this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.twitchSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,6 +156,8 @@
             this.addMapsButton = new System.Windows.Forms.Button();
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
+            this.enableTwitchChat = new System.Windows.Forms.ToolStripMenuItem();
+            this.twitchSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -465,6 +468,7 @@
             this.setRLPathToolStripMenuItem1,
             this.resetToolStripMenuItem1,
             this.resetMapSettingsToolStripMenuItem,
+            this.twitchSettingsToolStripMenuItem,
             this.autoLoadModsToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -491,6 +495,16 @@
             this.resetMapSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.resetMapSettingsToolStripMenuItem.Text = "Reset Mutators";
             this.resetMapSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetMapSettingsToolStripMenuItem_Click);
+            // 
+            // twitchSettingsToolStripMenuItem
+            // 
+            this.twitchSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableTwitchChat,
+            this.twitchSettings});
+            this.twitchSettingsToolStripMenuItem.Name = "twitchSettingsToolStripMenuItem";
+            this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.twitchSettingsToolStripMenuItem.Text = "Twitch";
+            this.twitchSettingsToolStripMenuItem.Click += new System.EventHandler(this.twitchSettingsToolStripMenuItem_Click);
             // 
             // autoLoadModsToolStripMenuItem
             // 
@@ -1826,6 +1840,20 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
+            // enableTwitchChat
+            // 
+            this.enableTwitchChat.Name = "enableTwitchChat";
+            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
+            this.enableTwitchChat.Text = "Enable";
+            this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
+            // 
+            // twitchSettings
+            // 
+            this.twitchSettings.Name = "twitchSettings";
+            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
+            this.twitchSettings.Text = "Settings";
+            this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1845,7 +1873,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.2";
+            this.Text = "Rocket Launcher 2.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1990,6 +2018,9 @@
         private System.Windows.Forms.ComboBox LANMap;
         private System.Windows.Forms.Button ClearMapsButton;
         private System.Windows.Forms.ToolStripMenuItem resetMapSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem twitchSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableTwitchChat;
+        private System.Windows.Forms.ToolStripMenuItem twitchSettings;
     }
 }
 
