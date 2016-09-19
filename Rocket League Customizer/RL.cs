@@ -20,17 +20,15 @@ using System.Net;
  * Can't leave match if you use the map loader
  *
  */
- 
-
-/* Tim - Add log information for memory adresses in the dll */ 
 
 namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
     {
  
-        private static string exePath;
+        private static string resPath;
         Thread processWatcher = new Thread(new ThreadStart(CheckForProcess));
+        //Thread twitchWatcher;
 
         private static bool isRunning = false;
 
@@ -38,7 +36,9 @@ namespace Rocket_League_Customizer
         private static bool isClosing = false;
 
         //Create twitch var
-        TwitchIRC twitch;
+        bool twitchStarted = false;
+        Process twitch;
+
 
         public RLCustomizer()
         {
@@ -58,8 +58,8 @@ namespace Rocket_League_Customizer
             WriteToLog("Initialized");
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
-            exePath = System.IO.Directory.GetCurrentDirectory() + "\\";
-            WriteToLog(exePath);
+            resPath = System.IO.Directory.GetCurrentDirectory() + "\\Resources\\";
+            WriteToLog(resPath);
 
             processWatcher.Start();
 
@@ -441,9 +441,6 @@ namespace Rocket_League_Customizer
                     case 5:
                         zombieCheckBox.Checked = (line == "1") ? true : false;
                         break;
-                    case 6:
-                        Hidden_checkBox.Checked = (line == "1") ? true : false;
-                        break;
                     case 7:
                         nameChange_CheckBox.Checked = (line == "1") ? true : false;
                         break;
@@ -559,7 +556,7 @@ namespace Rocket_League_Customizer
 
         private static bool LoadMods(bool showMessages)
         {
-            String strDLLName = exePath + "RLM.dll"; // here you put the dll you want, only the path.
+            String strDLLName = resPath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
 
             Int32 ProcID = GetProcessId(strProcessName);
@@ -597,7 +594,7 @@ namespace Rocket_League_Customizer
         //Reset settings
         private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Hidden_checkBox.Checked = false;
+            //Hidden_checkBox.Checked = false;
             nameChange_CheckBox.Checked = false;
             customBlog_checkBox.Checked = false;
             unlJumps_checkBox.Checked = false;
@@ -982,7 +979,7 @@ namespace Rocket_League_Customizer
                 writer.WriteLine(goal_text.Text);
                 writer.WriteLine((unlJumps_checkBox.Checked) ? "1" : "0");
                 writer.WriteLine((zombieCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((Hidden_checkBox.Checked) ? "1" : "0");
+                writer.WriteLine("0");
                 writer.WriteLine((nameChange_CheckBox.Checked) ? "1" : "0");
                 if (customBlog_checkBox.Checked && !enableTwitchChat.Checked)
                 {
@@ -1209,12 +1206,42 @@ namespace Rocket_League_Customizer
 
         }
 
+        private void StartTwitch(string username, string password)
+        {
+            string twitchExe = resPath + "twitch.exe";
+            Console.Out.WriteLine(resPath);
+            var processStartInfo = new ProcessStartInfo(twitchExe, Properties.Settings.Default.RLPath + " " + username + " " + password);
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.CreateNoWindow = false;
+
+            twitch = new Process();
+            twitch.StartInfo = processStartInfo;
+            twitchStarted = twitch.Start();
+            if (twitchStarted)
+            {
+                MessageBox.Show("Twitch chat started");
+            }
+            else
+            {
+                MessageBox.Show("Problem starting twitch chat");
+            }
+        }
+
         //Enable 
         private void enableTwitchChat_Click(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.RLPath.Equals(String.Empty))
+            {
+                MessageBox.Show("Please set your RL path");
+                return;
+            }
+
             if (Properties.Settings.Default.twitchUsername.Equals(String.Empty) || Properties.Settings.Default.twitchAuth.Equals(String.Empty))
             {
-                MessageBox.Show("Please set your twitch settings first under 'Settings' -> 'Twitch' -> 'Settings'");
+                //MessageBox.Show("Please set your twitch settings first under 'Settings' -> 'Twitch' -> 'Settings'");
+                Twitch twitch = new Twitch();
+                twitch.Show();
                 return;
             }
 
@@ -1226,13 +1253,19 @@ namespace Rocket_League_Customizer
                 enableTwitchChat.Checked = true;
                 customBlog_checkBox.Checked = false;
                 saveBtn.PerformClick();
-                twitch = new TwitchIRC(username, password);
+                StartTwitch(username, password);
+                //Console.Out.WriteLine("Thread started");
                
             }
             else
             {
                 enableTwitchChat.Checked = false;
-                twitch.Disconnect();
+                if (twitchStarted)
+                {
+                    twitch.CloseMainWindow();
+                    twitch.Close();
+                }
+                //twitch.Disconnect();
                 
             }
             
@@ -1245,6 +1278,20 @@ namespace Rocket_League_Customizer
             twitch.usernameText.Text = Properties.Settings.Default.twitchUsername;
             twitch.authText.Text = Properties.Settings.Default.twitchAuth;
             twitch.Show();
+        }
+        private void RLCustomizer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (twitchStarted)
+            {
+                try
+                {
+                    twitch.Kill();
+                } catch (Exception exc)
+                {
+                    WriteToLog("Twitch process not running. Exception caught: " + exc.Data.ToString());
+                }
+                
+            }     
         }
     }
 }

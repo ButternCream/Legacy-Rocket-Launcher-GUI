@@ -40,7 +40,6 @@
             this.goal_text = new System.Windows.Forms.TextBox();
             this.unlJumps_checkBox = new System.Windows.Forms.CheckBox();
             this.zombieCheckBox = new System.Windows.Forms.CheckBox();
-            this.Hidden_checkBox = new System.Windows.Forms.CheckBox();
             this.nameChange_CheckBox = new System.Windows.Forms.CheckBox();
             this.saveBtn = new System.Windows.Forms.Button();
             this.customBlog_checkBox = new System.Windows.Forms.CheckBox();
@@ -61,6 +60,8 @@
             this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twitchSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableTwitchChat = new System.Windows.Forms.ToolStripMenuItem();
+            this.twitchSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,8 +157,6 @@
             this.addMapsButton = new System.Windows.Forms.Button();
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
-            this.enableTwitchChat = new System.Windows.Forms.ToolStripMenuItem();
-            this.twitchSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -274,27 +273,12 @@
             this.zombieCheckBox.Text = "Enable Zombie Mode (Bots Required)";
             this.zombieCheckBox.UseVisualStyleBackColor = true;
             // 
-            // Hidden_checkBox
-            // 
-            this.Hidden_checkBox.AutoSize = true;
-            this.Hidden_checkBox.Enabled = false;
-            this.Hidden_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hidden_checkBox.ForeColor = System.Drawing.Color.Black;
-            this.Hidden_checkBox.Location = new System.Drawing.Point(10, 27);
-            this.Hidden_checkBox.Name = "Hidden_checkBox";
-            this.Hidden_checkBox.Size = new System.Drawing.Size(166, 23);
-            this.Hidden_checkBox.TabIndex = 10;
-            this.Hidden_checkBox.Text = "Show Hidden Maps (?)";
-            this.toolTip2.SetToolTip(this.Hidden_checkBox, "Requires you to start training and then go back to the main menu to work.\r\nTraini" +
-        "ng map & an old version of underpass will show up in exhibition");
-            this.Hidden_checkBox.UseVisualStyleBackColor = true;
-            // 
             // nameChange_CheckBox
             // 
             this.nameChange_CheckBox.AutoSize = true;
             this.nameChange_CheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameChange_CheckBox.ForeColor = System.Drawing.Color.Black;
-            this.nameChange_CheckBox.Location = new System.Drawing.Point(10, 50);
+            this.nameChange_CheckBox.Location = new System.Drawing.Point(6, 27);
             this.nameChange_CheckBox.Name = "nameChange_CheckBox";
             this.nameChange_CheckBox.Size = new System.Drawing.Size(233, 23);
             this.nameChange_CheckBox.TabIndex = 11;
@@ -320,7 +304,7 @@
             this.customBlog_checkBox.AutoSize = true;
             this.customBlog_checkBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customBlog_checkBox.ForeColor = System.Drawing.Color.Black;
-            this.customBlog_checkBox.Location = new System.Drawing.Point(10, 73);
+            this.customBlog_checkBox.Location = new System.Drawing.Point(6, 50);
             this.customBlog_checkBox.Name = "customBlog_checkBox";
             this.customBlog_checkBox.Size = new System.Drawing.Size(191, 23);
             this.customBlog_checkBox.TabIndex = 13;
@@ -333,7 +317,7 @@
             this.blogTitle_label.AutoSize = true;
             this.blogTitle_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.blogTitle_label.ForeColor = System.Drawing.Color.Black;
-            this.blogTitle_label.Location = new System.Drawing.Point(6, 99);
+            this.blogTitle_label.Location = new System.Drawing.Point(2, 76);
             this.blogTitle_label.Name = "blogTitle_label";
             this.blogTitle_label.Size = new System.Drawing.Size(37, 19);
             this.blogTitle_label.TabIndex = 14;
@@ -343,7 +327,7 @@
             // 
             this.title_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title_textBox.ForeColor = System.Drawing.Color.Black;
-            this.title_textBox.Location = new System.Drawing.Point(89, 96);
+            this.title_textBox.Location = new System.Drawing.Point(85, 73);
             this.title_textBox.Name = "title_textBox";
             this.title_textBox.Size = new System.Drawing.Size(186, 24);
             this.title_textBox.TabIndex = 15;
@@ -353,7 +337,7 @@
             // 
             this.body_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.body_textBox.ForeColor = System.Drawing.Color.Black;
-            this.body_textBox.Location = new System.Drawing.Point(89, 126);
+            this.body_textBox.Location = new System.Drawing.Point(85, 103);
             this.body_textBox.Multiline = true;
             this.body_textBox.Name = "body_textBox";
             this.body_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -366,7 +350,7 @@
             this.body_label.AutoSize = true;
             this.body_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.body_label.ForeColor = System.Drawing.Color.Black;
-            this.body_label.Location = new System.Drawing.Point(6, 129);
+            this.body_label.Location = new System.Drawing.Point(2, 106);
             this.body_label.Name = "body_label";
             this.body_label.Size = new System.Drawing.Size(43, 19);
             this.body_label.TabIndex = 16;
@@ -376,7 +360,7 @@
             // 
             this.motd_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.motd_textBox.ForeColor = System.Drawing.Color.Black;
-            this.motd_textBox.Location = new System.Drawing.Point(89, 199);
+            this.motd_textBox.Location = new System.Drawing.Point(85, 176);
             this.motd_textBox.Name = "motd_textBox";
             this.motd_textBox.Size = new System.Drawing.Size(186, 24);
             this.motd_textBox.TabIndex = 19;
@@ -387,7 +371,7 @@
             this.MotD_label.AutoSize = true;
             this.MotD_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MotD_label.ForeColor = System.Drawing.Color.Black;
-            this.MotD_label.Location = new System.Drawing.Point(6, 202);
+            this.MotD_label.Location = new System.Drawing.Point(2, 179);
             this.MotD_label.Name = "MotD_label";
             this.MotD_label.Size = new System.Drawing.Size(64, 19);
             this.MotD_label.TabIndex = 18;
@@ -398,7 +382,7 @@
             // 
             this.youtubeTitle_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youtubeTitle_textBox.ForeColor = System.Drawing.Color.Black;
-            this.youtubeTitle_textBox.Location = new System.Drawing.Point(89, 229);
+            this.youtubeTitle_textBox.Location = new System.Drawing.Point(85, 206);
             this.youtubeTitle_textBox.Name = "youtubeTitle_textBox";
             this.youtubeTitle_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeTitle_textBox.TabIndex = 21;
@@ -409,7 +393,7 @@
             this.youtubeTitle_label.AutoSize = true;
             this.youtubeTitle_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youtubeTitle_label.ForeColor = System.Drawing.Color.Black;
-            this.youtubeTitle_label.Location = new System.Drawing.Point(6, 232);
+            this.youtubeTitle_label.Location = new System.Drawing.Point(2, 209);
             this.youtubeTitle_label.Name = "youtubeTitle_label";
             this.youtubeTitle_label.Size = new System.Drawing.Size(37, 19);
             this.youtubeTitle_label.TabIndex = 20;
@@ -419,7 +403,7 @@
             // 
             this.youtubeURL_textBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youtubeURL_textBox.ForeColor = System.Drawing.Color.Black;
-            this.youtubeURL_textBox.Location = new System.Drawing.Point(89, 259);
+            this.youtubeURL_textBox.Location = new System.Drawing.Point(85, 236);
             this.youtubeURL_textBox.Name = "youtubeURL_textBox";
             this.youtubeURL_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeURL_textBox.TabIndex = 23;
@@ -430,7 +414,7 @@
             this.youtubeURL_label.AutoSize = true;
             this.youtubeURL_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youtubeURL_label.ForeColor = System.Drawing.Color.Black;
-            this.youtubeURL_label.Location = new System.Drawing.Point(6, 262);
+            this.youtubeURL_label.Location = new System.Drawing.Point(2, 239);
             this.youtubeURL_label.Name = "youtubeURL_label";
             this.youtubeURL_label.Size = new System.Drawing.Size(37, 19);
             this.youtubeURL_label.TabIndex = 22;
@@ -505,6 +489,20 @@
             this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.twitchSettingsToolStripMenuItem.Text = "Twitch";
             this.twitchSettingsToolStripMenuItem.Click += new System.EventHandler(this.twitchSettingsToolStripMenuItem_Click);
+            // 
+            // enableTwitchChat
+            // 
+            this.enableTwitchChat.Name = "enableTwitchChat";
+            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
+            this.enableTwitchChat.Text = "Enable";
+            this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
+            // 
+            // twitchSettings
+            // 
+            this.twitchSettings.Name = "twitchSettings";
+            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
+            this.twitchSettings.Text = "Settings";
+            this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
             // autoLoadModsToolStripMenuItem
             // 
@@ -717,7 +715,6 @@
             this.menuTab.AutoScroll = true;
             this.menuTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.menuTab.Controls.Add(this.title_textBox);
-            this.menuTab.Controls.Add(this.Hidden_checkBox);
             this.menuTab.Controls.Add(this.nameChange_CheckBox);
             this.menuTab.Controls.Add(this.customBlog_checkBox);
             this.menuTab.Controls.Add(this.blogTitle_label);
@@ -1840,20 +1837,6 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
-            // enableTwitchChat
-            // 
-            this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
-            this.enableTwitchChat.Text = "Enable";
-            this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
-            // 
-            // twitchSettings
-            // 
-            this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
-            this.twitchSettings.Text = "Settings";
-            this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
-            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1875,6 +1858,7 @@
             this.Name = "RLCustomizer";
             this.Text = "Rocket Launcher 2.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1903,7 +1887,6 @@
         private System.Windows.Forms.TextBox goal_text;
         private System.Windows.Forms.CheckBox unlJumps_checkBox;
         private System.Windows.Forms.CheckBox zombieCheckBox;
-        private System.Windows.Forms.CheckBox Hidden_checkBox;
         private System.Windows.Forms.CheckBox nameChange_CheckBox;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.CheckBox customBlog_checkBox;
