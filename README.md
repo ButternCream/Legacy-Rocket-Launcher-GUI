@@ -19,10 +19,10 @@ Current Features:
 - Demolish on Opposing Side Of Field (Exhibition)
 - Random Bot Size 
 - Ball Gravity Scale
+- Twitch Chat
 
 Planned Features:
 
-- Twitch Chat
 - Custom Hotkeys
 - Demolish in goal
 - Max Ball Speed
