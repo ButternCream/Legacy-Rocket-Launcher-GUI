@@ -449,10 +449,10 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.twitchSettingsToolStripMenuItem,
             this.setRLPathToolStripMenuItem1,
             this.resetToolStripMenuItem1,
             this.resetMapSettingsToolStripMenuItem,
-            this.twitchSettingsToolStripMenuItem,
             this.autoLoadModsToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -488,19 +488,18 @@
             this.twitchSettingsToolStripMenuItem.Name = "twitchSettingsToolStripMenuItem";
             this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.twitchSettingsToolStripMenuItem.Text = "Twitch";
-            this.twitchSettingsToolStripMenuItem.Click += new System.EventHandler(this.twitchSettingsToolStripMenuItem_Click);
             // 
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -633,7 +632,7 @@
             this.spiderManCheckBox.TabIndex = 33;
             this.spiderManCheckBox.Text = "Spider Man Mode";
             this.spiderManCheckBox.UseVisualStyleBackColor = true;
-            this.spiderManCheckBox.CheckedChanged += new System.EventHandler(this.spiderManCheckBox_CheckedChanged);
+
             // 
             // DemoOnOppCheckBox
             // 
@@ -646,7 +645,7 @@
             this.DemoOnOppCheckBox.TabIndex = 34;
             this.DemoOnOppCheckBox.Text = "Demolish On Opposing Side Of Field";
             this.DemoOnOppCheckBox.UseVisualStyleBackColor = true;
-            this.DemoOnOppCheckBox.CheckedChanged += new System.EventHandler(this.DemoOnOppCheckBox_CheckedChanged);
+
             // 
             // randomSizeBotsCheckBox
             // 
@@ -659,7 +658,7 @@
             this.randomSizeBotsCheckBox.TabIndex = 35;
             this.randomSizeBotsCheckBox.Text = "Random Size Bots (Bots Required)";
             this.randomSizeBotsCheckBox.UseVisualStyleBackColor = true;
-            this.randomSizeBotsCheckBox.CheckedChanged += new System.EventHandler(this.randomSizeBotsCheckBox_CheckedChanged);
+
             // 
             // toolTip1
             // 
@@ -668,7 +667,6 @@
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
             this.toolTip1.ShowAlways = true;
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
             // toolTip2
             // 

@@ -49,7 +49,11 @@ namespace Rocket_League_Customizer
             //MessageBox.Show("get rekt tim");
             // Since log now appends, clear log file on startup
             File.WriteAllText("log.txt", "");
-            
+            //Reset chat.txt on program start
+            if (File.Exists(Properties.Settings.Default.RLPath + "chat.txt"))
+            {
+                File.WriteAllText(Properties.Settings.Default.RLPath + "chat.txt", "");
+            }
 
 
             InitCustomBlog();
@@ -296,7 +300,7 @@ namespace Rocket_League_Customizer
             string rlPath = GetProcessPath("RocketLeague");
             if (rlPath == string.Empty)
             {
-                MessageBox.Show("Please have Rocket League running.", "Error");
+                WriteToLog("Please have Rocket League running.");
                 return false;
             }
             else
@@ -527,6 +531,7 @@ namespace Rocket_League_Customizer
                     RL.Start();
                 } catch (Exception exc)
                 {
+                    WriteToLog("Exception: ");
                     WriteToLog(exc.Data.ToString());
                 }
                 //Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
@@ -624,34 +629,6 @@ namespace Rocket_League_Customizer
             WriteToLog("Reset Settings.");
         }
 
-
-        /*
-         * TO GET RID OF
-         */
-        private void spiderManCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-       
-        private void DemoOnOppCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        
-        private void randomSizeBotsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-
-        }
-
-        /*
-         * END TO GET RID OF
-         */ 
-
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
             isClosing = true;
@@ -665,7 +642,7 @@ namespace Rocket_League_Customizer
                 if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
                 {
                     // Sleep enough to let process initialize
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2500);
 
                     WriteToLog("RocketLeague Start detected.");
                     // Update RL path
@@ -741,7 +718,7 @@ namespace Rocket_League_Customizer
                     writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
                         + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Foggy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
-                        "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Test Volleyball" + Environment.NewLine + "Underpass (Rocket Labs)"
+                        "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Underpass (Rocket Labs)"
                          + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +
                          "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
                     writer.Close();
@@ -937,7 +914,7 @@ namespace Rocket_League_Customizer
                 new MapInfo("TutorialTest.upk", "8f05dc2abd1ccc5a350ed682cf89ad74") },
             {"Advanced Tutorial",
                 new MapInfo("TutorialAdvanced.upk", "8223b670168244c5e7e6eb7e5e3e5acf") },
-            {"DFH Stadium (Foggy)",
+            {"DFH Stadium (Stormy)",
                 new MapInfo("Stadium_Foggy_P.upk", "7092D0BD81BFF56939BD1C0550C72650")},
             {"Urban Central (Dawn)",
                 new MapInfo("TrainStation_Dawn_P.upk", "703020DE94DB2CA4B316F9895498569E") },
@@ -1044,7 +1021,7 @@ namespace Rocket_League_Customizer
                 }
                 if (gameType.Equals("Freeplay"))
                 {
-                    writer.WriteLine("start " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
                 string gameTags = "GameTags=,";
@@ -1075,7 +1052,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[DemolishComboBox.Text];
                 gameTags += mutators[respawnTimeComboBox.Text];
 
-                writer.WriteLine("start " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
 
                 WriteToLog("Map Settings Saved");
                 writer.Close();
@@ -1124,7 +1101,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[LanDemolish.Text];
                 gameTags += mutators[LANRespawnTime.Text];
 
-                writer.WriteLine("start " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
 
                 writer.Close();
 
@@ -1142,7 +1119,7 @@ namespace Rocket_League_Customizer
             using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
                 string ip = reader.ReadLine();
-                ip = ip.Replace("start ", "");
+                ip = ip.Replace("SwitchLevel ", "");
                 joinIPBox.Text = ip;
             }
         }
@@ -1152,18 +1129,18 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
-                writer.WriteLine("start " + joinIPBox.Text);
+                writer.WriteLine("SwitchLevel " + joinIPBox.Text);
 
                 writer.Close();
 
             }
         }
-
+        //SM - Clears custom maps from map loader & LAN
         private void ClearMapsButton_Click(object sender, EventArgs e)
         {
             InitMaps(true);
         }
-
+        //SM - Resets the map settings for both the map loader and LAN
         private void ResetMapSettings()
         {
             mapBoxList.Text = "Beckwith Park";
@@ -1207,11 +1184,17 @@ namespace Rocket_League_Customizer
             //WriteLANServerSettings();
         }
 
-        private void twitchSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //SM - Start twitch
+        /* * * * * * * * * * * * * * * * * * * * * * * *
+         * Starts the process 'twitch.exe' with the params
+         * 
+         * @params
+         * 
+         * RLPath
+         * Twitch username
+         * Twitch Auth Code
+         * * * * * * * * * * * * * * * * * * * * * * * *
+         */
         private void StartTwitch(string username, string password)
         {
             string twitchExe = resPath + "twitch.exe";
@@ -1223,11 +1206,11 @@ namespace Rocket_League_Customizer
             processStartInfo.UseShellExecute = false;
             processStartInfo.ErrorDialog = false;
             processStartInfo.CreateNoWindow = false;
-            processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+            //Doesn't work
+            //processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
             twitch = new Process();
             twitch.StartInfo = processStartInfo;
-            twitch.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             twitchStarted = twitch.Start();
             if (twitchStarted)
             {
@@ -1241,7 +1224,7 @@ namespace Rocket_League_Customizer
             }
         }
 
-        //Enable 
+        //SM - When that click enable for twitch chat 
         private void enableTwitchChat_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.RLPath.Equals(String.Empty))
@@ -1249,10 +1232,9 @@ namespace Rocket_League_Customizer
                 MessageBox.Show("Please set your RL path");
                 return;
             }
-
+            //SM - Prompt them with twitch settings if they haven't set it yet
             if (Properties.Settings.Default.twitchUsername.Equals(String.Empty) || Properties.Settings.Default.twitchAuth.Equals(String.Empty))
             {
-                //MessageBox.Show("Please set your twitch settings first under 'Settings' -> 'Twitch' -> 'Settings'");
                 Twitch twitch = new Twitch();
                 twitch.Show();
                 return;
@@ -1263,16 +1245,16 @@ namespace Rocket_League_Customizer
 
             Process[] processes = Process.GetProcessesByName("twitch.exe");
             WriteToLog(processes.Length.ToString());
-
+            //SM - If enable isn't checked and the process hasn't started
             if (!enableTwitchChat.Checked && processes.Length <= 0)
             {
                 enableTwitchChat.Checked = true;
                 customBlog_checkBox.Checked = false;
                 saveBtn.PerformClick();
                 StartTwitch(username, password);
-                //Console.Out.WriteLine("Thread started");
                
             }
+            //SM - If twitch is started try and kill the process when they disable it
             else
             {
                 
@@ -1296,7 +1278,7 @@ namespace Rocket_League_Customizer
             
             
         }
-
+        //SM - Twitch settings window
         private void twitchSettings_Click(object sender, EventArgs e)
         {
             Twitch twitch = new Twitch();
@@ -1304,6 +1286,7 @@ namespace Rocket_League_Customizer
             twitch.authText.Text = Properties.Settings.Default.twitchAuth;
             twitch.Show();
         }
+        //SM - Try and kill twitch when they close the program
         private void RLCustomizer_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (twitchStarted)
@@ -1319,19 +1302,21 @@ namespace Rocket_League_Customizer
                 
             }     
         }
+        //SM - See below
         private void PlayEasterEgg()
         {
             System.Media.SoundPlayer sound = new System.Media.SoundPlayer(Properties.Resources.SARPBC);
             sound.Play();
         }
-
+        //SM - Easter egg thats plays SARPBC theme song
         private void RLCustomizer_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show(e.KeyCode.ToString());
+            //MessageBox.Show(e.KeyCode.ToString());
             if (e.KeyCode == Keys.F1)
             {
                 PlayEasterEgg();
             }
         }
+
     }
 }
