@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -39,6 +40,8 @@ namespace Rocket_League_Customizer
         bool twitchStarted = false;
         Process twitch;
 
+        
+
 
         public RLCustomizer()
         {
@@ -46,8 +49,8 @@ namespace Rocket_League_Customizer
             //MessageBox.Show("get rekt tim");
             // Since log now appends, clear log file on startup
             File.WriteAllText("log.txt", "");
-
             
+
 
             InitCustomBlog();
             CheckFirstTime();
@@ -69,6 +72,8 @@ namespace Rocket_League_Customizer
                 ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
                 ws.Run();
             }
+            KeyPreview = true;
+            
 
         }
 
@@ -543,10 +548,10 @@ namespace Rocket_League_Customizer
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once)."+
-                "\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\tF2 requires you to be in game.\n\nMap Loader\n\nTo load a map go to the map loader tab a choose the map and game type."
+                "\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\t\tThis includes twitch chat\n\tF2 requires you to be in game.\n\nMap Loader\n\nTo load a map go to the map loader tab a choose the map and game type."
                 + "\n\nThen click \"Save\" and then \"Load Mods\".\n\nThen press F3 in the main menu to load the map.\n\n" +
-                "LAN\nJoining\n\nType in the IP in the box and click join. (e.g 127.0.0.1:7777 - IP:Port). Then press F4 in the main menu." +
-                "\n\nHosting\n\nAssuming you the know and have done the pre-reqs for hosting. (e.g hamachi / port forwarding)\n\nClick Start LAN Server.\nThen press F5 in the main menu", "Help");
+                "LAN\nJoining\n\nType in the IP in the box and click Save. (e.g 127.0.0.1:7777 - IP:Port). Then press F4 in the main menu." +
+                "\n\nHosting\n\nAssuming you the know and have done the pre-reqs for hosting. (e.g hamachi / port forwarding)\n\nChoose mutator settings.\nThen hit Save.\nThen press F5 in the main menu\n\nTwitch Chat\nFound under settings\nHit F1 in the main menu to start twitch chat once its enabled", "Help");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
@@ -578,7 +583,8 @@ namespace Rocket_League_Customizer
                             MessageBox.Show("DLL Missing");
                         return false;
                     }
-                    InjectDLL(hProcess, strDLLName, showMessages);
+                    
+                    InjectDLL(hProcess, strDLLName , showMessages);
 
                 }
             }
@@ -1130,7 +1136,7 @@ namespace Rocket_League_Customizer
         {
             if (!File.Exists(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
-                MessageBox.Show("Doesn't exist");
+                WriteToLog("lan_join.txt doesn't exist");
                 return;
             }
             using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "lan_join.txt"))
@@ -1210,21 +1216,28 @@ namespace Rocket_League_Customizer
         {
             string twitchExe = resPath + "twitch.exe";
             Console.Out.WriteLine(resPath);
-            var processStartInfo = new ProcessStartInfo(twitchExe, Properties.Settings.Default.RLPath + " " + username + " " + password);
+            var processStartInfo = new ProcessStartInfo(twitchExe, "\"" + Properties.Settings.Default.RLPath + "\"" + " " + username + " " + password);
+            WriteToLog(Properties.Settings.Default.RLPath);
+            WriteToLog(username);
+            WriteToLog(password);
             processStartInfo.UseShellExecute = false;
             processStartInfo.ErrorDialog = false;
             processStartInfo.CreateNoWindow = false;
+            processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
             twitch = new Process();
             twitch.StartInfo = processStartInfo;
+            twitch.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             twitchStarted = twitch.Start();
             if (twitchStarted)
             {
-                MessageBox.Show("Twitch chat started");
+                MessageBox.Show("Twitch chat enabled. Hit F1 in the main menu to start it.");
+                WriteToLog("Twitch chat started");
             }
             else
             {
                 MessageBox.Show("Problem starting twitch chat");
+                WriteToLog("Twitch chat unable to start");
             }
         }
 
@@ -1247,8 +1260,11 @@ namespace Rocket_League_Customizer
 
             string username = Properties.Settings.Default.twitchUsername;
             string password = Properties.Settings.Default.twitchAuth;
-            
-            if (!enableTwitchChat.Checked)
+
+            Process[] processes = Process.GetProcessesByName("twitch.exe");
+            WriteToLog(processes.Length.ToString());
+
+            if (!enableTwitchChat.Checked && processes.Length <= 0)
             {
                 enableTwitchChat.Checked = true;
                 customBlog_checkBox.Checked = false;
@@ -1259,14 +1275,23 @@ namespace Rocket_League_Customizer
             }
             else
             {
-                enableTwitchChat.Checked = false;
-                if (twitchStarted)
-                {
-                    twitch.CloseMainWindow();
-                    twitch.Close();
-                }
-                //twitch.Disconnect();
                 
+                if (twitchStarted && processes.Length >= 0)
+                {
+                    try
+                    {
+                        twitch.Kill();
+                        WriteToLog("Twitch killed");
+                    }
+                    catch (Exception exc)
+                    {
+                        WriteToLog("Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
+                    }
+                    
+                }
+                enableTwitchChat.Checked = false;
+                //twitch.Disconnect();
+
             }
             
             
@@ -1286,12 +1311,27 @@ namespace Rocket_League_Customizer
                 try
                 {
                     twitch.Kill();
+                    WriteToLog("Twitch killed");
                 } catch (Exception exc)
                 {
-                    WriteToLog("Twitch process not running. Exception caught: " + exc.Data.ToString());
+                    WriteToLog("Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
                 }
                 
             }     
+        }
+        private void PlayEasterEgg()
+        {
+            System.Media.SoundPlayer sound = new System.Media.SoundPlayer(Properties.Resources.SARPBC);
+            sound.Play();
+        }
+
+        private void RLCustomizer_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.F1)
+            {
+                PlayEasterEgg();
+            }
         }
     }
 }

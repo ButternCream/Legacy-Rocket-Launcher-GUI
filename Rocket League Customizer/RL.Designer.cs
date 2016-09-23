@@ -1859,6 +1859,7 @@
             this.Text = "Rocket Launcher 2.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RLCustomizer_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
