@@ -56,12 +56,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startRocketLeagueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twitchSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableTwitchChat = new System.Windows.Forms.ToolStripMenuItem();
             this.twitchSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -459,6 +459,30 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(71, 23);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
+            // twitchSettingsToolStripMenuItem
+            // 
+            this.twitchSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableTwitchChat,
+            this.twitchSettings});
+            this.twitchSettingsToolStripMenuItem.Enabled = false;
+            this.twitchSettingsToolStripMenuItem.Name = "twitchSettingsToolStripMenuItem";
+            this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.twitchSettingsToolStripMenuItem.Text = "Twitch";
+            // 
+            // enableTwitchChat
+            // 
+            this.enableTwitchChat.Name = "enableTwitchChat";
+            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
+            this.enableTwitchChat.Text = "Enable";
+            this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
+            // 
+            // twitchSettings
+            // 
+            this.twitchSettings.Name = "twitchSettings";
+            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
+            this.twitchSettings.Text = "Settings";
+            this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
+            // 
             // setRLPathToolStripMenuItem1
             // 
             this.setRLPathToolStripMenuItem1.Name = "setRLPathToolStripMenuItem1";
@@ -479,29 +503,6 @@
             this.resetMapSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.resetMapSettingsToolStripMenuItem.Text = "Reset Mutators";
             this.resetMapSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetMapSettingsToolStripMenuItem_Click);
-            // 
-            // twitchSettingsToolStripMenuItem
-            // 
-            this.twitchSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableTwitchChat,
-            this.twitchSettings});
-            this.twitchSettingsToolStripMenuItem.Name = "twitchSettingsToolStripMenuItem";
-            this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.twitchSettingsToolStripMenuItem.Text = "Twitch";
-            // 
-            // enableTwitchChat
-            // 
-            this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
-            this.enableTwitchChat.Text = "Enable";
-            this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
-            // 
-            // twitchSettings
-            // 
-            this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
-            this.twitchSettings.Text = "Settings";
-            this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
             // autoLoadModsToolStripMenuItem
             // 
@@ -632,7 +633,6 @@
             this.spiderManCheckBox.TabIndex = 33;
             this.spiderManCheckBox.Text = "Spider Man Mode";
             this.spiderManCheckBox.UseVisualStyleBackColor = true;
-
             // 
             // DemoOnOppCheckBox
             // 
@@ -645,7 +645,6 @@
             this.DemoOnOppCheckBox.TabIndex = 34;
             this.DemoOnOppCheckBox.Text = "Demolish On Opposing Side Of Field";
             this.DemoOnOppCheckBox.UseVisualStyleBackColor = true;
-
             // 
             // randomSizeBotsCheckBox
             // 
@@ -658,7 +657,6 @@
             this.randomSizeBotsCheckBox.TabIndex = 35;
             this.randomSizeBotsCheckBox.Text = "Random Size Bots (Bots Required)";
             this.randomSizeBotsCheckBox.UseVisualStyleBackColor = true;
-
             // 
             // toolTip1
             // 
@@ -1857,7 +1855,6 @@
             this.Text = "Rocket Launcher 2.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RLCustomizer_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

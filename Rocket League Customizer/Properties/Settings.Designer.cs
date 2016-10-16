@@ -94,53 +94,5 @@ namespace Rocket_League_Customizer.Properties {
                 this["twitchAuth"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string menuHotkey {
-            get {
-                return ((string)(this["menuHotkey"]));
-            }
-            set {
-                this["menuHotkey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string modsHotkey {
-            get {
-                return ((string)(this["modsHotkey"]));
-            }
-            set {
-                this["modsHotkey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mapHotkey {
-            get {
-                return ((string)(this["mapHotkey"]));
-            }
-            set {
-                this["mapHotkey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LANHotkey {
-            get {
-                return ((string)(this["LANHotkey"]));
-            }
-            set {
-                this["LANHotkey"] = value;
-            }
-        }
     }
 }

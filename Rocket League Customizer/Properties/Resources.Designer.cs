@@ -69,14 +69,5 @@ namespace Rocket_League_Customizer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream SARPBC {
-            get {
-                return ResourceManager.GetStream("SARPBC", resourceCulture);
-            }
-        }
     }
 }

@@ -46,7 +46,6 @@ namespace Rocket_League_Customizer
         public RLCustomizer()
         {
             InitializeComponent();
-            //MessageBox.Show("get rekt tim");
             // Since log now appends, clear log file on startup
             File.WriteAllText("log.txt", "");
             //Reset chat.txt on program start
@@ -56,8 +55,8 @@ namespace Rocket_League_Customizer
             }
 
 
-            InitCustomBlog();
             CheckFirstTime();
+            InitCustomBlog();
             InitSavedSettings();
             InitMaps(false);
             InitMutators();
@@ -66,11 +65,11 @@ namespace Rocket_League_Customizer
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
             resPath = System.IO.Directory.GetCurrentDirectory() + "\\Resources\\";
-            WriteToLog(resPath);
+            WriteToLog("Resources Path: " + resPath);
 
             processWatcher.Start();
 
-            // Start LAn redirect server
+            // Start LAN redirect server
             if (Properties.Settings.Default.LanEnabled)
             {
                 ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
@@ -87,7 +86,7 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
-                writer.WriteLine(text);
+                writer.WriteLine(DateTime.Now.ToString("HH:mm:ss tt") + ":\t" + text);
                 writer.Close();
             }
             
@@ -180,11 +179,17 @@ namespace Rocket_League_Customizer
         {
 
             if (request.Url.AbsolutePath.Contains("/Keys/GenerateKeys"))
+            {
+                WriteToLog("GenerateKeys response sent");
                 return "Version=1&Key=ymaFdh03/Hw4rvHjr1zhlZVyNWQipDQqC1nzptiXfgE=&IV=nZ2e0bJY1YVZAgORhFbsEw==&HMACKey=Xv17y2p+hdaGbQgtnWAPbC58xeNGbNSDHr3wvODVsjE=&SessionID=9fhBAd0kBYFMMWmbA8GrkQ==";
+            }
             else
             {
-                return "";
+                WriteToLog("GenerateKeys response empty");
+                return String.Empty;
+ 
             }
+           
         }
 
         public static void InjectDLL(IntPtr hProcess, String strDLLName, bool showMessages)
@@ -204,6 +209,7 @@ namespace Rocket_League_Customizer
             if (Injector == null)
             {
                 MessageBox.Show(" Injector Error! \n ");
+                WriteToLog("Inject Error");
                 // return failed
                 return;
             }
@@ -215,6 +221,7 @@ namespace Rocket_League_Customizer
             {
                 //incorrect thread handle ... return failed
                 MessageBox.Show(" hThread [ 1 ] Error! \n ");
+                WriteToLog("hThread [ 1 ] Error!");
                 return;
             }
             // Time-out is 10 seconds...
@@ -224,6 +231,7 @@ namespace Rocket_League_Customizer
             {
                 /* Thread timed out... */
                 MessageBox.Show(" hThread [ 2 ] Error! \n ");
+                WriteToLog("hThread [ 2 ] Error!");
                 // Make sure thread handle is valid before closing... prevents crashes.
                 if (hThread != null)
                 {
@@ -243,9 +251,9 @@ namespace Rocket_League_Customizer
                 CloseHandle(hThread);
             }
             // return succeeded
-            if(showMessages)
-                MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
-            WriteToLog("Mods successfully loaded.");
+            //if(showMessages)
+                //MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
+            WriteToLog("Mods loaded.");
             return;
         }
 
@@ -300,7 +308,7 @@ namespace Rocket_League_Customizer
             string rlPath = GetProcessPath("RocketLeague");
             if (rlPath == string.Empty)
             {
-                WriteToLog("Please have Rocket League running.");
+                WriteToLog("Save Path - Rocket League not running.");
                 return false;
             }
             else
@@ -349,18 +357,21 @@ namespace Rocket_League_Customizer
                     string rl = processes[0].MainModule.FileName;
                     rl = rl.Replace("\\", "\\\\");
                     Console.WriteLine(rl);
+                    WriteToLog("GetProcessPath - "+rl);
+
                     // Add check to make sure correct process
                     if (rl.Contains("rocketleague"))
                     {
-                        WriteToLog("Path: " + rl);
+                        WriteToLog("GetProcessPath - Path: " + rl);
                         return rl.Remove(rl.Length - 16);
                     } else
                     {
+                        WriteToLog("GetProcessPath - Path does not contain 'rocketleague'");
                         return String.Empty;
                     }
                 } catch(Exception e)
                 {
-                    WriteToLog(e.ToString());
+                    WriteToLog("GetProcessPath - Exception: "+e.ToString());
                     return String.Empty;
                 }
                 
@@ -419,7 +430,7 @@ namespace Rocket_League_Customizer
 
             if (!File.Exists(Properties.Settings.Default.RLPath + "settings.txt") || Properties.Settings.Default.RLPath == string.Empty)
             {
-                WriteToLog("Settings do not exist.");
+                WriteToLog("InitSaveSetting - Settings do not exist.");
                 return;
             }
                 
@@ -427,7 +438,7 @@ namespace Rocket_League_Customizer
             string line;
             int count = 0;
             System.IO.StreamReader reader = new System.IO.StreamReader(Properties.Settings.Default.RLPath + "settings.txt");
-            WriteToLog("Settings do exist.");
+            WriteToLog("InitSaveSettings - Settings do exist.");
             while ((line = reader.ReadLine()) != null)
             {
                 switch (count)
@@ -503,6 +514,7 @@ namespace Rocket_League_Customizer
                 
 
             }
+            WriteToLog("InitSaveSettings - Loaded settings");
             reader.Close();
         }
 
@@ -514,10 +526,12 @@ namespace Rocket_League_Customizer
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
                 MessageBox.Show("Path not set. Please launch rocket league and press the \"Set RL Path\" button.", "Error");
+                WriteToLog("StartRLBtn - Path not set error");
                 return;
             }
             else if (!(GetProcessPath("RocketLeague") == string.Empty))
             {
+                WriteToLog("StartRLBtn - Process already running error");
                 MessageBox.Show("Rocket League already running.");
             }
             else
@@ -529,6 +543,7 @@ namespace Rocket_League_Customizer
                     RL.StartInfo.FileName = Properties.Settings.Default.RLPath + "RocketLeague.exe";
                     RL.StartInfo.Verb = "runas";
                     RL.Start();
+                    WriteToLog("StartRLBtn - Started RL as admin");
                 } catch (Exception exc)
                 {
                     WriteToLog("Exception: ");
@@ -577,13 +592,14 @@ namespace Rocket_League_Customizer
                 {
                     if (showMessages)
                         MessageBox.Show("OpenProcess() Failed!");
+                    WriteToLog("LoadMods - OpenProcess() failed");
                     return false;
                 }
                 else
                 {
                     if (!File.Exists(strDLLName))
                     {
-                        WriteToLog("Missing DLL");
+                        WriteToLog("LoadMods - Missing DLL");
                         if (showMessages)
                             MessageBox.Show("DLL Missing");
                         return false;
@@ -592,6 +608,9 @@ namespace Rocket_League_Customizer
                     InjectDLL(hProcess, strDLLName , showMessages);
 
                 }
+            } else
+            {
+                WriteToLog("LoadMods - Rocket League not running");
             }
             return true;
         }
@@ -644,17 +663,17 @@ namespace Rocket_League_Customizer
                     // Sleep enough to let process initialize
                     Thread.Sleep(2500);
 
-                    WriteToLog("RocketLeague Start detected.");
+                    WriteToLog("CheckForProc - RocketLeague Start detected.");
                     // Update RL path
                     if (LoadMods(true))
                     {
-                        WriteToLog("Auto Loaded mods, awesome.");
+                        WriteToLog("CheckForProc - Auto Loaded mods, awesome.");
                         isRunning = true;
 
                     }
                     else
                     {
-                        WriteToLog("Error auto loading mods.");
+                        WriteToLog("CheckForProc - Error auto loading mods.");
                         isRunning = false;
 
                     }
@@ -695,7 +714,7 @@ namespace Rocket_League_Customizer
             {
                 string filename = Path.GetFileName(mapFileDialog.FileName);
                 AddMaps(filename);
-                
+                WriteToLog("AddMaps - Added Map: "+filename);
             }
         }
 
@@ -715,7 +734,7 @@ namespace Rocket_League_Customizer
             {
                 using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt"))
                 {
-                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
+                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Aquadome" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
                         + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Foggy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
                         "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Underpass (Rocket Labs)"
@@ -727,12 +746,12 @@ namespace Rocket_League_Customizer
                 LANMap.Items.Clear();
                 readMaps();
 
-                WriteToLog("maps.txt created / reset");
+                WriteToLog("InitMaps - maps.txt created / reset");
             }
             else
             {
                 readMaps();
-                WriteToLog("maps.txt already exists, reading maps...");
+                WriteToLog("InitMaps - maps.txt already exists, reading maps...");
             }
         }
 
@@ -743,6 +762,7 @@ namespace Rocket_League_Customizer
             if (File.ReadAllText(Properties.Settings.Default.RLPath + "maps.txt").Contains(mapName))
             {
                 MessageBox.Show("Map is already added");
+                WriteToLog("AddMaps - " + mapName + " already added");
                 return;
             }
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
@@ -753,7 +773,7 @@ namespace Rocket_League_Customizer
                 writer.WriteLine(mapName);
                 writer.Close();
                 //MessageBox.Show(mapName + " Added");
-                WriteToLog(mapName + "added to the list.");
+                WriteToLog("AddMaps - "+mapName + "added to the list.");
             }
         }
 
@@ -763,6 +783,7 @@ namespace Rocket_League_Customizer
             if (!File.Exists(Properties.Settings.Default.RLPath + "maps.txt"))
             {
                 InitMaps(false);
+                WriteToLog("readMaps - created maps.txt, didn't exist");
                 return;
             }
             string name;
@@ -775,7 +796,7 @@ namespace Rocket_League_Customizer
                 }
                 reader.Close();
             }
-            WriteToLog("Read maps.txt");
+            WriteToLog("readMaps - Read maps.txt");
         }
         //SM - Mutator Dictionary
         public static Dictionary<string, string> mutators = new Dictionary<string, string>()
@@ -918,6 +939,8 @@ namespace Rocket_League_Customizer
                 new MapInfo("Stadium_Foggy_P.upk", "7092D0BD81BFF56939BD1C0550C72650")},
             {"Urban Central (Dawn)",
                 new MapInfo("TrainStation_Dawn_P.upk", "703020DE94DB2CA4B316F9895498569E") },
+            {"Aquadome",
+                new MapInfo("Underwater_P.upk", "B6B0BAB0570D2866E281830FCC27F12D") },
         };
       
 
@@ -993,7 +1016,7 @@ namespace Rocket_League_Customizer
 
                 //SM -Added play sound to signify saved settings
 
-                WriteToLog("Mod Settings Saved");
+                WriteToLog("WriteModSettings - wrote settings");
                 writer.Close();
             }
         }
@@ -1007,6 +1030,7 @@ namespace Rocket_League_Customizer
                 if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
                 {
                     MessageBox.Show("Please select a valid setting for all fields.");
+                    WriteToLog("WriteMapLoaderSettings - Selected invalid setting");
                     return;
                 }
 
@@ -1054,7 +1078,7 @@ namespace Rocket_League_Customizer
 
                 writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
 
-                WriteToLog("Map Settings Saved");
+                WriteToLog("WriteMapLoaderSettings - Map Settings Saved");
                 writer.Close();
             }
         }
@@ -1102,7 +1126,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[LANRespawnTime.Text];
 
                 writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
-
+                WriteToLog("WriteLANSettings - Settings saved");
                 writer.Close();
 
             }
@@ -1113,7 +1137,7 @@ namespace Rocket_League_Customizer
         {
             if (!File.Exists(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
-                WriteToLog("lan_join.txt doesn't exist");
+                WriteToLog("LoadLANIP - lan_join.txt doesn't exist");
                 return;
             }
             using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "lan_join.txt"))
@@ -1122,6 +1146,7 @@ namespace Rocket_League_Customizer
                 ip = ip.Replace("SwitchLevel ", "");
                 joinIPBox.Text = ip;
             }
+            WriteToLog("LoadLANIP - Loaded LAN ip");
         }
 
         //SM - Writes LAN join settings
@@ -1134,11 +1159,13 @@ namespace Rocket_League_Customizer
                 writer.Close();
 
             }
+            WriteToLog("WriteLANJoinSettings - Wrote join settings");
         }
         //SM - Clears custom maps from map loader & LAN
         private void ClearMapsButton_Click(object sender, EventArgs e)
         {
             InitMaps(true);
+            WriteToLog("Cleared custom maps");
         }
         //SM - Resets the map settings for both the map loader and LAN
         private void ResetMapSettings()
@@ -1182,6 +1209,7 @@ namespace Rocket_League_Customizer
             ResetMapSettings();
             //WriteMapLoaderSettings();
             //WriteLANServerSettings();
+            WriteToLog("Reset Map Settings");
         }
 
         //SM - Start twitch
@@ -1215,12 +1243,12 @@ namespace Rocket_League_Customizer
             if (twitchStarted)
             {
                 MessageBox.Show("Twitch chat enabled. Hit F1 in the main menu to start it.");
-                WriteToLog("Twitch chat started");
+                WriteToLog("StartTwitch - Initialized");
             }
             else
             {
                 MessageBox.Show("Problem starting twitch chat");
-                WriteToLog("Twitch chat unable to start");
+                WriteToLog("StartTwitch - Twitch chat unable to start");
             }
         }
 
@@ -1230,6 +1258,7 @@ namespace Rocket_League_Customizer
             if (Properties.Settings.Default.RLPath.Equals(String.Empty))
             {
                 MessageBox.Show("Please set your RL path");
+                WriteToLog("enableTwitchChat - RL Path not set error");
                 return;
             }
             //SM - Prompt them with twitch settings if they haven't set it yet
@@ -1237,6 +1266,7 @@ namespace Rocket_League_Customizer
             {
                 Twitch twitch = new Twitch();
                 twitch.Show();
+                WriteToLog("enableTwitchChat - Settings empty, show settings window");
                 return;
             }
 
@@ -1263,11 +1293,11 @@ namespace Rocket_League_Customizer
                     try
                     {
                         twitch.Kill();
-                        WriteToLog("Twitch killed");
+                        WriteToLog("enableTwitchChat - Twitch killed");
                     }
                     catch (Exception exc)
                     {
-                        WriteToLog("Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
+                        WriteToLog("enableTwitchChat - Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
                     }
                     
                 }
@@ -1294,28 +1324,14 @@ namespace Rocket_League_Customizer
                 try
                 {
                     twitch.Kill();
-                    WriteToLog("Twitch killed");
-                } catch (Exception exc)
-                {
-                    WriteToLog("Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
+                    WriteToLog("enableTwitchChat - Twitch killed");
                 }
-                
+                catch (Exception exc)
+                {
+                    WriteToLog("enableTwitchChat - Twitch process not running. Exception caught (Ignore): " + exc.Data.ToString());
+                }
+
             }     
-        }
-        //SM - See below
-        private void PlayEasterEgg()
-        {
-            System.Media.SoundPlayer sound = new System.Media.SoundPlayer(Properties.Resources.SARPBC);
-            sound.Play();
-        }
-        //SM - Easter egg thats plays SARPBC theme song
-        private void RLCustomizer_KeyDown(object sender, KeyEventArgs e)
-        {
-            //MessageBox.Show(e.KeyCode.ToString());
-            if (e.KeyCode == Keys.F1)
-            {
-                PlayEasterEgg();
-            }
         }
 
     }
