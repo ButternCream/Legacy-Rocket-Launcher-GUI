@@ -655,6 +655,7 @@ namespace Rocket_League_Customizer
             Properties.Settings.Default.joinHotkey = hotkeyJoin.Text;
             Properties.Settings.Default.hostHotkey = hotkeyHost.Text;
             Properties.Settings.Default.Save();
+            WriteHotkeys();
             WriteToLog("FormClosing - Saved hotkeys");
         }
 
