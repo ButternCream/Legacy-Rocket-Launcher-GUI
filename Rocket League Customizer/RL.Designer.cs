@@ -55,6 +55,9 @@
             this.youtubeURL_label = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startRocketLeagueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.killProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twitchSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableTwitchChat = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,9 +88,11 @@
             this.menuTab = new System.Windows.Forms.TabPage();
             this.hotkeyMenu = new System.Windows.Forms.TextBox();
             this.inGameTabs = new System.Windows.Forms.TabPage();
+            this.hotkeyGame = new System.Windows.Forms.TextBox();
             this.bounceScaleText = new System.Windows.Forms.TextBox();
             this.bounceScaleLbl = new System.Windows.Forms.Label();
             this.loaderTab = new System.Windows.Forms.TabPage();
+            this.hotkeyMap = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.RumbleComboBox = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -122,6 +127,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mapBoxList = new System.Windows.Forms.ComboBox();
             this.lanTab = new System.Windows.Forms.TabPage();
+            this.hotkeyHost = new System.Windows.Forms.TextBox();
+            this.hotkeyJoin = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.LANRumble = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -159,10 +166,7 @@
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
             this.rlFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.hotkeyGame = new System.Windows.Forms.TextBox();
-            this.hotkeyMap = new System.Windows.Forms.TextBox();
-            this.hotkeyJoin = new System.Windows.Forms.TextBox();
-            this.hotkeyHost = new System.Windows.Forms.TextBox();
+            this.resetHotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -446,11 +450,35 @@
             // startRocketLeagueToolStripMenuItem
             // 
             this.startRocketLeagueToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.startRocketLeagueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.normalToolStripMenuItem,
+            this.withlogToolStripMenuItem,
+            this.killProcessToolStripMenuItem});
             this.startRocketLeagueToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.startRocketLeagueToolStripMenuItem.Name = "startRocketLeagueToolStripMenuItem";
-            this.startRocketLeagueToolStripMenuItem.Size = new System.Drawing.Size(145, 23);
-            this.startRocketLeagueToolStripMenuItem.Text = "Start Rocket League";
-            this.startRocketLeagueToolStripMenuItem.Click += new System.EventHandler(this.startRocketLeagueToolStripMenuItem_Click);
+            this.startRocketLeagueToolStripMenuItem.Size = new System.Drawing.Size(111, 23);
+            this.startRocketLeagueToolStripMenuItem.Text = "Rocket League";
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.normalToolStripMenuItem.Text = "Start";
+            this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
+            // 
+            // withlogToolStripMenuItem
+            // 
+            this.withlogToolStripMenuItem.Name = "withlogToolStripMenuItem";
+            this.withlogToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.withlogToolStripMenuItem.Text = "Start With Console";
+            this.withlogToolStripMenuItem.Click += new System.EventHandler(this.withlogToolStripMenuItem_Click);
+            // 
+            // killProcessToolStripMenuItem
+            // 
+            this.killProcessToolStripMenuItem.Name = "killProcessToolStripMenuItem";
+            this.killProcessToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.killProcessToolStripMenuItem.Text = "Kill Process";
+            this.killProcessToolStripMenuItem.Click += new System.EventHandler(this.killProcessToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -459,6 +487,7 @@
             this.setRLPathToolStripMenuItem1,
             this.resetToolStripMenuItem1,
             this.resetMapSettingsToolStripMenuItem,
+            this.resetHotkeysToolStripMenuItem,
             this.autoLoadModsToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -474,18 +503,19 @@
             this.twitchSettingsToolStripMenuItem.Name = "twitchSettingsToolStripMenuItem";
             this.twitchSettingsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.twitchSettingsToolStripMenuItem.Text = "Twitch";
+            this.twitchSettingsToolStripMenuItem.Visible = false;
             // 
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -493,7 +523,7 @@
             // 
             this.setRLPathToolStripMenuItem1.Name = "setRLPathToolStripMenuItem1";
             this.setRLPathToolStripMenuItem1.Size = new System.Drawing.Size(198, 24);
-            this.setRLPathToolStripMenuItem1.Text = "Set RL Path";
+            this.setRLPathToolStripMenuItem1.Text = "Set Path";
             this.setRLPathToolStripMenuItem1.Click += new System.EventHandler(this.setRLPathToolStripMenuItem1_Click);
             // 
             // resetToolStripMenuItem1
@@ -533,14 +563,14 @@
             // redditToolStripMenuItem
             // 
             this.redditToolStripMenuItem.Name = "redditToolStripMenuItem";
-            this.redditToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.redditToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.redditToolStripMenuItem.Text = "Reddit";
             this.redditToolStripMenuItem.Click += new System.EventHandler(this.redditToolStripMenuItem_Click);
             // 
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
@@ -740,6 +770,7 @@
             // 
             // hotkeyMenu
             // 
+            this.hotkeyMenu.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.hotkeyMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.hotkeyMenu.Location = new System.Drawing.Point(67, 6);
             this.hotkeyMenu.MaxLength = 20;
@@ -784,6 +815,19 @@
             this.inGameTabs.TabIndex = 1;
             this.inGameTabs.Text = "In Game Mods";
             this.inGameTabs.UseVisualStyleBackColor = true;
+            // 
+            // hotkeyGame
+            // 
+            this.hotkeyGame.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.hotkeyGame.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyGame.Location = new System.Drawing.Point(87, 6);
+            this.hotkeyGame.MaxLength = 20;
+            this.hotkeyGame.Name = "hotkeyGame";
+            this.hotkeyGame.ReadOnly = true;
+            this.hotkeyGame.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyGame.TabIndex = 40;
+            this.hotkeyGame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyGame.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyGame_KeyDown);
             // 
             // bounceScaleText
             // 
@@ -852,6 +896,19 @@
             this.loaderTab.TabIndex = 2;
             this.loaderTab.Text = "Map Loader";
             this.loaderTab.UseVisualStyleBackColor = true;
+            // 
+            // hotkeyMap
+            // 
+            this.hotkeyMap.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.hotkeyMap.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyMap.Location = new System.Drawing.Point(118, 6);
+            this.hotkeyMap.MaxLength = 20;
+            this.hotkeyMap.Name = "hotkeyMap";
+            this.hotkeyMap.ReadOnly = true;
+            this.hotkeyMap.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyMap.TabIndex = 68;
+            this.hotkeyMap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyMap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyMap_KeyDown);
             // 
             // label9
             // 
@@ -1254,7 +1311,6 @@
             this.BallTypeComboBox.Size = new System.Drawing.Size(200, 25);
             this.BallTypeComboBox.TabIndex = 40;
             this.BallTypeComboBox.Text = "Default";
-            this.BallTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // loaderLbl
             // 
@@ -1367,6 +1423,32 @@
             this.lanTab.TabIndex = 3;
             this.lanTab.Text = "LAN";
             this.lanTab.UseVisualStyleBackColor = true;
+            // 
+            // hotkeyHost
+            // 
+            this.hotkeyHost.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.hotkeyHost.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyHost.Location = new System.Drawing.Point(88, 48);
+            this.hotkeyHost.MaxLength = 20;
+            this.hotkeyHost.Name = "hotkeyHost";
+            this.hotkeyHost.ReadOnly = true;
+            this.hotkeyHost.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyHost.TabIndex = 99;
+            this.hotkeyHost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyHost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyHost_KeyDown);
+            // 
+            // hotkeyJoin
+            // 
+            this.hotkeyJoin.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.hotkeyJoin.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyJoin.Location = new System.Drawing.Point(88, 3);
+            this.hotkeyJoin.MaxLength = 20;
+            this.hotkeyJoin.Name = "hotkeyJoin";
+            this.hotkeyJoin.ReadOnly = true;
+            this.hotkeyJoin.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyJoin.TabIndex = 98;
+            this.hotkeyJoin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyJoin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyJoin_KeyDown);
             // 
             // label30
             // 
@@ -1856,53 +1938,11 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
-            // hotkeyGame
+            // resetHotkeysToolStripMenuItem
             // 
-            this.hotkeyGame.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.hotkeyGame.Location = new System.Drawing.Point(87, 6);
-            this.hotkeyGame.MaxLength = 20;
-            this.hotkeyGame.Name = "hotkeyGame";
-            this.hotkeyGame.ReadOnly = true;
-            this.hotkeyGame.Size = new System.Drawing.Size(95, 20);
-            this.hotkeyGame.TabIndex = 40;
-            this.hotkeyGame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hotkeyGame.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyGame_KeyDown);
-            // 
-            // hotkeyMap
-            // 
-            this.hotkeyMap.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.hotkeyMap.Location = new System.Drawing.Point(118, 6);
-            this.hotkeyMap.MaxLength = 20;
-            this.hotkeyMap.Name = "hotkeyMap";
-            this.hotkeyMap.ReadOnly = true;
-            this.hotkeyMap.Size = new System.Drawing.Size(95, 20);
-            this.hotkeyMap.TabIndex = 68;
-            this.hotkeyMap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hotkeyMap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyMap_KeyDown);
-            // 
-            // hotkeyJoin
-            // 
-            this.hotkeyJoin.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.hotkeyJoin.Location = new System.Drawing.Point(88, 3);
-            this.hotkeyJoin.MaxLength = 20;
-            this.hotkeyJoin.Name = "hotkeyJoin";
-            this.hotkeyJoin.ReadOnly = true;
-            this.hotkeyJoin.Size = new System.Drawing.Size(95, 20);
-            this.hotkeyJoin.TabIndex = 98;
-            this.hotkeyJoin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hotkeyJoin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyJoin_KeyDown);
-            // 
-            // hotkeyHost
-            // 
-            this.hotkeyHost.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.hotkeyHost.Location = new System.Drawing.Point(88, 48);
-            this.hotkeyHost.MaxLength = 20;
-            this.hotkeyHost.Name = "hotkeyHost";
-            this.hotkeyHost.ReadOnly = true;
-            this.hotkeyHost.Size = new System.Drawing.Size(95, 20);
-            this.hotkeyHost.TabIndex = 99;
-            this.hotkeyHost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hotkeyHost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyHost_KeyDown);
+            this.resetHotkeysToolStripMenuItem.Name = "resetHotkeysToolStripMenuItem";
+            this.resetHotkeysToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.resetHotkeysToolStripMenuItem.Text = "Reset Hotkeys";
             // 
             // RLCustomizer
             // 
@@ -2078,6 +2118,10 @@
         private System.Windows.Forms.TextBox hotkeyMap;
         private System.Windows.Forms.TextBox hotkeyHost;
         private System.Windows.Forms.TextBox hotkeyJoin;
+        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem withlogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem killProcessToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetHotkeysToolStripMenuItem;
     }
 }
 

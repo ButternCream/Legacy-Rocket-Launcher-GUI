@@ -76,8 +76,7 @@ namespace Rocket_League_Customizer
                 ws = new WebServer(SendResponse, "http://localhost:8080/Keys/GenerateKeys/", "http://localhost:8080/Services/", "http://localhost:8080/callproc105/", "http://localhost:8080/Population/UpdatePlayerCurrentGame/", "http://localhost:8080/auth/", "http://localhost:8080/Matchmaking/CheckReservation/");
                 ws.Run();
             }
-            KeyPreview = true;
-            
+            KeyPreview = true;    
 
         }
 
@@ -176,23 +175,6 @@ namespace Rocket_League_Customizer
             }
         }
 
-        public static string SendResponse(HttpListenerRequest request)
-        {
-
-            if (request.Url.AbsolutePath.Contains("/Keys/GenerateKeys"))
-            {
-                WriteToLog("GenerateKeys response sent");
-                return "Version=1&Key=ymaFdh03/Hw4rvHjr1zhlZVyNWQipDQqC1nzptiXfgE=&IV=nZ2e0bJY1YVZAgORhFbsEw==&HMACKey=Xv17y2p+hdaGbQgtnWAPbC58xeNGbNSDHr3wvODVsjE=&SessionID=9fhBAd0kBYFMMWmbA8GrkQ==";
-            }
-            else
-            {
-                WriteToLog("GenerateKeys response empty");
-                return String.Empty;
- 
-            }
-           
-        }
-
         public static void InjectDLL(IntPtr hProcess, String strDLLName, bool showMessages)
         {
             IntPtr bytesout;
@@ -260,6 +242,24 @@ namespace Rocket_League_Customizer
 
         /* END LOAD MODS INJECTION */
 
+        //Generate keys to start dedicated server
+        public static string SendResponse(HttpListenerRequest request)
+        {
+
+            if (request.Url.AbsolutePath.Contains("/Keys/GenerateKeys"))
+            {
+                WriteToLog("GenerateKeys response sent");
+                return "Version=1&Key=ymaFdh03/Hw4rvHjr1zhlZVyNWQipDQqC1nzptiXfgE=&IV=nZ2e0bJY1YVZAgORhFbsEw==&HMACKey=Xv17y2p+hdaGbQgtnWAPbC58xeNGbNSDHr3wvODVsjE=&SessionID=9fhBAd0kBYFMMWmbA8GrkQ==";
+            }
+            else
+            {
+                WriteToLog("GenerateKeys response empty");
+                return String.Empty;
+
+            }
+
+        }
+
 
         //SM - Added PlaySound function to play a sound
         private void PlaySound()
@@ -293,10 +293,10 @@ namespace Rocket_League_Customizer
             {
                 if(MessageBox.Show("Welcome! To get everything properly setup please select your rocket league folder.\nIt's usually located at [STEAMFOLDER]/steamapps/common/rocketleague/") == DialogResult.OK)
                 {
-                    SavePath(true);
+                    SavePath(false);
                     WriteToLog("Saved path on first time startup");
                 }
-                
+                BringToFront();
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
             }
@@ -306,6 +306,10 @@ namespace Rocket_League_Customizer
         // TU - Added boolean for displaying error message.  If called by button press, save path and display errors.  If called by polling threads, silently update path if possible
         private bool SavePath(bool showSuccessOutput)
         {
+
+            var root = Properties.Settings.Default.RLPath.Replace("\\\\", "\\");
+            root = root.Replace("\\Binaries\\Win32\\", String.Empty);
+            rlFolderDialog.SelectedPath = root;
             DialogResult result = rlFolderDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -358,7 +362,7 @@ namespace Rocket_League_Customizer
                     }
                 } catch(Exception e)
                 {
-                    WriteToLog("GetProcessPath - Exception: "+e.ToString());
+                    WriteToLog("GetProcessPath - Exception: " + e.ToString());
                     return String.Empty;
                 }
                 
@@ -368,6 +372,7 @@ namespace Rocket_League_Customizer
                 return string.Empty;
             }
         }
+        
 
         //Custom blog checkbox event
         private void customBlog_checkBox_CheckedChanged(object sender, EventArgs e)
@@ -396,7 +401,7 @@ namespace Rocket_League_Customizer
             //If path isn't set save it
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
-                MessageBox.Show("Please start Rocket League and click the \"Set RL Path\"");
+                MessageBox.Show("Please start Rocket League and click the \"Set Path\"");
                 return;
             }
 
@@ -521,13 +526,12 @@ namespace Rocket_League_Customizer
         }
 
         //Start rocket league button event
-        private void startRocketLeagueToolStripMenuItem_Click(object sender, EventArgs e)
+        private void startRocketLeague(bool log)
         {
-            
             //If the path isn't set tell them
             if (Properties.Settings.Default.RLPath == String.Empty)
             {
-                MessageBox.Show("Path not set. Please launch rocket league and press the \"Set RL Path\" button.", "Error");
+                MessageBox.Show("Path not set. Please launch rocket league and press the \"Set Path\" button.", "Error");
                 WriteToLog("StartRLBtn - Path not set error");
                 return;
             }
@@ -544,17 +548,50 @@ namespace Rocket_League_Customizer
                     Process RL = new Process();
                     RL.StartInfo.FileName = Properties.Settings.Default.RLPath + "RocketLeague.exe";
                     RL.StartInfo.Verb = "runas";
+                    if (log)
+                        RL.StartInfo.Arguments = "-log";
                     RL.Start();
                     WriteToLog("StartRLBtn - Started RL as admin");
-                } catch (Exception exc)
+                }
+                catch (Exception exc)
                 {
                     WriteToLog("Exception: ");
                     WriteToLog(exc.Data.ToString());
                 }
                 //Process.Start(Properties.Settings.Default.RLPath + "RocketLeague.exe"); //To Add: ...Start(path,command line arguments)
             }
-           
         }
+
+        //Start rocket league normally
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            startRocketLeague(false);
+            WriteToLog("Started Rocket League Normally");
+        }
+        //Start rocket league with -log parameter
+        private void withlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            startRocketLeague(true);
+            WriteToLog("Started Rocket League With -log");
+        }
+
+        //Kill rocket league process
+        private void killProcessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach(var process in Process.GetProcessesByName("RocketLeague"))
+                {
+                    process.Kill();
+                    WriteToLog("KillProcess - Killed: " + process.ToString());
+                }
+                
+            } catch(Exception exc)
+            {
+                WriteToLog("KillProcess - Exception: " + exc.Data.ToString());
+            }
+        }
+
         //Go to our reddit page
         private void redditToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -569,7 +606,7 @@ namespace Rocket_League_Customizer
         //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("notepad.exe", resPath + "readme.txt");
+            Process.Start(resPath + "readme.txt");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
@@ -616,7 +653,7 @@ namespace Rocket_League_Customizer
         //Set RL Path
         private void setRLPathToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SavePath(true);
+            SavePath(false);
             InitMaps(true);
         }
         //Reset settings
@@ -742,12 +779,15 @@ namespace Rocket_League_Customizer
             {
                 using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt"))
                 {
-                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Aquadome" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
+                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Aquadome" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" 
+                        + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
-                        + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Foggy)" + Environment.NewLine + "Double Goal (Rocket Labs)" + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +
-                        "Mannfield (Stormy)" + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Underpass (Rocket Labs)"
-                         + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +
-                         "Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
+                        + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Stormy)" + Environment.NewLine + "Double Goal (Rocket Labs)" 
+                        + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +"Mannfield (Stormy)" 
+                        + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Underpass (Rocket Labs)"
+                         + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" 
+                         + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +"Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" 
+                         + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
                     writer.Close();
                 }
                 mapBoxList.Items.Clear();
@@ -895,6 +935,7 @@ namespace Rocket_League_Customizer
         /// associated with their name file and MD5 checksum
         /// </summary>
         //SM - Added new maps
+        //Credit to CrumbleZ
         public static Dictionary<string, MapInfo> Maps = new Dictionary<string, MapInfo>()
         {
             {"Beckwith Park",
@@ -950,12 +991,6 @@ namespace Rocket_League_Customizer
             {"Aquadome",
                 new MapInfo("Underwater_P.upk", "B6B0BAB0570D2866E281830FCC27F12D") },
         };
-      
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void gameTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1031,6 +1066,7 @@ namespace Rocket_League_Customizer
         //SM - Writes settings for map loader
         private void WriteMapLoaderSettings()
         {
+
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
             {
                 string mapName = mapBoxList.Text;
@@ -1342,6 +1378,8 @@ namespace Rocket_League_Customizer
             }     
         }
 
+        /* SM - Start Hotkey Code */
+
         private void hotkeyMenu_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyMenu.Text = e.KeyCode.ToString();
@@ -1367,6 +1405,9 @@ namespace Rocket_League_Customizer
             hotkeyHost.Text = e.KeyCode.ToString();
         }
 
+        /* End Hotkey Code */
+
+        //SM - Load hotkeys when the program is opened
         private void RLCustomizer_Load(object sender, EventArgs e)
         {
             hotkeyMenu.Text = Properties.Settings.Default.menuHotkey;
@@ -1375,6 +1416,18 @@ namespace Rocket_League_Customizer
             hotkeyJoin.Text = Properties.Settings.Default.joinHotkey;
             hotkeyHost.Text = Properties.Settings.Default.hostHotkey;
             WriteToLog("FormLoad - Loaded Hotkeys");
+        }
+
+        //SM - Reset hotkeys
+        private void resetHotkeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            hotkeyMenu.Text = Properties.Settings.Default.menuHotkey = "F1";
+            hotkeyGame.Text = Properties.Settings.Default.gameHotkey = "F2";
+            hotkeyMap.Text = Properties.Settings.Default.mapHotkey = "F3";
+            hotkeyJoin.Text = Properties.Settings.Default.joinHotkey = "F4";
+            hotkeyHost.Text = Properties.Settings.Default.hostHotkey = "F5";
+            Properties.Settings.Default.Save();
+            WriteHotkeys();
         }
     }
 }
