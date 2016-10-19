@@ -94,5 +94,65 @@ namespace Rocket_League_Customizer.Properties {
                 this["twitchAuth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F1")]
+        public string menuHotkey {
+            get {
+                return ((string)(this["menuHotkey"]));
+            }
+            set {
+                this["menuHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F2")]
+        public string gameHotkey {
+            get {
+                return ((string)(this["gameHotkey"]));
+            }
+            set {
+                this["gameHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F4")]
+        public string joinHotkey {
+            get {
+                return ((string)(this["joinHotkey"]));
+            }
+            set {
+                this["joinHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F5")]
+        public string hostHotkey {
+            get {
+                return ((string)(this["hostHotkey"]));
+            }
+            set {
+                this["hostHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F3")]
+        public string mapHotkey {
+            get {
+                return ((string)(this["mapHotkey"]));
+            }
+            set {
+                this["mapHotkey"] = value;
+            }
+        }
     }
 }

@@ -39,8 +39,9 @@ namespace Rocket_League_Customizer
         //Create twitch var
         bool twitchStarted = false;
         Process twitch;
-
         
+
+
 
 
         public RLCustomizer()
@@ -290,7 +291,7 @@ namespace Rocket_League_Customizer
         {
             if (Properties.Settings.Default.FirstTime)
             {
-                if(MessageBox.Show("Welcome! To get everything properly setup please start Rocket League and then hit the 'Ok' button", "Welcome") == DialogResult.OK)
+                if(MessageBox.Show("Welcome! To get everything properly setup please select your rocket league folder.\nIt's usually located at [STEAMFOLDER]/steamapps/common/rocketleague/") == DialogResult.OK)
                 {
                     SavePath(true);
                     WriteToLog("Saved path on first time startup");
@@ -305,33 +306,19 @@ namespace Rocket_League_Customizer
         // TU - Added boolean for displaying error message.  If called by button press, save path and display errors.  If called by polling threads, silently update path if possible
         private bool SavePath(bool showSuccessOutput)
         {
-            string rlPath = GetProcessPath("RocketLeague");
-            if (rlPath == string.Empty)
+            DialogResult result = rlFolderDialog.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                WriteToLog("Save Path - Rocket League not running.");
-                return false;
+                var path = rlFolderDialog.SelectedPath + "\\Binaries\\Win32\\";
+                path = path.Replace("\\", "\\\\");
+                if (showSuccessOutput)
+                    MessageBox.Show(path);
+                Properties.Settings.Default.RLPath = path;
+                Properties.Settings.Default.Save();
+                WriteToLog("Saved path as: " + path);
+                return true;
             }
-            else
-            {
-                //Save in default settings
-                try
-                {
-                    Properties.Settings.Default.RLPath = rlPath;
-                    Properties.Settings.Default.Save();
-                    if (showSuccessOutput)
-                    {
-                        MessageBox.Show("Rocket League path saved as \n" + Properties.Settings.Default.RLPath, "Success");
-                    }
-                    WriteToLog("Path Saved");
-                    return true;
-                } catch (Exception e)
-                {
-                    MessageBox.Show("Unable to save Rocket League path.", "Error");
-                    WriteToLog("Path Not Saved");
-                    return false;
-                }
-            }
-            
+            return false;
         }
 
         //Custom blog initially disabled
@@ -418,7 +405,22 @@ namespace Rocket_League_Customizer
             WriteMapLoaderSettings();
             WriteLANServerSettings();
             WriteLANJoinSettings();
+            WriteHotkeys();
             PlaySound();
+        }
+
+        private void WriteHotkeys()
+        {
+            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "hotkeys.txt"))
+            {
+                writer.WriteLine(hotkeyMenu.Text);
+                writer.WriteLine(hotkeyGame.Text);
+                writer.WriteLine(hotkeyMap.Text);
+                writer.WriteLine(hotkeyJoin.Text);
+                writer.WriteLine(hotkeyHost.Text);
+                writer.Close();
+            }
+            WriteToLog("WriteHotkeys - Wrote hotkeys");
         }
 
         //Load saved settings from settings file
@@ -567,11 +569,7 @@ namespace Rocket_League_Customizer
         //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Step 1: Select/Edit the values you want and click Save.\n\nStep 2: Click the Load Mods button (you only need to do this once)."+
-                "\n\nStep 3: Then hit the corresponding key.\n\n\tF1 requires you to be in the main menu.\n\t\tThis includes twitch chat\n\tF2 requires you to be in game.\n\nMap Loader\n\nTo load a map go to the map loader tab a choose the map and game type."
-                + "\n\nThen click \"Save\" and then \"Load Mods\".\n\nThen press F3 in the main menu to load the map.\n\n" +
-                "LAN\nJoining\n\nType in the IP in the box and click Save. (e.g 127.0.0.1:7777 - IP:Port). Then press F4 in the main menu." +
-                "\n\nHosting\n\nAssuming you the know and have done the pre-reqs for hosting. (e.g hamachi / port forwarding)\n\nChoose mutator settings.\nThen hit Save.\nThen press F5 in the main menu\n\nTwitch Chat\nFound under settings\nHit F1 in the main menu to start twitch chat once its enabled", "Help");
+            Process.Start("notepad.exe", resPath + "readme.txt");
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
@@ -651,6 +649,13 @@ namespace Rocket_League_Customizer
         private void RLCustomizer_FormClosing(object sender, FormClosingEventArgs e)
         {
             isClosing = true;
+            Properties.Settings.Default.menuHotkey = hotkeyMenu.Text;
+            Properties.Settings.Default.gameHotkey = hotkeyGame.Text;
+            Properties.Settings.Default.mapHotkey = hotkeyMap.Text;
+            Properties.Settings.Default.joinHotkey = hotkeyJoin.Text;
+            Properties.Settings.Default.hostHotkey = hotkeyHost.Text;
+            Properties.Settings.Default.Save();
+            WriteToLog("FormClosing - Saved hotkeys");
         }
 
         private static void CheckForProcess()
@@ -716,6 +721,8 @@ namespace Rocket_League_Customizer
                 AddMaps(filename);
                 WriteToLog("AddMaps - Added Map: "+filename);
             }
+
+
         }
 
         //Initiate the maps.txt file
@@ -1334,5 +1341,39 @@ namespace Rocket_League_Customizer
             }     
         }
 
+        private void hotkeyMenu_KeyDown(object sender, KeyEventArgs e)
+        {
+            hotkeyMenu.Text = e.KeyCode.ToString();
+        }
+
+        private void hotkeyGame_KeyDown(object sender, KeyEventArgs e)
+        {
+            hotkeyGame.Text = e.KeyCode.ToString();
+        }
+
+        private void hotkeyMap_KeyDown(object sender, KeyEventArgs e)
+        {
+            hotkeyMap.Text = e.KeyCode.ToString();
+        }
+
+        private void hotkeyJoin_KeyDown(object sender, KeyEventArgs e)
+        {
+            hotkeyJoin.Text = e.KeyCode.ToString();
+        }
+
+        private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
+        {
+            hotkeyHost.Text = e.KeyCode.ToString();
+        }
+
+        private void RLCustomizer_Load(object sender, EventArgs e)
+        {
+            hotkeyMenu.Text = Properties.Settings.Default.menuHotkey;
+            hotkeyGame.Text = Properties.Settings.Default.gameHotkey;
+            hotkeyMap.Text = Properties.Settings.Default.mapHotkey;
+            hotkeyJoin.Text = Properties.Settings.Default.joinHotkey;
+            hotkeyHost.Text = Properties.Settings.Default.hostHotkey;
+            WriteToLog("FormLoad - Loaded Hotkeys");
+        }
     }
 }

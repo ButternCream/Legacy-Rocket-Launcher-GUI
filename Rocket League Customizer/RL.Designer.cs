@@ -83,6 +83,7 @@
             this.ballGravScaleLbl = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.menuTab = new System.Windows.Forms.TabPage();
+            this.hotkeyMenu = new System.Windows.Forms.TextBox();
             this.inGameTabs = new System.Windows.Forms.TabPage();
             this.bounceScaleText = new System.Windows.Forms.TextBox();
             this.bounceScaleLbl = new System.Windows.Forms.Label();
@@ -157,6 +158,11 @@
             this.addMapsButton = new System.Windows.Forms.Button();
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
+            this.rlFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.hotkeyGame = new System.Windows.Forms.TextBox();
+            this.hotkeyMap = new System.Windows.Forms.TextBox();
+            this.hotkeyJoin = new System.Windows.Forms.TextBox();
+            this.hotkeyHost = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -472,14 +478,14 @@
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -553,9 +559,9 @@
             this.InGameTitleLabel.ForeColor = System.Drawing.Color.Black;
             this.InGameTitleLabel.Location = new System.Drawing.Point(6, 3);
             this.InGameTitleLabel.Name = "InGameTitleLabel";
-            this.InGameTitleLabel.Size = new System.Drawing.Size(152, 21);
+            this.InGameTitleLabel.Size = new System.Drawing.Size(75, 21);
             this.InGameTitleLabel.TabIndex = 26;
-            this.InGameTitleLabel.Text = "In Game (Press F2)";
+            this.InGameTitleLabel.Text = "In Game";
             // 
             // MenuTitleLabel
             // 
@@ -564,9 +570,9 @@
             this.MenuTitleLabel.ForeColor = System.Drawing.Color.Black;
             this.MenuTitleLabel.Location = new System.Drawing.Point(6, 3);
             this.MenuTitleLabel.Name = "MenuTitleLabel";
-            this.MenuTitleLabel.Size = new System.Drawing.Size(132, 21);
+            this.MenuTitleLabel.Size = new System.Drawing.Size(55, 21);
             this.MenuTitleLabel.TabIndex = 27;
-            this.MenuTitleLabel.Text = "Menu (Press F1)";
+            this.MenuTitleLabel.Text = "Menu";
             // 
             // dllButton
             // 
@@ -710,6 +716,7 @@
             // 
             this.menuTab.AutoScroll = true;
             this.menuTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.menuTab.Controls.Add(this.hotkeyMenu);
             this.menuTab.Controls.Add(this.title_textBox);
             this.menuTab.Controls.Add(this.nameChange_CheckBox);
             this.menuTab.Controls.Add(this.customBlog_checkBox);
@@ -731,10 +738,23 @@
             this.menuTab.Text = "Menu Mods";
             this.menuTab.UseVisualStyleBackColor = true;
             // 
+            // hotkeyMenu
+            // 
+            this.hotkeyMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyMenu.Location = new System.Drawing.Point(67, 6);
+            this.hotkeyMenu.MaxLength = 20;
+            this.hotkeyMenu.Name = "hotkeyMenu";
+            this.hotkeyMenu.ReadOnly = true;
+            this.hotkeyMenu.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyMenu.TabIndex = 28;
+            this.hotkeyMenu.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyMenu.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyMenu_KeyDown);
+            // 
             // inGameTabs
             // 
             this.inGameTabs.AutoScroll = true;
             this.inGameTabs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inGameTabs.Controls.Add(this.hotkeyGame);
             this.inGameTabs.Controls.Add(this.bounceScaleText);
             this.inGameTabs.Controls.Add(this.bounceScaleLbl);
             this.inGameTabs.Controls.Add(this.randomSizeBotsCheckBox);
@@ -791,6 +811,7 @@
             this.loaderTab.AutoScroll = true;
             this.loaderTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.loaderTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.loaderTab.Controls.Add(this.hotkeyMap);
             this.loaderTab.Controls.Add(this.label9);
             this.loaderTab.Controls.Add(this.RumbleComboBox);
             this.loaderTab.Controls.Add(this.label10);
@@ -1242,9 +1263,9 @@
             this.loaderLbl.ForeColor = System.Drawing.Color.Black;
             this.loaderLbl.Location = new System.Drawing.Point(2, 3);
             this.loaderLbl.Name = "loaderLbl";
-            this.loaderLbl.Size = new System.Drawing.Size(179, 21);
+            this.loaderLbl.Size = new System.Drawing.Size(102, 21);
             this.loaderLbl.TabIndex = 7;
-            this.loaderLbl.Text = "Map Loader (Press F3)";
+            this.loaderLbl.Text = "Map Loader";
             // 
             // label2
             // 
@@ -1303,6 +1324,8 @@
             // 
             this.lanTab.AutoScroll = true;
             this.lanTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lanTab.Controls.Add(this.hotkeyHost);
+            this.lanTab.Controls.Add(this.hotkeyJoin);
             this.lanTab.Controls.Add(this.label30);
             this.lanTab.Controls.Add(this.LANRumble);
             this.lanTab.Controls.Add(this.label31);
@@ -1780,9 +1803,9 @@
             this.label18.ForeColor = System.Drawing.Color.Black;
             this.label18.Location = new System.Drawing.Point(7, 47);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(159, 21);
+            this.label18.Size = new System.Drawing.Size(82, 21);
             this.label18.TabIndex = 9;
-            this.label18.Text = "Host LAN (Press F5)";
+            this.label18.Text = "Host LAN";
             // 
             // label17
             // 
@@ -1791,16 +1814,16 @@
             this.label17.ForeColor = System.Drawing.Color.Black;
             this.label17.Location = new System.Drawing.Point(5, 2);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(154, 21);
+            this.label17.Size = new System.Drawing.Size(77, 21);
             this.label17.TabIndex = 8;
-            this.label17.Text = "Join LAN (Press F4)";
+            this.label17.Text = "Join LAN";
             // 
             // joinIPBox
             // 
             this.joinIPBox.Location = new System.Drawing.Point(9, 25);
             this.joinIPBox.Margin = new System.Windows.Forms.Padding(2);
             this.joinIPBox.Name = "joinIPBox";
-            this.joinIPBox.Size = new System.Drawing.Size(331, 20);
+            this.joinIPBox.Size = new System.Drawing.Size(251, 20);
             this.joinIPBox.TabIndex = 2;
             this.joinIPBox.Text = "127.0.0.1:7777";
             // 
@@ -1833,6 +1856,54 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
+            // hotkeyGame
+            // 
+            this.hotkeyGame.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyGame.Location = new System.Drawing.Point(87, 6);
+            this.hotkeyGame.MaxLength = 20;
+            this.hotkeyGame.Name = "hotkeyGame";
+            this.hotkeyGame.ReadOnly = true;
+            this.hotkeyGame.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyGame.TabIndex = 40;
+            this.hotkeyGame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyGame.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyGame_KeyDown);
+            // 
+            // hotkeyMap
+            // 
+            this.hotkeyMap.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyMap.Location = new System.Drawing.Point(118, 6);
+            this.hotkeyMap.MaxLength = 20;
+            this.hotkeyMap.Name = "hotkeyMap";
+            this.hotkeyMap.ReadOnly = true;
+            this.hotkeyMap.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyMap.TabIndex = 68;
+            this.hotkeyMap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyMap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyMap_KeyDown);
+            // 
+            // hotkeyJoin
+            // 
+            this.hotkeyJoin.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyJoin.Location = new System.Drawing.Point(88, 3);
+            this.hotkeyJoin.MaxLength = 20;
+            this.hotkeyJoin.Name = "hotkeyJoin";
+            this.hotkeyJoin.ReadOnly = true;
+            this.hotkeyJoin.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyJoin.TabIndex = 98;
+            this.hotkeyJoin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyJoin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyJoin_KeyDown);
+            // 
+            // hotkeyHost
+            // 
+            this.hotkeyHost.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.hotkeyHost.Location = new System.Drawing.Point(88, 48);
+            this.hotkeyHost.MaxLength = 20;
+            this.hotkeyHost.Name = "hotkeyHost";
+            this.hotkeyHost.ReadOnly = true;
+            this.hotkeyHost.Size = new System.Drawing.Size(95, 20);
+            this.hotkeyHost.TabIndex = 99;
+            this.hotkeyHost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hotkeyHost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hotkeyHost_KeyDown);
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1852,9 +1923,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.3";
+            this.Text = "Rocket Launcher 2.4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
+            this.Load += new System.EventHandler(this.RLCustomizer_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -2000,6 +2072,12 @@
         private System.Windows.Forms.ToolStripMenuItem twitchSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableTwitchChat;
         private System.Windows.Forms.ToolStripMenuItem twitchSettings;
+        private System.Windows.Forms.FolderBrowserDialog rlFolderDialog;
+        private System.Windows.Forms.TextBox hotkeyMenu;
+        private System.Windows.Forms.TextBox hotkeyGame;
+        private System.Windows.Forms.TextBox hotkeyMap;
+        private System.Windows.Forms.TextBox hotkeyHost;
+        private System.Windows.Forms.TextBox hotkeyJoin;
     }
 }
 
