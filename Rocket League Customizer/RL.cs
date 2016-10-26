@@ -36,13 +36,28 @@ namespace Rocket_League_Customizer
         private WebServer ws;
         private static bool isClosing = false;
 
+        static Dictionary<string, int> hotKeyMap = new Dictionary<string, int>
+        {
+        {"Escape", 27},
+        {"F1", 112},
+        {"F2", 113},
+        {"F3", 114},
+        {"F4", 115},
+        {"F5", 116},
+        {"F6", 117},
+        {"F7", 118},
+        {"F8", 119},
+        {"F9", 120},
+        {"F10", 121},
+        {"F11", 122},
+        {"F12", 123}
+        };
+
+
         //Create twitch var
         bool twitchStarted = false;
         Process twitch;
-        
-
-
-
+        int mainMenuHotKey, inGameHotKey, customMatchHotKey, joinGameHotKey, hostGameHotKey;
 
         public RLCustomizer()
         {
@@ -418,11 +433,11 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "hotkeys.txt"))
             {
-                writer.WriteLine(hotkeyMenu.Text);
-                writer.WriteLine(hotkeyGame.Text);
-                writer.WriteLine(hotkeyMap.Text);
-                writer.WriteLine(hotkeyJoin.Text);
-                writer.WriteLine(hotkeyHost.Text);
+                writer.WriteLine(mainMenuHotKey);
+                writer.WriteLine(inGameHotKey);
+                writer.WriteLine(customMatchHotKey);
+                writer.WriteLine(joinGameHotKey);
+                writer.WriteLine(hostGameHotKey);
                 writer.Close();
             }
             WriteToLog("WriteHotkeys - Wrote hotkeys");
@@ -1383,26 +1398,35 @@ namespace Rocket_League_Customizer
         private void hotkeyMenu_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyMenu.Text = e.KeyCode.ToString();
+            mainMenuHotKey = hotKeyMap[hotkeyMenu.Text];
         }
 
         private void hotkeyGame_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyGame.Text = e.KeyCode.ToString();
+            inGameHotKey = hotKeyMap[hotkeyGame.Text];
+
         }
 
         private void hotkeyMap_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyMap.Text = e.KeyCode.ToString();
+            customMatchHotKey = hotKeyMap[hotkeyMap.Text];
+
         }
 
         private void hotkeyJoin_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyJoin.Text = e.KeyCode.ToString();
+            joinGameHotKey = hotKeyMap[hotkeyJoin.Text];
+
         }
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyHost.Text = e.KeyCode.ToString();
+            hostGameHotKey = hotKeyMap[hotkeyHost.Text];
+
         }
 
         /* End Hotkey Code */
