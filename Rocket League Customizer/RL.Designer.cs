@@ -65,10 +65,12 @@
             this.setRLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMapSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetHotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoLoadModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InGameTitleLabel = new System.Windows.Forms.Label();
             this.MenuTitleLabel = new System.Windows.Forms.Label();
@@ -166,7 +168,6 @@
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
             this.rlFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.resetHotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -508,14 +509,14 @@
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -540,6 +541,12 @@
             this.resetMapSettingsToolStripMenuItem.Text = "Reset Mutators";
             this.resetMapSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetMapSettingsToolStripMenuItem_Click);
             // 
+            // resetHotkeysToolStripMenuItem
+            // 
+            this.resetHotkeysToolStripMenuItem.Name = "resetHotkeysToolStripMenuItem";
+            this.resetHotkeysToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.resetHotkeysToolStripMenuItem.Text = "Reset Hotkeys";
+            // 
             // autoLoadModsToolStripMenuItem
             // 
             this.autoLoadModsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -554,7 +561,8 @@
             this.linksToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.linksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.redditToolStripMenuItem,
-            this.websiteToolStripMenuItem});
+            this.websiteToolStripMenuItem,
+            this.donateToolStripMenuItem});
             this.linksToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.linksToolStripMenuItem.Name = "linksToolStripMenuItem";
             this.linksToolStripMenuItem.Size = new System.Drawing.Size(52, 23);
@@ -563,16 +571,23 @@
             // redditToolStripMenuItem
             // 
             this.redditToolStripMenuItem.Name = "redditToolStripMenuItem";
-            this.redditToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.redditToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.redditToolStripMenuItem.Text = "Reddit";
             this.redditToolStripMenuItem.Click += new System.EventHandler(this.redditToolStripMenuItem_Click);
             // 
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
+            // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click_1);
             // 
             // howToUseToolStripMenuItem
             // 
@@ -1938,19 +1953,13 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
-            // resetHotkeysToolStripMenuItem
-            // 
-            this.resetHotkeysToolStripMenuItem.Name = "resetHotkeysToolStripMenuItem";
-            this.resetHotkeysToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.resetHotkeysToolStripMenuItem.Text = "Reset Hotkeys";
-            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(392, 551);
+            this.ClientSize = new System.Drawing.Size(392, 548);
             this.Controls.Add(this.ClearMapsButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dllButton);
@@ -2122,6 +2131,7 @@
         private System.Windows.Forms.ToolStripMenuItem withlogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem killProcessToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetHotkeysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
     }
 }
 

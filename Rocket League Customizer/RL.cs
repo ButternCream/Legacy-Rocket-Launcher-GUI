@@ -1429,5 +1429,13 @@ namespace Rocket_League_Customizer
             Properties.Settings.Default.Save();
             WriteHotkeys();
         }
+
+        //SM - Added donate button
+        private void donateToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            string url = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHLHQGAQK2XZG";
+            Process.Start(url);
+        }
+
     }
 }
