@@ -20,10 +20,11 @@ Current Features:
 - Random Bot Size 
 - Ball Gravity Scale
 - Twitch Chat
+- Custom Hotkeys
+- Dev Console
 
 Planned Features:
 
-- Custom Hotkeys
 - Demolish in goal
 - Max Ball Speed
 - Ability to launch ball
@@ -32,7 +33,6 @@ Planned Features:
 - Set Car Physics Scale (Mass)
 - Freeze Players
 - Max Team Size
-- Dev Console
 - C++ Proxy
 
 Please message me any feedback / more bug reports on reddit or steam.
