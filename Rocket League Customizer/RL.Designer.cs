@@ -168,6 +168,7 @@
             this.mapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ClearMapsButton = new System.Windows.Forms.Button();
             this.rlFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -252,6 +253,7 @@
             // 
             // goal_text
             // 
+            this.goal_text.Enabled = false;
             this.goal_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.goal_text.ForeColor = System.Drawing.Color.Black;
             this.goal_text.Location = new System.Drawing.Point(162, 225);
@@ -397,7 +399,7 @@
             this.youtubeTitle_textBox.Name = "youtubeTitle_textBox";
             this.youtubeTitle_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeTitle_textBox.TabIndex = 21;
-            this.youtubeTitle_textBox.Text = "Youtube";
+            this.youtubeTitle_textBox.Text = "Rocket League Mods";
             // 
             // youtubeTitle_label
             // 
@@ -418,7 +420,7 @@
             this.youtubeURL_textBox.Name = "youtubeURL_textBox";
             this.youtubeURL_textBox.Size = new System.Drawing.Size(186, 24);
             this.youtubeURL_textBox.TabIndex = 23;
-            this.youtubeURL_textBox.Text = "https://www.youtube.com/";
+            this.youtubeURL_textBox.Text = "https://www.rocketleaguemods.com";
             // 
             // youtubeURL_label
             // 
@@ -454,7 +456,8 @@
             this.startRocketLeagueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.normalToolStripMenuItem,
             this.withlogToolStripMenuItem,
-            this.killProcessToolStripMenuItem});
+            this.killProcessToolStripMenuItem,
+            this.restartToolStripMenuItem});
             this.startRocketLeagueToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.startRocketLeagueToolStripMenuItem.Name = "startRocketLeagueToolStripMenuItem";
             this.startRocketLeagueToolStripMenuItem.Size = new System.Drawing.Size(111, 23);
@@ -546,6 +549,7 @@
             this.resetHotkeysToolStripMenuItem.Name = "resetHotkeysToolStripMenuItem";
             this.resetHotkeysToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.resetHotkeysToolStripMenuItem.Text = "Reset Hotkeys";
+            this.resetHotkeysToolStripMenuItem.Click += new System.EventHandler(this.resetHotkeysToolStripMenuItem_Click_1);
             // 
             // autoLoadModsToolStripMenuItem
             // 
@@ -1953,6 +1957,13 @@
             this.ClearMapsButton.UseVisualStyleBackColor = true;
             this.ClearMapsButton.Click += new System.EventHandler(this.ClearMapsButton_Click);
             // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.restartToolStripMenuItem.Text = "Restart";
+            this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
+            // 
             // RLCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2132,6 +2143,7 @@
         private System.Windows.Forms.ToolStripMenuItem killProcessToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetHotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
     }
 }
 

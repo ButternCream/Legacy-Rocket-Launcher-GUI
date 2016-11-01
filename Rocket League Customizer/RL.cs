@@ -39,6 +39,16 @@ namespace Rocket_League_Customizer
         static Dictionary<string, int> hotKeyMap = new Dictionary<string, int>
         {
         {"Escape", 27},
+        {"NumPad0", 96 },
+        {"NumPad1", 97 },
+        {"NumPad2", 98 },
+        {"NumPad3", 99 },
+        {"NumPad4", 100 },
+        {"NumPad5", 101 },
+        {"NumPad6", 102 },
+        {"NumPad7", 103 },
+        {"NumPad8", 104 },
+        {"NumPad9", 105 },
         {"F1", 112},
         {"F2", 113},
         {"F3", 114},
@@ -314,6 +324,11 @@ namespace Rocket_League_Customizer
                 BringToFront();
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
+                WriteModSettings();
+                WriteMapLoaderSettings();
+                WriteLANServerSettings();
+                WriteLANJoinSettings();
+                WriteHotkeys();
             }
         }
 
@@ -621,7 +636,13 @@ namespace Rocket_League_Customizer
         //Help button
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(resPath + "readme.txt");
+            try
+            {
+                Process.Start(resPath + "readme.txt");
+            } catch(Exception ex)
+            {
+                WriteToLog("Readme mising");
+            }
         }
         //Load mods button
         private void dllButton_Click(object sender, EventArgs e)
@@ -685,8 +706,8 @@ namespace Rocket_League_Customizer
             title_textBox.Text = "Rocket League Mods";
             body_textBox.Text = "/r/RocketLeagueMods";
             motd_textBox.Text = "Rocket Launcher by ButterandCream";
-            youtubeTitle_textBox.Text = "Youtube";
-            youtubeURL_textBox.Text = "https://www.youtube.com/";
+            youtubeTitle_textBox.Text = "Rocket League Mods";
+            youtubeURL_textBox.Text = "https://www.rocketleaguemods.com";
             jump_text.Text = "1.5";
             ball_text.Text = "1";
             car_text.Text = "1";
@@ -794,7 +815,7 @@ namespace Rocket_League_Customizer
             {
                 using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt"))
                 {
-                    writer.WriteLine("Advanced Tutorial" + Environment.NewLine + "Aquadome" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" 
+                    writer.WriteLine("Aquadome" + Environment.NewLine + "Basic Tutorial" + Environment.NewLine + "Beckwith Park" 
                         + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
                         + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Stormy)" + Environment.NewLine + "Double Goal (Rocket Labs)" 
@@ -1398,34 +1419,116 @@ namespace Rocket_League_Customizer
         private void hotkeyMenu_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyMenu.Text = e.KeyCode.ToString();
-            mainMenuHotKey = hotKeyMap[hotkeyMenu.Text];
+            try
+            {
+                mainMenuHotKey = hotKeyMap[hotkeyMenu.Text];
+            } catch(Exception ex)
+            {
+                WriteToLog(hotkeyMenu.Text + " is not in dictionary.");
+            }
         }
 
         private void hotkeyGame_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyGame.Text = e.KeyCode.ToString();
-            inGameHotKey = hotKeyMap[hotkeyGame.Text];
+            try
+            {
+                inGameHotKey = hotKeyMap[hotkeyGame.Text];
+            }
+            catch (Exception ex)
+            {
+                WriteToLog(hotkeyMenu.Text + " is not in dictionary.");
+            }
+            
 
         }
 
         private void hotkeyMap_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyMap.Text = e.KeyCode.ToString();
-            customMatchHotKey = hotKeyMap[hotkeyMap.Text];
+            try
+            {
+                customMatchHotKey = hotKeyMap[hotkeyMap.Text];
+            }
+            catch (Exception ex)
+            {
+                WriteToLog(hotkeyMenu.Text + " is not in dictionary.");
+            }
+            
 
         }
 
         private void hotkeyJoin_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyJoin.Text = e.KeyCode.ToString();
-            joinGameHotKey = hotKeyMap[hotkeyJoin.Text];
+            try
+            {
+                joinGameHotKey = hotKeyMap[hotkeyJoin.Text];
+            }
+            catch (Exception ex)
+            {
+                WriteToLog(hotkeyMenu.Text + " is not in dictionary.");
+            }
+            
 
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName("RocketLeague"))
+                {
+                    process.Kill();
+                    WriteToLog("KillProcess - Killed: " + process.ToString());
+                }
+
+            }
+            catch (Exception exc)
+            {
+                WriteToLog("KillProcess - Exception: " + exc.Data.ToString());
+            }
+            Thread.Sleep(1000);
+            startRocketLeague(false);
+            WriteToLog("Started Rocket League Normally");
+        }
+
+        private void resetHotkeysToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            hotkeyMenu.Text = Properties.Settings.Default.menuHotkey = "F1";
+            hotkeyGame.Text = Properties.Settings.Default.gameHotkey = "F2";
+            hotkeyMap.Text = Properties.Settings.Default.mapHotkey = "F3";
+            hotkeyJoin.Text = Properties.Settings.Default.joinHotkey = "F4";
+            hotkeyHost.Text = Properties.Settings.Default.hostHotkey = "F5";
+            try
+            {
+                mainMenuHotKey = hotKeyMap[hotkeyMenu.Text];
+                inGameHotKey = hotKeyMap[hotkeyGame.Text];
+                customMatchHotKey = hotKeyMap[hotkeyMap.Text];
+                joinGameHotKey = hotKeyMap[hotkeyJoin.Text];
+                hostGameHotKey = hotKeyMap[hotkeyHost.Text];
+            }
+            catch (Exception ex)
+            {
+                WriteToLog("onLoad - Not in dictionary.");
+            }
+            Properties.Settings.Default.Save();
+            WriteHotkeys();
+            WriteToLog("Hotkeys reset");
         }
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyHost.Text = e.KeyCode.ToString();
-            hostGameHotKey = hotKeyMap[hotkeyHost.Text];
+            try
+            {
+                hostGameHotKey = hotKeyMap[hotkeyHost.Text];
+            }
+            catch (Exception ex)
+            {
+                WriteToLog(hotkeyMenu.Text + " is not in dictionary.");
+            }
+            
 
         }
 
@@ -1439,6 +1542,18 @@ namespace Rocket_League_Customizer
             hotkeyMap.Text = Properties.Settings.Default.mapHotkey;
             hotkeyJoin.Text = Properties.Settings.Default.joinHotkey;
             hotkeyHost.Text = Properties.Settings.Default.hostHotkey;
+            try
+            {
+                mainMenuHotKey = hotKeyMap[hotkeyMenu.Text];
+                inGameHotKey = hotKeyMap[hotkeyGame.Text];
+                customMatchHotKey = hotKeyMap[hotkeyMap.Text];
+                joinGameHotKey = hotKeyMap[hotkeyJoin.Text];
+                hostGameHotKey = hotKeyMap[hotkeyHost.Text];
+            } catch (Exception ex)
+            {
+                WriteToLog("onLoad - Not in dictionary.");
+            }
+            WriteHotkeys();
             WriteToLog("FormLoad - Loaded Hotkeys");
         }
 
