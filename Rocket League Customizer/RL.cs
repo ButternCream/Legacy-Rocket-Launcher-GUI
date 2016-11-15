@@ -287,7 +287,7 @@ namespace Rocket_League_Customizer
 
 
         //SM - Added PlaySound function to play a sound
-        private void PlaySound()
+        private static void PlaySound()
         {
             System.Media.SoundPlayer sound = new System.Media.SoundPlayer(@"C:\Windows\Media\chimes.wav");
             sound.Play();
@@ -748,6 +748,7 @@ namespace Rocket_League_Customizer
                     {
                         WriteToLog("CheckForProc - Auto Loaded mods, awesome.");
                         isRunning = true;
+                        PlaySound();
 
                     }
                     else
@@ -1125,7 +1126,7 @@ namespace Rocket_League_Customizer
                 }
                 if (gameType.Equals("Freeplay"))
                 {
-                    writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
                 string gameTags = "GameTags=,";
@@ -1156,7 +1157,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[DemolishComboBox.Text];
                 gameTags += mutators[respawnTimeComboBox.Text];
 
-                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                writer.WriteLine(mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
 
                 WriteToLog("WriteMapLoaderSettings - Map Settings Saved");
                 writer.Close();
@@ -1205,7 +1206,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[LanDemolish.Text];
                 gameTags += mutators[LANRespawnTime.Text];
 
-                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                writer.WriteLine(mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
                 WriteToLog("WriteLANSettings - Settings saved");
                 writer.Close();
 
@@ -1234,7 +1235,7 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
-                writer.WriteLine("SwitchLevel " + joinIPBox.Text);
+                writer.WriteLine(joinIPBox.Text);
 
                 writer.Close();
 
