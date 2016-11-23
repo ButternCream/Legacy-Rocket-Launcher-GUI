@@ -888,6 +888,16 @@ namespace Rocket_League_Customizer
         {
             //Default
             {"Default", "" },
+            //Team Size
+            {"1v1", "PlayerCount2," },
+            {"2v2", "PlayerCount4," },
+            {"3v3", "PlayerCount6," },
+            {"4v4", "PlayerCount8," },
+            {"5v5", "PlayerCount10," },
+            //Bot Difficulty
+            {"Rookie", "BotsEasy," },
+            {"Pro", "BotsMedium," },
+            {"All Star", "BotsHard," },
             //Time
             {"5 MinutesTime", ""},
             {"10 MinutesTime", "10Minutes,"},
@@ -1130,7 +1140,7 @@ namespace Rocket_League_Customizer
                 }
                 if (gameType.Equals("Freeplay"))
                 {
-                    writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
                 string gameTags = "GameTags=";
@@ -1172,7 +1182,11 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
+                string commandString;
+                string gameTags = "GameTags=";
                 string mapName = LANMap.Text;
+                string gameMode = "TAGame.GameInfo_Soccar_TA?";
+                //gameMode = "TAGame.GameInfo_Basketball_TA?";
 
                 if (Maps.ContainsKey(mapName))
                 {
@@ -1184,7 +1198,9 @@ namespace Rocket_League_Customizer
 
                 }
 
-                string gameTags = "GameTags=";
+                if(LANBots.Text != "No Bots")
+                    gameTags += mutators[LANBots.Text];
+                gameTags += mutators[LANTeamSize.Text];
                 gameTags += mutators[LANMatchLength.Text + "Time"];
                 gameTags += mutators[LANMaxScore.Text + "Score"];
                 gameTags += mutators[LANGameSpeed.Text];
@@ -1212,7 +1228,8 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[LanDemolish.Text];
                 gameTags += mutators[LANRespawnTime.Text];
 
-                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                commandString = "SwitchLevel " + mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
+                writer.WriteLine(commandString);
                 WriteToLog("WriteLANSettings - Settings saved");
                 writer.Close();
 
