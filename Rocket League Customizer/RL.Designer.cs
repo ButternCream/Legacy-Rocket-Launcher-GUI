@@ -177,6 +177,8 @@
             this.label36 = new System.Windows.Forms.Label();
             this.LANGameMode = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
+            this.LANDodge = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -614,21 +616,21 @@
             // redditToolStripMenuItem
             // 
             this.redditToolStripMenuItem.Name = "redditToolStripMenuItem";
-            this.redditToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
+            this.redditToolStripMenuItem.Size = new System.Drawing.Size(211, 32);
             this.redditToolStripMenuItem.Text = "Reddit";
             this.redditToolStripMenuItem.Click += new System.EventHandler(this.redditToolStripMenuItem_Click);
             // 
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(211, 32);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
             // donateToolStripMenuItem
             // 
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(211, 32);
             this.donateToolStripMenuItem.Text = "Donate";
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click_1);
             // 
@@ -1492,7 +1494,9 @@
             // 
             this.lanTab.AutoScroll = true;
             this.lanTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lanTab.Controls.Add(this.label38);
             this.lanTab.Controls.Add(this.label28);
+            this.lanTab.Controls.Add(this.LANDodge);
             this.lanTab.Controls.Add(this.noBalls);
             this.lanTab.Controls.Add(this.hotkeyHost);
             this.lanTab.Controls.Add(this.hotkeyJoin);
@@ -2142,6 +2146,7 @@
             this.LANBots.Size = new System.Drawing.Size(298, 32);
             this.LANBots.TabIndex = 66;
             this.LANBots.Text = "No Bots";
+            this.LANBots.SelectedIndexChanged += new System.EventHandler(this.LANBots_SelectedIndexChanged);
             // 
             // label35
             // 
@@ -2159,6 +2164,7 @@
             // 
             this.LANTeamSize.DropDownHeight = 300;
             this.LANTeamSize.DropDownWidth = 200;
+            this.LANTeamSize.Enabled = false;
             this.LANTeamSize.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LANTeamSize.FormattingEnabled = true;
             this.LANTeamSize.IntegralHeight = false;
@@ -2172,7 +2178,6 @@
             this.LANTeamSize.Name = "LANTeamSize";
             this.LANTeamSize.Size = new System.Drawing.Size(298, 32);
             this.LANTeamSize.TabIndex = 66;
-            this.LANTeamSize.Text = "3v3";
             // 
             // label36
             // 
@@ -2217,6 +2222,35 @@
             this.label37.Size = new System.Drawing.Size(131, 27);
             this.label37.TabIndex = 67;
             this.label37.Text = "Game Mode";
+            // 
+            // LANDodge
+            // 
+            this.LANDodge.DropDownHeight = 100;
+            this.LANDodge.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANDodge.FormattingEnabled = true;
+            this.LANDodge.IntegralHeight = false;
+            this.LANDodge.Items.AddRange(new object[] {
+            "Default",
+            "2x",
+            "4x"});
+            this.LANDodge.Location = new System.Drawing.Point(184, 914);
+            this.LANDodge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LANDodge.Name = "LANDodge";
+            this.LANDodge.Size = new System.Drawing.Size(298, 32);
+            this.LANDodge.TabIndex = 100;
+            this.LANDodge.Text = "Default";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Black;
+            this.label38.Location = new System.Drawing.Point(10, 916);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(158, 27);
+            this.label38.TabIndex = 101;
+            this.label38.Text = "Dodge Impulse";
             // 
             // RLCustomizer
             // 
@@ -2407,6 +2441,8 @@
         private System.Windows.Forms.ComboBox LANTeamSize;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.ComboBox LANGameMode;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.ComboBox LANDodge;
     }
 }
 

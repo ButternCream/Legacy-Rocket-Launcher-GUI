@@ -971,6 +971,9 @@ namespace Rocket_League_Customizer
             {"2 Seconds", "TwoSecondsRespawn," },
             {"1 Second", "OneSecondsRespawn," },
             {"Disable Goal Reset", "DisableGoalDelay," },
+            //Dodge Impulse
+            {"2xDodge", "DodgeImpulse2x," },
+            {"4xDodge", "DodgeImpulse4x," },
 
         };
             
@@ -1204,7 +1207,8 @@ namespace Rocket_League_Customizer
 
                 if(LANBots.Text != "No Bots")
                     gameTags += mutators[LANBots.Text];
-                gameTags += mutators[LANTeamSize.Text];
+                if(LANTeamSize.Text != "")
+                    gameTags += mutators[LANTeamSize.Text];
                 gameTags += mutators[LANMatchLength.Text + "Time"];
                 gameTags += mutators[LANMaxScore.Text + "Score"];
                 gameTags += mutators[LANGameSpeed.Text];
@@ -1227,6 +1231,8 @@ namespace Rocket_League_Customizer
                     gameTags += "ItemsMode,";
                 if (noBalls.Text != "Default")
                     gameTags += mutators[noBalls.Text + "Balls"];
+                if (LANDodge.Text != "Default")
+                    gameTags += mutators[LANDodge.Text + "Dodge"];
                 gameTags += mutators[LANBoostStrength.Text];
                 gameTags += mutators[LANGravity.Text];
                 gameTags += mutators[LanDemolish.Text];
@@ -1295,6 +1301,9 @@ namespace Rocket_League_Customizer
             DemolishComboBox.Text = "Default";
             respawnTimeComboBox.Text = "3 Seconds";
 
+            LANBots.Text = "No Bots";
+            LANTeamSize.Text = "3v3";
+            LANGameMode.Text = "Soccar";
             LANMap.Text = "Beckwith Park";
             LANMatchLength.Text = "5 Minutes";
             LANMaxScore.Text = "Unlimited";
@@ -1310,6 +1319,8 @@ namespace Rocket_League_Customizer
             LANGravity.Text = "Default";
             LanDemolish.Text = "Default";
             LANRespawnTime.Text = "3 Seconds";
+            noBalls.Text = "Default";
+            LANDodge.Text = "Default";
         }
 
         private void resetMapSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1561,6 +1572,20 @@ namespace Rocket_League_Customizer
             {
                 LANMap.Text = "Beckwith Park";
                 LANMap.Enabled = true;
+            }
+        }
+
+        private void LANBots_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LANBots.Text == "No Bots")
+            {
+                LANTeamSize.Text = "";
+                LANTeamSize.Enabled = false;
+            }
+            else
+            {
+                LANTeamSize.Text = "3v3";
+                LANTeamSize.Enabled = true;
             }
         }
 
