@@ -893,11 +893,15 @@ namespace Rocket_League_Customizer
             {"2v2", "PlayerCount4," },
             {"3v3", "PlayerCount6," },
             {"4v4", "PlayerCount8," },
-            {"5v5", "PlayerCount10," },
             //Bot Difficulty
             {"Rookie", "BotsEasy," },
             {"Pro", "BotsMedium," },
             {"All Star", "BotsHard," },
+            //Game Modes
+            {"Soccar", "TAGame.GameInfo_Soccar_TA?" },
+            {"Hoops", "TAGame.GameInfo_Basketball_TA?" },
+            {"Snow Day", "TAGame.GameInfo_Hockey_TA?" },
+            {"Rumble", "TAGame.GameInfo_Items_TA?" },
             //Time
             {"5 MinutesTime", ""},
             {"10 MinutesTime", "10Minutes,"},
@@ -952,9 +956,11 @@ namespace Rocket_League_Customizer
             {"2x", "BoostMultiplier2x," },
             {"10x", "BoostMultiplier10x," },
             //Gravity
+            {"Almost Zero", "AlmostZeroGravity," },
             {"Low", "LowGravity," },
             {"High", "HighGravity," },
             {"Super High", "SuperGravity," },
+            {"Inverse", "InverseGravity," },
             //Demolish
             {"Disabled", "NoDemolish," },
             {"Friendly Fire", "AlwaysDemolish," },
@@ -1185,8 +1191,7 @@ namespace Rocket_League_Customizer
                 string commandString;
                 string gameTags = "GameTags=";
                 string mapName = LANMap.Text;
-                string gameMode = "TAGame.GameInfo_Soccar_TA?";
-                //gameMode = "TAGame.GameInfo_Basketball_TA?";
+                string gameMode = mutators[LANGameMode.Text];
 
                 if (Maps.ContainsKey(mapName))
                 {
@@ -1195,7 +1200,6 @@ namespace Rocket_League_Customizer
                 else
                 {
                     mapName = mapName.Replace(".upk", "");
-
                 }
 
                 if(LANBots.Text != "No Bots")
@@ -1539,6 +1543,25 @@ namespace Rocket_League_Customizer
             Properties.Settings.Default.Save();
             WriteHotkeys();
             WriteToLog("Hotkeys reset");
+        }
+
+        private void LANGameMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LANGameMode.Text == "Hoops")
+            {
+                LANMap.Text = "Dunk House";
+                LANMap.Enabled = false;
+            }
+            else if (LANGameMode.Text == "Snow Day")
+            {
+                LANMap.Text = "DFH Stadium (Snowy)";
+                LANMap.Enabled = false;
+            }
+            else
+            {
+                LANMap.Text = "Beckwith Park";
+                LANMap.Enabled = true;
+            }
         }
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)

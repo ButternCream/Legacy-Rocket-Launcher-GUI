@@ -175,6 +175,8 @@
             this.label35 = new System.Windows.Forms.Label();
             this.LANTeamSize = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
+            this.LANGameMode = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.menuTab.SuspendLayout();
@@ -1522,9 +1524,11 @@
             this.lanTab.Controls.Add(this.LANBallWeight);
             this.lanTab.Controls.Add(this.label27);
             this.lanTab.Controls.Add(this.LANBallType);
+            this.lanTab.Controls.Add(this.label37);
             this.lanTab.Controls.Add(this.label36);
             this.lanTab.Controls.Add(this.label35);
             this.lanTab.Controls.Add(this.label29);
+            this.lanTab.Controls.Add(this.LANGameMode);
             this.lanTab.Controls.Add(this.LANTeamSize);
             this.lanTab.Controls.Add(this.LANBots);
             this.lanTab.Controls.Add(this.LANMap);
@@ -1544,7 +1548,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.Black;
-            this.label28.Location = new System.Drawing.Point(10, 832);
+            this.label28.Location = new System.Drawing.Point(10, 874);
             this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(121, 27);
@@ -1562,7 +1566,7 @@
             "2",
             "4",
             "6"});
-            this.noBalls.Location = new System.Drawing.Point(184, 830);
+            this.noBalls.Location = new System.Drawing.Point(184, 872);
             this.noBalls.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.noBalls.Name = "noBalls";
             this.noBalls.Size = new System.Drawing.Size(298, 32);
@@ -1602,7 +1606,7 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Black;
-            this.label30.Location = new System.Drawing.Point(10, 621);
+            this.label30.Location = new System.Drawing.Point(10, 663);
             this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(90, 27);
@@ -1622,7 +1626,7 @@
             "Civilized",
             "Destruction Derby",
             "Spring Loaded"});
-            this.LANRumble.Location = new System.Drawing.Point(184, 620);
+            this.LANRumble.Location = new System.Drawing.Point(184, 662);
             this.LANRumble.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANRumble.Name = "LANRumble";
             this.LANRumble.Size = new System.Drawing.Size(298, 32);
@@ -1634,7 +1638,7 @@
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.Black;
-            this.label31.Location = new System.Drawing.Point(10, 705);
+            this.label31.Location = new System.Drawing.Point(10, 747);
             this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(85, 27);
@@ -1649,10 +1653,12 @@
             this.LANGravity.IntegralHeight = false;
             this.LANGravity.Items.AddRange(new object[] {
             "Default",
+            "Almost Zero",
             "Low",
             "High",
-            "Super High"});
-            this.LANGravity.Location = new System.Drawing.Point(184, 704);
+            "Super High",
+            "Inverse"});
+            this.LANGravity.Location = new System.Drawing.Point(184, 746);
             this.LANGravity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANGravity.Name = "LANGravity";
             this.LANGravity.Size = new System.Drawing.Size(298, 32);
@@ -1664,7 +1670,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.Black;
-            this.label32.Location = new System.Drawing.Point(10, 664);
+            this.label32.Location = new System.Drawing.Point(10, 706);
             this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(160, 27);
@@ -1683,7 +1689,7 @@
             "1.5x",
             "2x",
             "10x"});
-            this.LANBoostStrength.Location = new System.Drawing.Point(184, 662);
+            this.LANBoostStrength.Location = new System.Drawing.Point(184, 704);
             this.LANBoostStrength.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBoostStrength.Name = "LANBoostStrength";
             this.LANBoostStrength.Size = new System.Drawing.Size(298, 32);
@@ -1695,7 +1701,7 @@
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.Black;
-            this.label33.Location = new System.Drawing.Point(10, 790);
+            this.label33.Location = new System.Drawing.Point(10, 832);
             this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(154, 27);
@@ -1713,7 +1719,7 @@
             "2 Seconds",
             "1 Second",
             "Disable Goal Reset"});
-            this.LANRespawnTime.Location = new System.Drawing.Point(184, 788);
+            this.LANRespawnTime.Location = new System.Drawing.Point(184, 830);
             this.LANRespawnTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANRespawnTime.Name = "LANRespawnTime";
             this.LANRespawnTime.Size = new System.Drawing.Size(298, 32);
@@ -1725,7 +1731,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.Black;
-            this.label34.Location = new System.Drawing.Point(10, 748);
+            this.label34.Location = new System.Drawing.Point(10, 790);
             this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(106, 27);
@@ -1745,7 +1751,7 @@
             "Friendly Fire",
             "On Contact",
             "On Contact (FF)"});
-            this.LanDemolish.Location = new System.Drawing.Point(184, 746);
+            this.LanDemolish.Location = new System.Drawing.Point(184, 788);
             this.LanDemolish.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LanDemolish.Name = "LanDemolish";
             this.LanDemolish.Size = new System.Drawing.Size(298, 32);
@@ -1757,7 +1763,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(10, 579);
+            this.label19.Location = new System.Drawing.Point(10, 621);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(155, 27);
@@ -1777,7 +1783,7 @@
             "Unlimited",
             "Recharge (Slow)",
             "Recharge (Fast)"});
-            this.LANBoostAmount.Location = new System.Drawing.Point(184, 578);
+            this.LANBoostAmount.Location = new System.Drawing.Point(184, 620);
             this.LANBoostAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBoostAmount.Name = "LANBoostAmount";
             this.LANBoostAmount.Size = new System.Drawing.Size(298, 32);
@@ -1789,7 +1795,7 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.Black;
-            this.label20.Location = new System.Drawing.Point(10, 538);
+            this.label20.Location = new System.Drawing.Point(10, 580);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(163, 27);
@@ -1807,7 +1813,7 @@
             "Low",
             "High",
             "Super High"});
-            this.LANBallBounciness.Location = new System.Drawing.Point(184, 536);
+            this.LANBallBounciness.Location = new System.Drawing.Point(184, 578);
             this.LANBallBounciness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBallBounciness.Name = "LANBallBounciness";
             this.LANBallBounciness.Size = new System.Drawing.Size(298, 32);
@@ -1819,7 +1825,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.Black;
-            this.label21.Location = new System.Drawing.Point(10, 496);
+            this.label21.Location = new System.Drawing.Point(10, 538);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(95, 27);
@@ -1838,7 +1844,7 @@
             "Small",
             "Large",
             "Gigantic"});
-            this.LANBallSize.Location = new System.Drawing.Point(184, 494);
+            this.LANBallSize.Location = new System.Drawing.Point(184, 536);
             this.LANBallSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBallSize.Name = "LANBallSize";
             this.LANBallSize.Size = new System.Drawing.Size(298, 32);
@@ -1850,7 +1856,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.Black;
-            this.label22.Location = new System.Drawing.Point(10, 285);
+            this.label22.Location = new System.Drawing.Point(10, 327);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(118, 27);
@@ -1868,7 +1874,7 @@
             "3 Goals",
             "5 Goals",
             "Unlimited"});
-            this.LANMaxScore.Location = new System.Drawing.Point(184, 284);
+            this.LANMaxScore.Location = new System.Drawing.Point(184, 326);
             this.LANMaxScore.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANMaxScore.Name = "LANMaxScore";
             this.LANMaxScore.Size = new System.Drawing.Size(298, 32);
@@ -1880,7 +1886,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.Black;
-            this.label23.Location = new System.Drawing.Point(10, 243);
+            this.label23.Location = new System.Drawing.Point(10, 285);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(148, 27);
@@ -1899,7 +1905,7 @@
             "10 Minutes",
             "20 Minutes",
             "Unlimited"});
-            this.LANMatchLength.Location = new System.Drawing.Point(184, 242);
+            this.LANMatchLength.Location = new System.Drawing.Point(184, 284);
             this.LANMatchLength.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANMatchLength.Name = "LANMatchLength";
             this.LANMatchLength.Size = new System.Drawing.Size(298, 32);
@@ -1911,7 +1917,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.Black;
-            this.label24.Location = new System.Drawing.Point(10, 369);
+            this.label24.Location = new System.Drawing.Point(10, 411);
             this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(164, 27);
@@ -1929,7 +1935,7 @@
             "Slow",
             "Fast",
             "Super Fast"});
-            this.LANBallMaxSpeed.Location = new System.Drawing.Point(184, 368);
+            this.LANBallMaxSpeed.Location = new System.Drawing.Point(184, 410);
             this.LANBallMaxSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBallMaxSpeed.Name = "LANBallMaxSpeed";
             this.LANBallMaxSpeed.Size = new System.Drawing.Size(298, 32);
@@ -1941,7 +1947,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(10, 328);
+            this.label25.Location = new System.Drawing.Point(10, 370);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(139, 27);
@@ -1959,7 +1965,7 @@
             "Default",
             "Slo-Mo",
             "Time Warp"});
-            this.LANGameSpeed.Location = new System.Drawing.Point(184, 326);
+            this.LANGameSpeed.Location = new System.Drawing.Point(184, 368);
             this.LANGameSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANGameSpeed.Name = "LANGameSpeed";
             this.LANGameSpeed.Size = new System.Drawing.Size(298, 32);
@@ -1971,7 +1977,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.Black;
-            this.label26.Location = new System.Drawing.Point(10, 454);
+            this.label26.Location = new System.Drawing.Point(10, 496);
             this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(125, 27);
@@ -1989,7 +1995,7 @@
             "Light",
             "Heavy",
             "Super Light"});
-            this.LANBallWeight.Location = new System.Drawing.Point(184, 452);
+            this.LANBallWeight.Location = new System.Drawing.Point(184, 494);
             this.LANBallWeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBallWeight.Name = "LANBallWeight";
             this.LANBallWeight.Size = new System.Drawing.Size(298, 32);
@@ -2001,7 +2007,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.Black;
-            this.label27.Location = new System.Drawing.Point(10, 412);
+            this.label27.Location = new System.Drawing.Point(10, 454);
             this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(103, 27);
@@ -2020,7 +2026,7 @@
             "Cube",
             "Puck",
             "Basketball"});
-            this.LANBallType.Location = new System.Drawing.Point(184, 410);
+            this.LANBallType.Location = new System.Drawing.Point(184, 452);
             this.LANBallType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANBallType.Name = "LANBallType";
             this.LANBallType.Size = new System.Drawing.Size(298, 32);
@@ -2032,7 +2038,7 @@
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.Color.Black;
-            this.label29.Location = new System.Drawing.Point(10, 202);
+            this.label29.Location = new System.Drawing.Point(10, 244);
             this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(61, 27);
@@ -2048,7 +2054,7 @@
             this.LANMap.IntegralHeight = false;
             this.LANMap.Items.AddRange(new object[] {
             "[Official Maps]"});
-            this.LANMap.Location = new System.Drawing.Point(184, 200);
+            this.LANMap.Location = new System.Drawing.Point(184, 242);
             this.LANMap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANMap.Name = "LANMap";
             this.LANMap.Size = new System.Drawing.Size(298, 32);
@@ -2160,8 +2166,7 @@
             "1v1",
             "2v2",
             "3v3",
-            "4v4",
-            "5v5"});
+            "4v4"});
             this.LANTeamSize.Location = new System.Drawing.Point(184, 158);
             this.LANTeamSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LANTeamSize.Name = "LANTeamSize";
@@ -2180,6 +2185,38 @@
             this.label36.Size = new System.Drawing.Size(108, 27);
             this.label36.TabIndex = 67;
             this.label36.Text = "Team Size";
+            // 
+            // LANGameMode
+            // 
+            this.LANGameMode.DropDownHeight = 300;
+            this.LANGameMode.DropDownWidth = 200;
+            this.LANGameMode.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LANGameMode.FormattingEnabled = true;
+            this.LANGameMode.IntegralHeight = false;
+            this.LANGameMode.Items.AddRange(new object[] {
+            "Soccar",
+            "Hoops",
+            "Snow Day",
+            "Rumble"});
+            this.LANGameMode.Location = new System.Drawing.Point(184, 200);
+            this.LANGameMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LANGameMode.Name = "LANGameMode";
+            this.LANGameMode.Size = new System.Drawing.Size(298, 32);
+            this.LANGameMode.TabIndex = 66;
+            this.LANGameMode.Text = "Soccar";
+            this.LANGameMode.SelectedIndexChanged += new System.EventHandler(this.LANGameMode_SelectedIndexChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Black;
+            this.label37.Location = new System.Drawing.Point(10, 202);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(131, 27);
+            this.label37.TabIndex = 67;
+            this.label37.Text = "Game Mode";
             // 
             // RLCustomizer
             // 
@@ -2368,6 +2405,8 @@
         private System.Windows.Forms.ComboBox LANBots;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.ComboBox LANTeamSize;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox LANGameMode;
     }
 }
 
