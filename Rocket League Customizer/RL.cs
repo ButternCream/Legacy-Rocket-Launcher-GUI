@@ -971,9 +971,6 @@ namespace Rocket_League_Customizer
             {"2 Seconds", "TwoSecondsRespawn," },
             {"1 Second", "OneSecondsRespawn," },
             {"Disable Goal Reset", "DisableGoalDelay," },
-            //Dodge Impulse
-            {"2xDodge", "DodgeImpulse2x," },
-            {"4xDodge", "DodgeImpulse4x," },
 
         };
             
@@ -1152,7 +1149,7 @@ namespace Rocket_League_Customizer
                     writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
-                string gameTags = "GameTags=";
+                string gameTags = "GameTags=,";
                 gameTags += mutators[matchLengthComboBox.Text + "Time"];
                 gameTags += mutators[MaxScoreComboBox.Text + "Score"];
                 gameTags += mutators[GameSpeedComboBox.Text];
@@ -1180,7 +1177,7 @@ namespace Rocket_League_Customizer
                 gameTags += mutators[DemolishComboBox.Text];
                 gameTags += mutators[respawnTimeComboBox.Text];
 
-                writer.WriteLine("SwitchLevel " + mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                writer.WriteLine(mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
 
                 WriteToLog("WriteMapLoaderSettings - Map Settings Saved");
                 writer.Close();
@@ -1192,7 +1189,7 @@ namespace Rocket_League_Customizer
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
                 string commandString;
-                string gameTags = "GameTags=";
+                string gameTags = "GameTags=,";
                 string mapName = LANMap.Text;
                 string gameMode = mutators[LANGameMode.Text];
 
@@ -1231,14 +1228,12 @@ namespace Rocket_League_Customizer
                     gameTags += "ItemsMode,";
                 if (noBalls.Text != "Default")
                     gameTags += mutators[noBalls.Text + "Balls"];
-                if (LANDodge.Text != "Default")
-                    gameTags += mutators[LANDodge.Text + "Dodge"];
                 gameTags += mutators[LANBoostStrength.Text];
                 gameTags += mutators[LANGravity.Text];
                 gameTags += mutators[LanDemolish.Text];
                 gameTags += mutators[LANRespawnTime.Text];
 
-                commandString = "SwitchLevel " + mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
+                commandString = mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
                 writer.WriteLine(commandString);
                 WriteToLog("WriteLANSettings - Settings saved");
                 writer.Close();
@@ -1268,7 +1263,7 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
             {
-                writer.WriteLine("SwitchLevel " + joinIPBox.Text);
+                writer.WriteLine(joinIPBox.Text);
 
                 writer.Close();
 
@@ -1320,7 +1315,6 @@ namespace Rocket_League_Customizer
             LanDemolish.Text = "Default";
             LANRespawnTime.Text = "3 Seconds";
             noBalls.Text = "Default";
-            LANDodge.Text = "Default";
         }
 
         private void resetMapSettingsToolStripMenuItem_Click(object sender, EventArgs e)
