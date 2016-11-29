@@ -888,6 +888,20 @@ namespace Rocket_League_Customizer
         {
             //Default
             {"Default", "" },
+            //Team Size
+            {"1v1", "PlayerCount2," },
+            {"2v2", "PlayerCount4," },
+            {"3v3", "PlayerCount6," },
+            {"4v4", "PlayerCount8," },
+            //Bot Difficulty
+            {"Rookie", "BotsEasy," },
+            {"Pro", "BotsMedium," },
+            {"All Star", "BotsHard," },
+            //Game Modes
+            {"Soccar", "TAGame.GameInfo_Soccar_TA?" },
+            {"Hoops", "TAGame.GameInfo_Basketball_TA?" },
+            {"Snow Day", "TAGame.GameInfo_Hockey_TA?" },
+            {"Rumble", "TAGame.GameInfo_Items_TA?" },
             //Time
             {"5 MinutesTime", ""},
             {"10 MinutesTime", "10Minutes,"},
@@ -921,6 +935,10 @@ namespace Rocket_League_Customizer
             {"LowBounce", "LowBounciness," },
             {"HighBounce", "HighBounciness," },
             {"Super HighBounce", "SuperBounciness," },
+            //Ball Bounciness
+            {"2Balls", "TwoBalls," },
+            {"4Balls", "FourBalls," },
+            {"6Balls", "SixBalls," },
             //Boost Amount
             {"No BoostBoost", "NoBooster," },
             {"UnlimitedBoost", "UnlimitedBooster," },
@@ -938,9 +956,11 @@ namespace Rocket_League_Customizer
             {"2x", "BoostMultiplier2x," },
             {"10x", "BoostMultiplier10x," },
             //Gravity
+            {"Almost Zero", "AlmostZeroGravity," },
             {"Low", "LowGravity," },
             {"High", "HighGravity," },
             {"Super High", "SuperGravity," },
+            {"Inverse", "InverseGravity," },
             //Demolish
             {"Disabled", "NoDemolish," },
             {"Friendly Fire", "AlwaysDemolish," },
@@ -1126,7 +1146,7 @@ namespace Rocket_League_Customizer
                 }
                 if (gameType.Equals("Freeplay"))
                 {
-                    writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
                 string gameTags = "GameTags=,";
@@ -1168,7 +1188,10 @@ namespace Rocket_League_Customizer
         {
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
             {
+                string commandString;
+                string gameTags = "GameTags=,";
                 string mapName = LANMap.Text;
+                string gameMode = mutators[LANGameMode.Text];
 
                 if (Maps.ContainsKey(mapName))
                 {
@@ -1177,10 +1200,12 @@ namespace Rocket_League_Customizer
                 else
                 {
                     mapName = mapName.Replace(".upk", "");
-
                 }
 
-                string gameTags = "GameTags=,";
+                if(LANBots.Text != "No Bots")
+                    gameTags += mutators[LANBots.Text];
+                if(LANTeamSize.Text != "")
+                    gameTags += mutators[LANTeamSize.Text];
                 gameTags += mutators[LANMatchLength.Text + "Time"];
                 gameTags += mutators[LANMaxScore.Text + "Score"];
                 gameTags += mutators[LANGameSpeed.Text];
@@ -1201,12 +1226,15 @@ namespace Rocket_League_Customizer
                     gameTags += mutators[LANBoostAmount.Text];
                 if (LANRumble.Text == "Default")
                     gameTags += "ItemsMode,";
+                if (noBalls.Text != "Default")
+                    gameTags += mutators[noBalls.Text + "Balls"];
                 gameTags += mutators[LANBoostStrength.Text];
                 gameTags += mutators[LANGravity.Text];
                 gameTags += mutators[LanDemolish.Text];
                 gameTags += mutators[LANRespawnTime.Text];
 
-                writer.WriteLine(mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+                commandString = mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
+                writer.WriteLine(commandString);
                 WriteToLog("WriteLANSettings - Settings saved");
                 writer.Close();
 
@@ -1268,6 +1296,9 @@ namespace Rocket_League_Customizer
             DemolishComboBox.Text = "Default";
             respawnTimeComboBox.Text = "3 Seconds";
 
+            LANBots.Text = "No Bots";
+            LANTeamSize.Text = "3v3";
+            LANGameMode.Text = "Soccar";
             LANMap.Text = "Beckwith Park";
             LANMatchLength.Text = "5 Minutes";
             LANMaxScore.Text = "Unlimited";
@@ -1283,6 +1314,7 @@ namespace Rocket_League_Customizer
             LANGravity.Text = "Default";
             LanDemolish.Text = "Default";
             LANRespawnTime.Text = "3 Seconds";
+            noBalls.Text = "Default";
         }
 
         private void resetMapSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1516,6 +1548,39 @@ namespace Rocket_League_Customizer
             Properties.Settings.Default.Save();
             WriteHotkeys();
             WriteToLog("Hotkeys reset");
+        }
+
+        private void LANGameMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LANGameMode.Text == "Hoops")
+            {
+                LANMap.Text = "Dunk House";
+                LANMap.Enabled = false;
+            }
+            else if (LANGameMode.Text == "Snow Day")
+            {
+                LANMap.Text = "DFH Stadium (Snowy)";
+                LANMap.Enabled = false;
+            }
+            else
+            {
+                LANMap.Text = "Beckwith Park";
+                LANMap.Enabled = true;
+            }
+        }
+
+        private void LANBots_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LANBots.Text == "No Bots")
+            {
+                LANTeamSize.Text = "";
+                LANTeamSize.Enabled = false;
+            }
+            else
+            {
+                LANTeamSize.Text = "3v3";
+                LANTeamSize.Enabled = true;
+            }
         }
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
