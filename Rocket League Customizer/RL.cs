@@ -821,10 +821,12 @@ namespace Rocket_League_Customizer
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
                         + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Stormy)" + Environment.NewLine + "Double Goal (Rocket Labs)" 
                         + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +"Mannfield (Stormy)" 
-                        + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Underpass (Rocket Labs)"
+                        + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Starbase ARC"  + Environment.NewLine + "Underpass (Rocket Labs)"
                          + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" 
-                         + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +"Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)" 
-                         + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" + Environment.NewLine + "[Custom Maps]");
+                         + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +"Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)"
+                         + Environment.NewLine + "Utopia Coliseum (Snowy)" + Environment.NewLine + "Utopia Retro (Rocket Labs)" + Environment.NewLine + "Wasteland" 
+                         + Environment.NewLine + "Wasteland (Night)" + Environment.NewLine
+                         + "[Custom Maps]");
                     writer.Close();
                 }
                 mapBoxList.Items.Clear();
@@ -876,8 +878,18 @@ namespace Rocket_League_Customizer
             {
                 while((name = reader.ReadLine()) != null)
                 {
-                    mapBoxList.Items.Add(name);
-                    LANMap.Items.Add(name);
+                  
+                    if (name.Contains(".udk"))
+                    {
+                        int idx = name.LastIndexOf('\\');
+                        name = name.Substring(idx+1);
+                    }
+                    if (!mapBoxList.Items.Contains(name))
+                    {
+                        mapBoxList.Items.Add(name);
+                        LANMap.Items.Add(name);
+                    }
+                   
                 }
                 reader.Close();
             }
@@ -897,6 +909,7 @@ namespace Rocket_League_Customizer
             {"Rookie", "BotsEasy," },
             {"Pro", "BotsMedium," },
             {"All Star", "BotsHard," },
+            {"Unfair", "BotsUnfair,"},
             //Game Modes
             {"Soccar", "TAGame.GameInfo_Soccar_TA?" },
             {"Hoops", "TAGame.GameInfo_Basketball_TA?" },
@@ -1047,6 +1060,12 @@ namespace Rocket_League_Customizer
                 new MapInfo("TrainStation_Dawn_P.upk", "703020DE94DB2CA4B316F9895498569E") },
             {"Aquadome",
                 new MapInfo("Underwater_P.upk", "B6B0BAB0570D2866E281830FCC27F12D") },
+            {"Starbase ARC",
+                new MapInfo("ARC_P.upk", "1F9FCCD874313E8C27E92F0FC9F959DA") },
+            {"Wasteland (Night)",
+                new MapInfo("Wasteland_Night_P.upk", "E0DF021A4F28A031D6DAE462358DDAF4") },
+            {"Utopia Coliseum (Snowy)",
+                new MapInfo("UtopiaStadium_Snow_P.upk", "55D5D682D18CCA0770CAEEF9AC975FFA") },
         };
 
         private void gameTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1138,15 +1157,17 @@ namespace Rocket_League_Customizer
                 if (Maps.ContainsKey(mapName))
                 {
                     mapName = Maps[mapName].filename.Replace(".upk", "");
+               
                 }
                 else
                 {
                     mapName = mapName.Replace(".upk", "");
+                   
 
                 }
                 if (gameType.Equals("Freeplay"))
                 {
-                    writer.WriteLine("SwitchLevel " + mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                    writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
                     return;
                 }
                 string gameTags = "GameTags=,";
@@ -1274,6 +1295,9 @@ namespace Rocket_League_Customizer
         private void ClearMapsButton_Click(object sender, EventArgs e)
         {
             InitMaps(true);
+            //string workshop = Path.GetFullPath(Path.Combine(Properties.Settings.Default.RLPath, @"..\..\..\..\workshop\content"));
+            //Process.Start(workshop);
+            //MessageBox.Show(workshop);
             WriteToLog("Cleared custom maps");
         }
         //SM - Resets the map settings for both the map loader and LAN
@@ -1552,6 +1576,7 @@ namespace Rocket_League_Customizer
 
         private void LANGameMode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LANRumble.Text = "None";
             if (LANGameMode.Text == "Hoops")
             {
                 LANMap.Text = "Dunk House";
@@ -1561,6 +1586,10 @@ namespace Rocket_League_Customizer
             {
                 LANMap.Text = "DFH Stadium (Snowy)";
                 LANMap.Enabled = false;
+            }
+            else if (LANGameMode.Text == "Rumble")
+            {
+                LANRumble.Text = "Default";
             }
             else
             {
@@ -1582,7 +1611,7 @@ namespace Rocket_League_Customizer
                 LANTeamSize.Enabled = true;
             }
         }
-
+    
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyHost.Text = e.KeyCode.ToString();
