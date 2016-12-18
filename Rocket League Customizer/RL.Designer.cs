@@ -590,21 +590,21 @@
             // redditToolStripMenuItem
             // 
             this.redditToolStripMenuItem.Name = "redditToolStripMenuItem";
-            this.redditToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.redditToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.redditToolStripMenuItem.Text = "Reddit";
             this.redditToolStripMenuItem.Click += new System.EventHandler(this.redditToolStripMenuItem_Click);
             // 
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
             // donateToolStripMenuItem
             // 
             this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.donateToolStripMenuItem.Text = "Donate";
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click_1);
             // 
@@ -2088,7 +2088,7 @@
             // mapFileDialog
             // 
             this.mapFileDialog.FileName = "*.upk";
-            this.mapFileDialog.Filter = "Map Files: (*.upk) | *.upk | All Files: (*.*) |  *.*";
+            this.mapFileDialog.Filter = "All Files: (*.*) |  *.* |Map Files: (*.upk) | *.upk";
             // 
             // ClearMapsButton
             // 

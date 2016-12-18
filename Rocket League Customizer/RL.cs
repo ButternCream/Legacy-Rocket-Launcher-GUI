@@ -734,9 +734,10 @@ namespace Rocket_League_Customizer
 
         private static void CheckForProcess()
         {
+            string rlPath = GetProcessPath("RocketLeague");
             while (!isClosing && Properties.Settings.Default.AutoLoadMods)
             {
-                string rlPath = GetProcessPath("RocketLeague");
+                
                 if (Properties.Settings.Default.AutoLoadMods && rlPath != string.Empty && !isRunning)
                 {
                     // Sleep enough to let process initialize
@@ -854,7 +855,11 @@ namespace Rocket_League_Customizer
             }
             using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "maps.txt", true))
             {
-                
+                if (mapName.Contains("udk"))
+                {
+                    int index = mapName.LastIndexOf('.');
+                    mapName = mapName.Substring(0, index);
+                }
                 mapBoxList.Items.Add(mapName);
                 LANMap.Items.Add(mapName);
                 writer.WriteLine(mapName);
@@ -879,11 +884,7 @@ namespace Rocket_League_Customizer
                 while((name = reader.ReadLine()) != null)
                 {
                   
-                    if (name.Contains(".udk"))
-                    {
-                        int idx = name.LastIndexOf('\\');
-                        name = name.Substring(idx+1);
-                    }
+                   
                     if (!mapBoxList.Items.Contains(name))
                     {
                         mapBoxList.Items.Add(name);
