@@ -9,19 +9,6 @@ using System.Management;
 using System.Collections.Generic;
 using System.Net;
 
-/*
- * When adding a new feature make sure to change:
- * 1. Writing it to the settings file
- * 2. Reading it from the settings file
- * 3. Reset button event
- */
-
-/* BUGS TO FIX
- * 
- * Can't leave match if you use the map loader
- *
- */
-
 namespace Rocket_League_Customizer
 {
     public partial class RLCustomizer : Form
@@ -35,6 +22,7 @@ namespace Rocket_League_Customizer
 
         private WebServer ws;
         private static bool isClosing = false;
+        
 
         static Dictionary<string, int> hotKeyMap = new Dictionary<string, int>
         {
@@ -66,8 +54,64 @@ namespace Rocket_League_Customizer
 
         //Create twitch var
         bool twitchStarted = false;
+        
         Process twitch;
         int mainMenuHotKey, inGameHotKey, customMatchHotKey, joinGameHotKey, hostGameHotKey;
+
+        // Start Check for VC++ 2015 x86
+        /*public enum INSTALLSTATE
+        {
+            INSTALLSTATE_NOTUSED = -7,  // component disabled
+            INSTALLSTATE_BADCONFIG = -6,  // configuration datacorrupt
+            INSTALLSTATE_INCOMPLETE = -5,  // installationsuspended or in progress
+            INSTALLSTATE_SOURCEABSENT = -4,  // run from source,source is unavailable
+            INSTALLSTATE_MOREDATA = -3,  // return bufferoverflow
+            INSTALLSTATE_INVALIDARG = -2,  // invalid functionargument
+            INSTALLSTATE_UNKNOWN = -1,  // unrecognized productor feature
+            INSTALLSTATE_BROKEN = 0,  // broken
+            INSTALLSTATE_ADVERTISED = 1,  // advertised feature
+            INSTALLSTATE_REMOVED = 1,  // component being removed(action state, not settable)
+            INSTALLSTATE_ABSENT = 2,  // uninstalled (or actionstate absent but clients remain)
+            INSTALLSTATE_LOCAL = 3,  // installed on local drive
+            INSTALLSTATE_SOURCE = 4,  // run from source, CD ornet
+            INSTALLSTATE_DEFAULT = 5,  // use default, local orsource
+        }
+
+        [DllImport("msi.dll")]
+        private static extern INSTALLSTATE MsiQueryProductState(string product);
+
+        //Product Codes: http://mdb-blog.blogspot.com/2010/11/bootstrapper-package-detect-vcredist.html
+        public static bool IsVCRedistInstalled()
+        {
+            string[] strCodes = new string[]
+           {
+                //vcredist_x86 - ProductCode
+                "{e2803110-78b3-4664-a479-3611a381656a}",
+                /*"{86CE1746-9EFF-3C9C-8755-81EA8903AC34}",
+                "{CA8A885F-E95B-3FC6-BB91-F4D9377C7686}",
+                "{820B6609-4C97-3A2B-B644-573B06A0F0CC}",
+                "{6AFCA4E1-9B78-3640-8F72-A7BF33448200}",
+                "{F03CB3EF-DC16-35CE-B3C1-C68EA09E5E97}",
+                "{402ED4A1-8F5B-387A-8688-997ABF58B8F2}",
+                "{887868A2-D6DE-3255-AA92-AA0B5A59B874}",
+                "{527BBE2F-1FED-3D8B-91CB-4DB0F838E69E}",
+                "{57660847-B1F7-35BD-9118-F62EB863A598}"
+           };
+
+            INSTALLSTATE state;
+            for (int i = 0; i < strCodes.Length; i++)
+            {
+                state = MsiQueryProductState(strCodes[i]);
+                if (state == INSTALLSTATE.INSTALLSTATE_LOCAL ||
+                    state == INSTALLSTATE.INSTALLSTATE_DEFAULT)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }*/
+
 
         public RLCustomizer()
         {
@@ -203,7 +247,7 @@ namespace Rocket_League_Customizer
         public static void InjectDLL(IntPtr hProcess, String strDLLName, bool showMessages)
         {
             IntPtr bytesout;
-
+            
             // Length of string containing the DLL file name +1 byte padding
             Int32 LenWrite = strDLLName.Length + 1;
             // Allocate memory within the virtual address space of the target process
@@ -260,8 +304,9 @@ namespace Rocket_League_Customizer
             }
             // return succeeded
             //if(showMessages)
-                //MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
+            //MessageBox.Show("Mods Loaded\nPress F1 in the main menu to activate menu mods.\nPress F2 in a game to activate the in game mods.\nGo to help for more instructions.");
             WriteToLog("Mods loaded.");
+            
             return;
         }
 
@@ -649,12 +694,12 @@ namespace Rocket_League_Customizer
         {
             LoadMods(true);
         }
-
+        
         private static bool LoadMods(bool showMessages)
         {
             String strDLLName = resPath + "RLM.dll"; // here you put the dll you want, only the path.
             String strProcessName = "RocketLeague"; //here you will put the process name without ".exe"
-
+            
             Int32 ProcID = GetProcessId(strProcessName);
             if (ProcID >= 0)
             {
@@ -1612,7 +1657,9 @@ namespace Rocket_League_Customizer
                 LANTeamSize.Enabled = true;
             }
         }
-    
+
+       
+
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
         {
             hotkeyHost.Text = e.KeyCode.ToString();

@@ -527,14 +527,14 @@
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -2122,7 +2122,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.5";
+            this.Text = "Rocket Launcher 2.7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
             this.Load += new System.EventHandler(this.RLCustomizer_Load);
