@@ -4,5 +4,5 @@ _Rocket Launcher still has many bugs that need to be fixed / can't be fixed. Exp
 
 ### Current Version: 3.0
 
-This repo is *only* for the *GUI interface* of Rocket Launcher.
+This repo is **only** for the **GUI interface** of Rocket Launcher.
 
