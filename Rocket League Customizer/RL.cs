@@ -8,6 +8,7 @@ using System.Threading;
 using System.Management;
 using System.Collections.Generic;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace Rocket_League_Customizer
 {
@@ -510,94 +511,81 @@ namespace Rocket_League_Customizer
             autoLoadModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoLoadMods;
             
 
-            if (!File.Exists(Properties.Settings.Default.RLPath + "settings.txt") || Properties.Settings.Default.RLPath == string.Empty)
+            if (!File.Exists(Properties.Settings.Default.RLPath + "settings.json") || Properties.Settings.Default.RLPath == string.Empty)
             {
                 WriteToLog("InitSaveSetting - Settings do not exist.");
                 return;
             }
-                
-
-            string line;
-            int count = 0;
-            System.IO.StreamReader reader = new System.IO.StreamReader(Properties.Settings.Default.RLPath + "settings.txt");
-            WriteToLog("InitSaveSettings - Settings do exist.");
-            while ((line = reader.ReadLine()) != null)
+            //Console.WriteLine("Testing Deserialization");
+            //Console.WriteLine(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.txt").ToString());
+            List<ModSetting> settings = JsonConvert.DeserializeObject<List<ModSetting>>(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.txt").ToString());
+            foreach (var setting in settings)
             {
-                switch (count)
+                switch(setting.name)
                 {
-                    case 0:
-                        jump_text.Text = line;
+                    case "Jump_Timeout":
+                        jump_text.Text = setting.value;
                         break;
-                    case 1:
-                        ball_text.Text = line;
+                    case "Ball_Scale":
+                        ball_text.Text = setting.value;
                         break;
-                    case 2:
-                        car_text.Text = line;
+                    case "Car_Scale":
+                        car_text.Text = setting.value;
                         break;
-                    case 3:
-                        goal_text.Text = line;
+                    case "Goal_Text":
+                        goal_text.Text = setting.value;
                         break;
-                    case 4:
-                        unlJumps_checkBox.Checked = (line == "1") ? true : false;
+                    case "Unl_Jumps":
+                        unlJumps_checkBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 5:
-                        zombieCheckBox.Checked = (line == "1") ? true : false;
+                    case "Zombie_Mode":
+                        zombieCheckBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 7:
-                        nameChange_CheckBox.Checked = (line == "1") ? true : false;
+                    case "Spin_Rate":
+                        spinRateText.Text = setting.value;
                         break;
-                    case 8:
-                        if (line == "1")
-                        {
-                            customBlog_checkBox.Checked = true;
-                            line = reader.ReadLine();
-                            title_textBox.Text = line;
-                            line = reader.ReadLine();
-                            body_textBox.Text = line + " ";
-                            line = reader.ReadLine();
-                            while (line != "xxx")
-                            {
-                                body_textBox.Text += line + " ";
-                                line = reader.ReadLine();
-                            }
-                            
-                            line = reader.ReadLine();
-                            motd_textBox.Text = line;
-                            line = reader.ReadLine();
-                            youtubeTitle_textBox.Text = line;
-                            line = reader.ReadLine();
-                            youtubeURL_textBox.Text = line;
-                            break;
-                        }
+                    case "Sticky_Ceiling":
+                        spiderManCheckBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 9:
-                        spinRateText.Text = line;
+                    case "Demo_On_Opposing":
+                        DemoOnOppCheckBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 10:
-                        speedText.Text = line;
+                    case "Rand_Bot_Size":
+                        randomSizeBotsCheckBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 11:
-                        spiderManCheckBox.Checked = (line == "1") ? true : false;
+                    case "Ball_Gravity_Scale":
+                        ballGravityScaleText.Text = setting.value;
                         break;
-                    case 12:
-                        DemoOnOppCheckBox.Checked = (line == "1") ? true : false;
+                    case "Bounce_Scale":
+                        bounceScaleText.Text = setting.value;
                         break;
-                    case 13:
-                        randomSizeBotsCheckBox.Checked = (line == "1") ? true : false;
+                    case "Name_Change":
+                        nameChange_CheckBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 14:
-                        ballGravityScaleText.Text = line;
+                    case "Custom_Blog_Enabled":
+                        customBlog_checkBox.Checked = (setting.value == "True") ? true : false;
                         break;
-                    case 15:
-                        bounceScaleText.Text = line;
+                    case "Blog_Title":
+                        title_textBox.Text = setting.value;
+                        break;
+                    case "Blog_Body":
+                        body_textBox.Text = setting.value;
+                        break;
+                    case "MOTD":
+                        motd_textBox.Text = setting.value;
+                        break;
+                    case "YouTube_Title":
+                        youtubeTitle_textBox.Text = setting.value;
+                        break;
+                    case "YouTube_URL":
+                        youtubeURL_textBox.Text = setting.value;
+                        break;
+                    case "Car_Speed":
+                        speedText.Text = setting.value;
                         break;
                 }
-                count++;
-                
-
             }
             WriteToLog("InitSaveSettings - Loaded settings");
-            reader.Close();
         }
 
         //Start rocket league button event
@@ -866,7 +854,7 @@ namespace Rocket_League_Customizer
                         + Environment.NewLine + "Beckwith Park (Midnight)" + Environment.NewLine +
                         "Beckwith Park (Stormy)" + Environment.NewLine + "Cosmic (Rocket Labs)" + Environment.NewLine + "DFH Stadium"
                         + Environment.NewLine + "DFH Stadium (Snowy)" + Environment.NewLine + "DFH Stadium (Stormy)" + Environment.NewLine + "Double Goal (Rocket Labs)" 
-                        + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +"Mannfield (Stormy)" 
+                        + Environment.NewLine + "Dunk House" + Environment.NewLine + "Mannfield" + Environment.NewLine +"Mannfield (Stormy)" + Environment.NewLine + "Mannfield(Night)"
                         + Environment.NewLine + "Neo Tokyo" + Environment.NewLine + "Pillars (Rocket Labs)" + Environment.NewLine + "Starbase ARC"  + Environment.NewLine + "Underpass (Rocket Labs)"
                          + Environment.NewLine + "Underpass V0 (Rocket Labs)" + Environment.NewLine + "Urban Central" + Environment.NewLine + "Urban Central (Dawn)" 
                          + Environment.NewLine + "Urban Central (Night)" + Environment.NewLine +"Utopia Coliseum" + Environment.NewLine + "Utopia Coliseum (Dusk)"
@@ -1064,6 +1052,8 @@ namespace Rocket_League_Customizer
                 new MapInfo("EuroStadium_P.upk", "0527a5acd7661778fa7ff3e8a11c57ea") },
             {"Mannfield (Stormy)",
                 new MapInfo("EuroStadium_Rainy_P.upk", "e1d9dc5ff839a44725d4b8c2e1a1df88") },
+            {"Mannfield (Night)",
+                new MapInfo("EuroStadium_Night_P.upk", "DA00F359AA4515CDAFC1EBCFC8ADFC45")},
             {"DFH Stadium",
                 new MapInfo("Stadium_P.upk", "0831c9ccd06df87262c78d39f624afa2") },
             {"DFH Stadium (Snowy)",
@@ -1141,49 +1131,34 @@ namespace Rocket_League_Customizer
         //SM - Writes the mod settings
         private void WriteModSettings()
         {
-            //Write custom data to file
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "settings.txt"))
-            {
-                writer.WriteLine(jump_text.Text);
-                writer.WriteLine(ball_text.Text);
-                writer.WriteLine(car_text.Text);
-                writer.WriteLine(goal_text.Text);
-                writer.WriteLine((unlJumps_checkBox.Checked) ? "1" : "0");
-                writer.WriteLine((zombieCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine("0");
-                writer.WriteLine((nameChange_CheckBox.Checked) ? "1" : "0");
-                if (customBlog_checkBox.Checked && !enableTwitchChat.Checked)
-                {
-                    writer.WriteLine("1");
-                    writer.WriteLine(title_textBox.Text);
-                    writer.WriteLine(body_textBox.Text);
-                    //Stops the getline function in the dll when reading multi line body
-                    writer.WriteLine("xxx");
-                    writer.WriteLine(motd_textBox.Text);
-                    writer.WriteLine(youtubeTitle_textBox.Text);
-                    writer.WriteLine(youtubeURL_textBox.Text);
-
-                }
-                else
-                {
-                    writer.WriteLine("0");
-                }
-                writer.WriteLine(spinRateText.Text);
-                writer.WriteLine(speedText.Text);
-                writer.WriteLine((spiderManCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((DemoOnOppCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine((randomSizeBotsCheckBox.Checked) ? "1" : "0");
-                writer.WriteLine(ballGravityScaleText.Text);
-                writer.WriteLine(bounceScaleText.Text);
-                //Add twitch chat
-                writer.WriteLine((enableTwitchChat.Checked) ? "1" : "0");
+            //In Game Mods
+            List<ModSetting> ModSettings = new List<ModSetting>();
+            ModSettings.Add(new ModSetting("Jump_Timeout",jump_text.Text));
+            ModSettings.Add(new ModSetting("Ball_Scale", ball_text.Text));
+            ModSettings.Add(new ModSetting("Car_Scale", car_text.Text));
+            ModSettings.Add(new ModSetting("Goal_Text", goal_text.Text));
+            ModSettings.Add(new ModSetting("Unl_Jumps", unlJumps_checkBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Zombie_Mode", zombieCheckBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Spin_Rate", spinRateText.Text));
+            ModSettings.Add(new ModSetting("Car_Speed", speedText.Text));
+            ModSettings.Add(new ModSetting("Sticky_Ceiling", spiderManCheckBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Demo_On_Opposing", DemoOnOppCheckBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Rand_Bot_Size", randomSizeBotsCheckBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Ball_Gravity_Scale", ballGravityScaleText.Text));
+            ModSettings.Add(new ModSetting("Bounce_Scale", bounceScaleText.Text));
 
 
-                //SM -Added play sound to signify saved settings
+            //Menu Mods
+            ModSettings.Add(new ModSetting("Name_Change", nameChange_CheckBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Custom_Blog_Enabled", customBlog_checkBox.Checked.ToString()));
+            ModSettings.Add(new ModSetting("Blog_Title", title_textBox.Text));
+            ModSettings.Add(new ModSetting("Blog_Body", body_textBox.Text));
+            ModSettings.Add(new ModSetting("MOTD", motd_textBox.Text));
+            ModSettings.Add(new ModSetting("YouTube_Title", youtubeTitle_textBox.Text));
+            ModSettings.Add(new ModSetting("YouTube_URL", youtubeURL_textBox.Text));
 
-                WriteToLog("WriteModSettings - wrote settings");
-                writer.Close();
-            }
+            File.WriteAllText(Properties.Settings.Default.RLPath + "settings.json", JsonConvert.SerializeObject(ModSettings, Formatting.Indented));
+
         }
         //SM - Writes settings for map loader
         private void WriteMapLoaderSettings()
@@ -1657,8 +1632,6 @@ namespace Rocket_League_Customizer
                 LANTeamSize.Enabled = true;
             }
         }
-
-       
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
         {

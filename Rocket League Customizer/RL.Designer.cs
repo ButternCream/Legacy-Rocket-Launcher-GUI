@@ -474,28 +474,28 @@
             // normalToolStripMenuItem
             // 
             this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.normalToolStripMenuItem.Text = "Start";
             this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
             // 
             // withlogToolStripMenuItem
             // 
             this.withlogToolStripMenuItem.Name = "withlogToolStripMenuItem";
-            this.withlogToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
-            this.withlogToolStripMenuItem.Text = "Start With Console";
+            this.withlogToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
+            this.withlogToolStripMenuItem.Text = "Start With -log";
             this.withlogToolStripMenuItem.Click += new System.EventHandler(this.withlogToolStripMenuItem_Click);
             // 
             // killProcessToolStripMenuItem
             // 
             this.killProcessToolStripMenuItem.Name = "killProcessToolStripMenuItem";
-            this.killProcessToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.killProcessToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.killProcessToolStripMenuItem.Text = "Kill Process";
             this.killProcessToolStripMenuItem.Click += new System.EventHandler(this.killProcessToolStripMenuItem_Click);
             // 
             // restartToolStripMenuItem
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.restartToolStripMenuItem.Text = "Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
             // 
@@ -527,14 +527,14 @@
             // enableTwitchChat
             // 
             this.enableTwitchChat.Name = "enableTwitchChat";
-            this.enableTwitchChat.Size = new System.Drawing.Size(152, 24);
+            this.enableTwitchChat.Size = new System.Drawing.Size(128, 24);
             this.enableTwitchChat.Text = "Enable";
             this.enableTwitchChat.Click += new System.EventHandler(this.enableTwitchChat_Click);
             // 
             // twitchSettings
             // 
             this.twitchSettings.Name = "twitchSettings";
-            this.twitchSettings.Size = new System.Drawing.Size(152, 24);
+            this.twitchSettings.Size = new System.Drawing.Size(128, 24);
             this.twitchSettings.Text = "Settings";
             this.twitchSettings.Click += new System.EventHandler(this.twitchSettings_Click);
             // 
@@ -2122,7 +2122,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RLCustomizer";
-            this.Text = "Rocket Launcher 2.7";
+            this.Text = "Rocket Launcher 3.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLCustomizer_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RLCustomizer_FormClosed);
             this.Load += new System.EventHandler(this.RLCustomizer_Load);
