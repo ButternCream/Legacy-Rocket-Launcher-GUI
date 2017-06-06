@@ -18,12 +18,14 @@ namespace Rocket_League_Customizer
         private static string resPath;
         Thread processWatcher = new Thread(new ThreadStart(CheckForProcess));
         //Thread twitchWatcher;
-
+        private static bool injected = false;
         private static bool isRunning = false;
 
         private WebServer ws;
         private static bool isClosing = false;
-        
+        private static IntPtr hThread;
+
+
 
         static Dictionary<string, int> hotKeyMap = new Dictionary<string, int>
         {
@@ -231,6 +233,41 @@ namespace Rocket_League_Customizer
             Int32 milliseconds
             );
 
+        [DllImport("kernel32", SetLastError = true)]
+        static extern bool FreeLibrary(IntPtr hModule);
+
+        public static void UnloadImportDll(string DllPath)
+        {
+            Process RL = null;
+            try
+            {
+                Process[] ProcList;
+                ProcList = Process.GetProcessesByName("RocketLeague");
+                RL = ProcList[0];
+            } catch(IndexOutOfRangeException e)
+            {
+                MessageBox.Show("Rocket League not running");
+                return;
+            }
+            if (RL != null)
+            {
+                foreach(System.Diagnostics.ProcessModule mod in RL.Modules)
+                {
+
+                    if (mod.ModuleName.Contains("rlm.dll"))
+                    {
+                        Console.WriteLine(mod.ModuleName);
+                        if (mod.BaseAddress != null)
+                        {
+                            bool free = FreeLibrary(mod.BaseAddress);
+                            Console.WriteLine(free);
+                        }
+                    }            
+                    
+                }
+            }
+        }
+
         public static Int32 GetProcessId(String proc)
         {
             try
@@ -245,6 +282,7 @@ namespace Rocket_League_Customizer
             }
         }
 
+
         public static void InjectDLL(IntPtr hProcess, String strDLLName, bool showMessages)
         {
             IntPtr bytesout;
@@ -258,7 +296,7 @@ namespace Rocket_League_Customizer
             WriteProcessMemory(hProcess, AllocMem, strDLLName, (UIntPtr)LenWrite, out bytesout);
             // Function pointer "Injector"
             UIntPtr Injector = (UIntPtr)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
-
+            //FreeLibrary()
             if (Injector == null)
             {
                 MessageBox.Show(" Injector Error! \n ");
@@ -268,7 +306,7 @@ namespace Rocket_League_Customizer
             }
 
             // Create thread in target process, and store handle in hThread
-            IntPtr hThread = (IntPtr)CreateRemoteThread(hProcess, (IntPtr)null, 0, Injector, AllocMem, 0, out bytesout);
+            hThread = (IntPtr)CreateRemoteThread(hProcess, (IntPtr)null, 0, Injector, AllocMem, 0, out bytesout);
             // Make sure thread handle is valid
             if (hThread == null)
             {
@@ -301,6 +339,7 @@ namespace Rocket_League_Customizer
             if (hThread != null)
             {
                 //Close thread in target process
+                //MessageBox.Show("Free'ing hThread");
                 CloseHandle(hThread);
             }
             // return succeeded
@@ -518,73 +557,27 @@ namespace Rocket_League_Customizer
             }
             //Console.WriteLine("Testing Deserialization");
             //Console.WriteLine(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.txt").ToString());
-            List<ModSetting> settings = JsonConvert.DeserializeObject<List<ModSetting>>(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.txt").ToString());
-            foreach (var setting in settings)
-            {
-                switch(setting.name)
-                {
-                    case "Jump_Timeout":
-                        jump_text.Text = setting.value;
-                        break;
-                    case "Ball_Scale":
-                        ball_text.Text = setting.value;
-                        break;
-                    case "Car_Scale":
-                        car_text.Text = setting.value;
-                        break;
-                    case "Goal_Text":
-                        goal_text.Text = setting.value;
-                        break;
-                    case "Unl_Jumps":
-                        unlJumps_checkBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Zombie_Mode":
-                        zombieCheckBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Spin_Rate":
-                        spinRateText.Text = setting.value;
-                        break;
-                    case "Sticky_Ceiling":
-                        spiderManCheckBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Demo_On_Opposing":
-                        DemoOnOppCheckBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Rand_Bot_Size":
-                        randomSizeBotsCheckBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Ball_Gravity_Scale":
-                        ballGravityScaleText.Text = setting.value;
-                        break;
-                    case "Bounce_Scale":
-                        bounceScaleText.Text = setting.value;
-                        break;
-                    case "Name_Change":
-                        nameChange_CheckBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Custom_Blog_Enabled":
-                        customBlog_checkBox.Checked = (setting.value == "True") ? true : false;
-                        break;
-                    case "Blog_Title":
-                        title_textBox.Text = setting.value;
-                        break;
-                    case "Blog_Body":
-                        body_textBox.Text = setting.value;
-                        break;
-                    case "MOTD":
-                        motd_textBox.Text = setting.value;
-                        break;
-                    case "YouTube_Title":
-                        youtubeTitle_textBox.Text = setting.value;
-                        break;
-                    case "YouTube_URL":
-                        youtubeURL_textBox.Text = setting.value;
-                        break;
-                    case "Car_Speed":
-                        speedText.Text = setting.value;
-                        break;
-                }
-            }
+            //List<ModSetting> settings = JsonConvert.DeserializeObject<List<ModSetting>>(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.json").ToString());
+            Dictionary<string, string> settings = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Properties.Settings.Default.RLPath + "settings.json").ToString());
+
+            jump_text.Text = settings["Jump_Timeout"];
+            ball_text.Text = settings["Ball_Scale"];
+            car_text.Text = settings["Car_Scale"];
+            unlJumps_checkBox.Checked = (settings["Unl_Jumps"] == "True") ? true : false;
+            zombieCheckBox.Checked = (settings["Zombie_Mode"] == "True") ? true : false;
+            spinRateText.Text = settings["Spin_Rate"];
+            spiderManCheckBox.Checked = (settings["Sticky_Ceiling"] == "True") ? true : false;
+            randomSizeBotsCheckBox.Checked = (settings["Rand_Bot_Size"] == "True") ? true : false;
+            ballGravityScaleText.Text = settings["Ball_Gravity_Scale"];
+            bounceScaleText.Text = settings["Bounce_Scale"];
+            customBlog_checkBox.Checked = (settings["Custom_Blog_Enabled"] == "True") ? true : false;
+            title_textBox.Text = settings["Blog_Title"];
+            body_textBox.Text = settings["Blog_Body"];
+            motd_textBox.Text = settings["MOTD"];
+            youtubeTitle_textBox.Text = settings["YouTube_Title"];
+            youtubeURL_textBox.Text = settings["YouTube_URL"];
+            speedText.Text = settings["Car_Speed"];
+                               
             WriteToLog("InitSaveSettings - Loaded settings");
         }
 
@@ -708,8 +701,13 @@ namespace Rocket_League_Customizer
                             MessageBox.Show("DLL Missing");
                         return false;
                     }
-                    
-                    InjectDLL(hProcess, strDLLName , showMessages);
+                    if (!injected)
+                    {
+                        //Load DLL
+                        InjectDLL(hProcess, strDLLName, showMessages);
+                        injected = true;
+                    } 
+                     
 
                 }
             } else
@@ -729,12 +727,10 @@ namespace Rocket_League_Customizer
         private void resetToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Hidden_checkBox.Checked = false;
-            nameChange_CheckBox.Checked = false;
             customBlog_checkBox.Checked = false;
             unlJumps_checkBox.Checked = false;
             zombieCheckBox.Checked = false;
             spiderManCheckBox.Checked = false;
-            DemoOnOppCheckBox.Checked = false;
             randomSizeBotsCheckBox.Checked = false;
             title_textBox.Text = "Rocket League Mods";
             body_textBox.Text = "/r/RocketLeagueMods";
@@ -744,7 +740,6 @@ namespace Rocket_League_Customizer
             jump_text.Text = "1.5";
             ball_text.Text = "1";
             car_text.Text = "1";
-            goal_text.Text = "{Player} Scored!";
             spinRateText.Text = "5.5";
             speedText.Text = "2300.0";
             ballGravityScaleText.Text = "1";
@@ -1132,30 +1127,28 @@ namespace Rocket_League_Customizer
         private void WriteModSettings()
         {
             //In Game Mods
-            List<ModSetting> ModSettings = new List<ModSetting>();
-            ModSettings.Add(new ModSetting("Jump_Timeout",jump_text.Text));
-            ModSettings.Add(new ModSetting("Ball_Scale", ball_text.Text));
-            ModSettings.Add(new ModSetting("Car_Scale", car_text.Text));
-            ModSettings.Add(new ModSetting("Goal_Text", goal_text.Text));
-            ModSettings.Add(new ModSetting("Unl_Jumps", unlJumps_checkBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Zombie_Mode", zombieCheckBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Spin_Rate", spinRateText.Text));
-            ModSettings.Add(new ModSetting("Car_Speed", speedText.Text));
-            ModSettings.Add(new ModSetting("Sticky_Ceiling", spiderManCheckBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Demo_On_Opposing", DemoOnOppCheckBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Rand_Bot_Size", randomSizeBotsCheckBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Ball_Gravity_Scale", ballGravityScaleText.Text));
-            ModSettings.Add(new ModSetting("Bounce_Scale", bounceScaleText.Text));
-
-
-            //Menu Mods
-            ModSettings.Add(new ModSetting("Name_Change", nameChange_CheckBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Custom_Blog_Enabled", customBlog_checkBox.Checked.ToString()));
-            ModSettings.Add(new ModSetting("Blog_Title", title_textBox.Text));
-            ModSettings.Add(new ModSetting("Blog_Body", body_textBox.Text));
-            ModSettings.Add(new ModSetting("MOTD", motd_textBox.Text));
-            ModSettings.Add(new ModSetting("YouTube_Title", youtubeTitle_textBox.Text));
-            ModSettings.Add(new ModSetting("YouTube_URL", youtubeURL_textBox.Text));
+            Dictionary<string, string> ModSettings = new Dictionary<string, string>
+            {
+                { "Jump_Timeout",       jump_text.Text },
+                { "Ball_Scale",         ball_text.Text },
+                {"Car_Scale",           car_text.Text},
+                {"Unl_Jumps",           unlJumps_checkBox.Checked.ToString()},
+                {"Zombie_Mode",         zombieCheckBox.Checked.ToString()},
+                {"Spin_Rate",           spinRateText.Text},
+                {"Car_Speed",           speedText.Text},
+                {"Sticky_Ceiling",      spiderManCheckBox.Checked.ToString()},
+                {"Rand_Bot_Size",       randomSizeBotsCheckBox.Checked.ToString()},
+                {"Ball_Gravity_Scale",  ballGravityScaleText.Text},
+                {"Bounce_Scale",        bounceScaleText.Text},                                                               
+                {"Custom_Blog_Enabled", customBlog_checkBox.Checked.ToString()},
+                {"Blog_Title",          title_textBox.Text},
+                {"Blog_Body",           body_textBox.Text},
+                {"MOTD",                motd_textBox.Text},
+                {"YouTube_Title",       youtubeTitle_textBox.Text},
+                { "YouTube_URL",        youtubeURL_textBox.Text}
+            };
+           
+            
 
             File.WriteAllText(Properties.Settings.Default.RLPath + "settings.json", JsonConvert.SerializeObject(ModSettings, Formatting.Indented));
 
@@ -1631,6 +1624,11 @@ namespace Rocket_League_Customizer
                 LANTeamSize.Text = "3v3";
                 LANTeamSize.Enabled = true;
             }
+        }
+
+        private void testUnloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UnloadImportDll("RLM.dll");
         }
 
         private void hotkeyHost_KeyDown(object sender, KeyEventArgs e)
