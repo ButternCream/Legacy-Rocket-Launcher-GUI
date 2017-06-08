@@ -133,7 +133,6 @@ namespace Rocket_League_Customizer
             InitSavedSettings();
             InitMaps(false);
             InitMutators();
-            LoadLANIP();
             WriteToLog("Initialized");
 
             // TU - Changed the method of grabbing the exe path to this...hopefully doesn't cause any issues.  Due to threading the other method was giving me problems.
@@ -410,10 +409,6 @@ namespace Rocket_League_Customizer
                 Properties.Settings.Default.FirstTime = false;
                 Properties.Settings.Default.Save();
                 WriteModSettings();
-                WriteMapLoaderSettings();
-                WriteLANServerSettings();
-                WriteLANJoinSettings();
-                WriteHotkeys();
             }
         }
 
@@ -522,25 +517,7 @@ namespace Rocket_League_Customizer
 
             //SM - Map settings now save when "Save" is pressed not "Save Map Settings"
             WriteModSettings();
-            WriteMapLoaderSettings();
-            WriteLANServerSettings();
-            WriteLANJoinSettings();
-            WriteHotkeys();
             PlaySound();
-        }
-
-        private void WriteHotkeys()
-        {
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "hotkeys.txt"))
-            {
-                writer.WriteLine(mainMenuHotKey);
-                writer.WriteLine(inGameHotKey);
-                writer.WriteLine(customMatchHotKey);
-                writer.WriteLine(joinGameHotKey);
-                writer.WriteLine(hostGameHotKey);
-                writer.Close();
-            }
-            WriteToLog("WriteHotkeys - Wrote hotkeys");
         }
 
         //Load saved settings from settings file
@@ -552,7 +529,8 @@ namespace Rocket_League_Customizer
 
             if (!File.Exists(Properties.Settings.Default.RLPath + "settings.json") || Properties.Settings.Default.RLPath == string.Empty)
             {
-                WriteToLog("InitSaveSetting - Settings do not exist.");
+                WriteToLog("InitSaveSetting - Settings do not exist. Writing settings...");
+                WriteModSettings();
                 return;
             }
             //Console.WriteLine("Testing Deserialization");
@@ -577,7 +555,14 @@ namespace Rocket_League_Customizer
             youtubeTitle_textBox.Text = settings["YouTube_Title"];
             youtubeURL_textBox.Text = settings["YouTube_URL"];
             speedText.Text = settings["Car_Speed"];
-                               
+            joinIPBox.Text = settings["LAN_IP_Address"];
+            mainMenuHotKey =  Int32.Parse(settings["Menu_Hotkey"]);
+            inGameHotKey = Int32.Parse(settings["Game_Hotkey"]);
+            customMatchHotKey = Int32.Parse(settings["MapLoader_Hotkey"]);
+            joinGameHotKey = Int32.Parse(settings["Join_Hotkey"]);
+            hostGameHotKey = Int32.Parse(settings["Host_Hotkey"]);
+            
+
             WriteToLog("InitSaveSettings - Loaded settings");
         }
 
@@ -756,7 +741,7 @@ namespace Rocket_League_Customizer
             Properties.Settings.Default.joinHotkey = hotkeyJoin.Text;
             Properties.Settings.Default.hostHotkey = hotkeyHost.Text;
             Properties.Settings.Default.Save();
-            WriteHotkeys();
+            WriteModSettings();
             WriteToLog("FormClosing - Saved hotkeys");
         }
 
@@ -1139,14 +1124,22 @@ namespace Rocket_League_Customizer
                 {"Sticky_Ceiling",      spiderManCheckBox.Checked.ToString()},
                 {"Rand_Bot_Size",       randomSizeBotsCheckBox.Checked.ToString()},
                 {"Ball_Gravity_Scale",  ballGravityScaleText.Text},
-                {"Bounce_Scale",        bounceScaleText.Text},                                                               
+                {"Bounce_Scale",        bounceScaleText.Text},
                 {"Custom_Blog_Enabled", customBlog_checkBox.Checked.ToString()},
                 {"Blog_Title",          title_textBox.Text},
                 {"Blog_Body",           body_textBox.Text},
                 {"MOTD",                motd_textBox.Text},
                 {"YouTube_Title",       youtubeTitle_textBox.Text},
-                { "YouTube_URL",        youtubeURL_textBox.Text}
-            };
+                {"YouTube_URL",         youtubeURL_textBox.Text},
+                {"Map_Loader_Command",  MapLoaderSettings()},
+                {"LAN_Host_Command",    LANServerSettings()},
+                {"LAN_IP_Address",      joinIPBox.Text},
+                {"Menu_Hotkey",         mainMenuHotKey.ToString() },
+                {"Game_Hotkey",         inGameHotKey.ToString() },
+                {"MapLoader_Hotkey",    customMatchHotKey.ToString() },
+                {"Join_Hotkey",         joinGameHotKey.ToString() },
+                {"Host_Hotkey",         hostGameHotKey.ToString() }
+        };
            
             
 
@@ -1154,157 +1147,120 @@ namespace Rocket_League_Customizer
 
         }
         //SM - Writes settings for map loader
-        private void WriteMapLoaderSettings()
+        private string MapLoaderSettings()
         {
-
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "map_settings.txt"))
+            string mapName = mapBoxList.Text;
+            string gameType = gameTypeComboBox.Text;
+            if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
             {
-                string mapName = mapBoxList.Text;
-                string gameType = gameTypeComboBox.Text;
-                if (mapName == String.Empty || gameType == String.Empty || mapName == "[Official Maps]" || mapName == "[Custom Maps]")
-                {
-                    MessageBox.Show("Please select a valid setting for all fields.");
-                    WriteToLog("WriteMapLoaderSettings - Selected invalid setting");
-                    return;
-                }
+                MessageBox.Show("Please select a valid setting for all fields.");
+                WriteToLog("WriteMapLoaderSettings - Selected invalid setting");
+                return String.Empty;
+            }
 
-                if (Maps.ContainsKey(mapName))
-                {
-                    mapName = Maps[mapName].filename.Replace(".upk", "");
+            if (Maps.ContainsKey(mapName))
+            {
+                mapName = Maps[mapName].filename.Replace(".upk", "");
                
-                }
-                else
-                {
-                    mapName = mapName.Replace(".upk", "");
+            }
+            else
+            {
+                mapName = mapName.Replace(".upk", "");
                    
 
-                }
-                if (gameType.Equals("Freeplay"))
-                {
-                    writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
-                    return;
-                }
-                string gameTags = "GameTags=,";
-                gameTags += mutators[matchLengthComboBox.Text + "Time"];
-                gameTags += mutators[MaxScoreComboBox.Text + "Score"];
-                gameTags += mutators[GameSpeedComboBox.Text];
-                if (BallMaxSpeedComboBox.Text != "Default")
-                    gameTags += mutators[BallMaxSpeedComboBox.Text + "Ball"];
-                else
-                    gameTags += mutators[BallMaxSpeedComboBox.Text];
-                gameTags += mutators[BallTypeComboBox.Text];
-                gameTags += mutators[BallWeightComboBox.Text];
-                gameTags += mutators[BallSizeComboBox.Text];
-                if (BallBouncinessComboBox.Text != "Default")
-                    gameTags += mutators[BallBouncinessComboBox.Text + "Bounce"];
-                else
-                    gameTags += mutators[BallBouncinessComboBox.Text];
-                if (BoostAmountComboBox.Text != "Default")
-                    gameTags += mutators[BoostAmountComboBox.Text + "Boost"];
-                else
-                    gameTags += mutators[BoostAmountComboBox.Text];
-                if (RumbleComboBox.Text == "Default")
-                    gameTags += "ItemsMode,";
-                else
-                    gameTags += mutators[RumbleComboBox.Text];
-                gameTags += mutators[BoostStrengthComboBox.Text];
-                gameTags += mutators[GravityComboBox.Text];
-                gameTags += mutators[DemolishComboBox.Text];
-                gameTags += mutators[respawnTimeComboBox.Text];
-
-                writer.WriteLine(mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
-
-                WriteToLog("WriteMapLoaderSettings - Map Settings Saved");
-                writer.Close();
             }
+            if (gameType.Equals("Freeplay"))
+            {
+                //writer.WriteLine(mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+                return (mapName + "?Game=TAGame.GameInfo_Tutorial_TA?Freeplay?");
+            }
+            string gameTags = "GameTags=,";
+            gameTags += mutators[matchLengthComboBox.Text + "Time"];
+            gameTags += mutators[MaxScoreComboBox.Text + "Score"];
+            gameTags += mutators[GameSpeedComboBox.Text];
+            if (BallMaxSpeedComboBox.Text != "Default")
+                gameTags += mutators[BallMaxSpeedComboBox.Text + "Ball"];
+            else
+                gameTags += mutators[BallMaxSpeedComboBox.Text];
+            gameTags += mutators[BallTypeComboBox.Text];
+            gameTags += mutators[BallWeightComboBox.Text];
+            gameTags += mutators[BallSizeComboBox.Text];
+            if (BallBouncinessComboBox.Text != "Default")
+                gameTags += mutators[BallBouncinessComboBox.Text + "Bounce"];
+            else
+                gameTags += mutators[BallBouncinessComboBox.Text];
+            if (BoostAmountComboBox.Text != "Default")
+                gameTags += mutators[BoostAmountComboBox.Text + "Boost"];
+            else
+                gameTags += mutators[BoostAmountComboBox.Text];
+            if (RumbleComboBox.Text == "Default")
+                gameTags += "ItemsMode,";
+            else
+                gameTags += mutators[RumbleComboBox.Text];
+            gameTags += mutators[BoostStrengthComboBox.Text];
+            gameTags += mutators[GravityComboBox.Text];
+            gameTags += mutators[DemolishComboBox.Text];
+            gameTags += mutators[respawnTimeComboBox.Text];
+
+            WriteToLog("WriteMapLoaderSettings - Map Settings Saved");
+            return (mapName + "?playtest?listen?Private?Game=TAGame.GameInfo_Soccar_TA?" + gameTags);
+
+                
         }
         //SM - Writes LAN Server settings
-        private void WriteLANServerSettings()
+        private string LANServerSettings()
         {
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_server.txt"))
+            string commandString;
+            string gameTags = "GameTags=,";
+            string mapName = LANMap.Text;
+            string gameMode = mutators[LANGameMode.Text];
+
+            if (Maps.ContainsKey(mapName))
             {
-                string commandString;
-                string gameTags = "GameTags=,";
-                string mapName = LANMap.Text;
-                string gameMode = mutators[LANGameMode.Text];
-
-                if (Maps.ContainsKey(mapName))
-                {
-                    mapName = Maps[mapName].filename.Replace(".upk", "");
-                }
-                else
-                {
-                    mapName = mapName.Replace(".upk", "");
-                }
-
-                if(LANBots.Text != "No Bots")
-                    gameTags += mutators[LANBots.Text];
-                if(LANTeamSize.Text != "")
-                    gameTags += mutators[LANTeamSize.Text];
-                gameTags += mutators[LANMatchLength.Text + "Time"];
-                gameTags += mutators[LANMaxScore.Text + "Score"];
-                gameTags += mutators[LANGameSpeed.Text];
-                if (LANBallMaxSpeed.Text != "Default")
-                    gameTags += mutators[LANBallMaxSpeed.Text + "Ball"];
-                else
-                    gameTags += mutators[LANBallMaxSpeed.Text];
-                gameTags += mutators[LANBallType.Text];
-                gameTags += mutators[LANBallWeight.Text];
-                gameTags += mutators[LANBallSize.Text];
-                if (LANBallBounciness.Text != "Default")
-                    gameTags += mutators[LANBallBounciness.Text + "Bounce"];
-                else
-                    gameTags += mutators[LANBallBounciness.Text];
-                if (LANBoostAmount.Text != "Default")
-                    gameTags += mutators[LANBoostAmount.Text + "Boost"];
-                else
-                    gameTags += mutators[LANBoostAmount.Text];
-                if (LANRumble.Text == "Default")
-                    gameTags += "ItemsMode,";
-                if (noBalls.Text != "Default")
-                    gameTags += mutators[noBalls.Text + "Balls"];
-                gameTags += mutators[LANBoostStrength.Text];
-                gameTags += mutators[LANGravity.Text];
-                gameTags += mutators[LanDemolish.Text];
-                gameTags += mutators[LANRespawnTime.Text];
-
-                commandString = mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
-                writer.WriteLine(commandString);
-                WriteToLog("WriteLANSettings - Settings saved");
-                writer.Close();
-
+                mapName = Maps[mapName].filename.Replace(".upk", "");
             }
+            else
+            {
+                mapName = mapName.Replace(".upk", "");
+            }
+
+            if(LANBots.Text != "No Bots")
+                gameTags += mutators[LANBots.Text];
+            if(LANTeamSize.Text != "")
+                gameTags += mutators[LANTeamSize.Text];
+            gameTags += mutators[LANMatchLength.Text + "Time"];
+            gameTags += mutators[LANMaxScore.Text + "Score"];
+            gameTags += mutators[LANGameSpeed.Text];
+            if (LANBallMaxSpeed.Text != "Default")
+                gameTags += mutators[LANBallMaxSpeed.Text + "Ball"];
+            else
+                gameTags += mutators[LANBallMaxSpeed.Text];
+            gameTags += mutators[LANBallType.Text];
+            gameTags += mutators[LANBallWeight.Text];
+            gameTags += mutators[LANBallSize.Text];
+            if (LANBallBounciness.Text != "Default")
+                gameTags += mutators[LANBallBounciness.Text + "Bounce"];
+            else
+                gameTags += mutators[LANBallBounciness.Text];
+            if (LANBoostAmount.Text != "Default")
+                gameTags += mutators[LANBoostAmount.Text + "Boost"];
+            else
+                gameTags += mutators[LANBoostAmount.Text];
+            if (LANRumble.Text == "Default")
+                gameTags += "ItemsMode,";
+            if (noBalls.Text != "Default")
+                gameTags += mutators[noBalls.Text + "Balls"];
+            gameTags += mutators[LANBoostStrength.Text];
+            gameTags += mutators[LANGravity.Text];
+            gameTags += mutators[LanDemolish.Text];
+            gameTags += mutators[LANRespawnTime.Text];
+
+            commandString = mapName + "?playtest?listen?Private?Game=" + gameMode + gameTags;
+            WriteToLog("WriteLANSettings - Settings saved");
+            return commandString;
+               
         }
 
-        //SM - Reload LAN IP
-        private void LoadLANIP()
-        {
-            if (!File.Exists(Properties.Settings.Default.RLPath + "lan_join.txt"))
-            {
-                WriteToLog("LoadLANIP - lan_join.txt doesn't exist");
-                return;
-            }
-            using (StreamReader reader = new StreamReader(Properties.Settings.Default.RLPath + "lan_join.txt"))
-            {
-                string ip = reader.ReadLine();
-                ip = ip.Replace("SwitchLevel ", "");
-                joinIPBox.Text = ip;
-            }
-            WriteToLog("LoadLANIP - Loaded LAN ip");
-        }
-
-        //SM - Writes LAN join settings
-        private void WriteLANJoinSettings()
-        {
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.RLPath + "lan_join.txt"))
-            {
-                writer.WriteLine(joinIPBox.Text);
-
-                writer.Close();
-
-            }
-            WriteToLog("WriteLANJoinSettings - Wrote join settings");
-        }
         //SM - Clears custom maps from map loader & LAN
         private void ClearMapsButton_Click(object sender, EventArgs e)
         {
@@ -1584,7 +1540,7 @@ namespace Rocket_League_Customizer
                 WriteToLog("onLoad - Not in dictionary.");
             }
             Properties.Settings.Default.Save();
-            WriteHotkeys();
+            WriteModSettings();
             WriteToLog("Hotkeys reset");
         }
 
@@ -1667,7 +1623,7 @@ namespace Rocket_League_Customizer
             {
                 WriteToLog("onLoad - Not in dictionary.");
             }
-            WriteHotkeys();
+            WriteModSettings();
             WriteToLog("FormLoad - Loaded Hotkeys");
         }
 
@@ -1680,7 +1636,7 @@ namespace Rocket_League_Customizer
             hotkeyJoin.Text = Properties.Settings.Default.joinHotkey = "F4";
             hotkeyHost.Text = Properties.Settings.Default.hostHotkey = "F5";
             Properties.Settings.Default.Save();
-            WriteHotkeys();
+            WriteModSettings();
         }
 
         //SM - Added donate button
