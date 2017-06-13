@@ -542,10 +542,8 @@ namespace Rocket_League_Customizer
             ball_text.Text = settings["Ball_Scale"];
             car_text.Text = settings["Car_Scale"];
             unlJumps_checkBox.Checked = (settings["Unl_Jumps"] == "True") ? true : false;
-            zombieCheckBox.Checked = (settings["Zombie_Mode"] == "True") ? true : false;
             spinRateText.Text = settings["Spin_Rate"];
             spiderManCheckBox.Checked = (settings["Sticky_Ceiling"] == "True") ? true : false;
-            randomSizeBotsCheckBox.Checked = (settings["Rand_Bot_Size"] == "True") ? true : false;
             ballGravityScaleText.Text = settings["Ball_Gravity_Scale"];
             bounceScaleText.Text = settings["Bounce_Scale"];
             customBlog_checkBox.Checked = (settings["Custom_Blog_Enabled"] == "True") ? true : false;
@@ -714,9 +712,7 @@ namespace Rocket_League_Customizer
             //Hidden_checkBox.Checked = false;
             customBlog_checkBox.Checked = false;
             unlJumps_checkBox.Checked = false;
-            zombieCheckBox.Checked = false;
             spiderManCheckBox.Checked = false;
-            randomSizeBotsCheckBox.Checked = false;
             title_textBox.Text = "Rocket League Mods";
             body_textBox.Text = "/r/RocketLeagueMods";
             motd_textBox.Text = "Rocket Launcher by ButterandCream";
@@ -1118,11 +1114,9 @@ namespace Rocket_League_Customizer
                 { "Ball_Scale",         ball_text.Text },
                 {"Car_Scale",           car_text.Text},
                 {"Unl_Jumps",           unlJumps_checkBox.Checked.ToString()},
-                {"Zombie_Mode",         zombieCheckBox.Checked.ToString()},
                 {"Spin_Rate",           spinRateText.Text},
                 {"Car_Speed",           speedText.Text},
                 {"Sticky_Ceiling",      spiderManCheckBox.Checked.ToString()},
-                {"Rand_Bot_Size",       randomSizeBotsCheckBox.Checked.ToString()},
                 {"Ball_Gravity_Scale",  ballGravityScaleText.Text},
                 {"Bounce_Scale",        bounceScaleText.Text},
                 {"Custom_Blog_Enabled", customBlog_checkBox.Checked.ToString()},

@@ -37,7 +37,6 @@
             this.ball_text = new System.Windows.Forms.TextBox();
             this.car_text = new System.Windows.Forms.TextBox();
             this.unlJumps_checkBox = new System.Windows.Forms.CheckBox();
-            this.zombieCheckBox = new System.Windows.Forms.CheckBox();
             this.saveBtn = new System.Windows.Forms.Button();
             this.customBlog_checkBox = new System.Windows.Forms.CheckBox();
             this.blogTitle_label = new System.Windows.Forms.Label();
@@ -78,7 +77,6 @@
             this.speedText = new System.Windows.Forms.TextBox();
             this.speedLabel = new System.Windows.Forms.Label();
             this.spiderManCheckBox = new System.Windows.Forms.CheckBox();
-            this.randomSizeBotsCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.ballGravityScaleText = new System.Windows.Forms.TextBox();
@@ -186,7 +184,7 @@
             this.jump_label.AutoSize = true;
             this.jump_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jump_label.ForeColor = System.Drawing.Color.Black;
-            this.jump_label.Location = new System.Drawing.Point(6, 122);
+            this.jump_label.Location = new System.Drawing.Point(6, 73);
             this.jump_label.Name = "jump_label";
             this.jump_label.Size = new System.Drawing.Size(147, 19);
             this.jump_label.TabIndex = 0;
@@ -197,7 +195,7 @@
             this.car_label.AutoSize = true;
             this.car_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.car_label.ForeColor = System.Drawing.Color.Black;
-            this.car_label.Location = new System.Drawing.Point(6, 177);
+            this.car_label.Location = new System.Drawing.Point(6, 128);
             this.car_label.Name = "car_label";
             this.car_label.Size = new System.Drawing.Size(69, 19);
             this.car_label.TabIndex = 1;
@@ -208,7 +206,7 @@
             this.ball_label.AutoSize = true;
             this.ball_label.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ball_label.ForeColor = System.Drawing.Color.Black;
-            this.ball_label.Location = new System.Drawing.Point(6, 148);
+            this.ball_label.Location = new System.Drawing.Point(6, 99);
             this.ball_label.Name = "ball_label";
             this.ball_label.Size = new System.Drawing.Size(69, 19);
             this.ball_label.TabIndex = 2;
@@ -218,7 +216,7 @@
             // 
             this.jump_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jump_text.ForeColor = System.Drawing.Color.Black;
-            this.jump_text.Location = new System.Drawing.Point(159, 119);
+            this.jump_text.Location = new System.Drawing.Point(159, 70);
             this.jump_text.Name = "jump_text";
             this.jump_text.Size = new System.Drawing.Size(147, 24);
             this.jump_text.TabIndex = 4;
@@ -228,7 +226,7 @@
             // 
             this.ball_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ball_text.ForeColor = System.Drawing.Color.Black;
-            this.ball_text.Location = new System.Drawing.Point(159, 145);
+            this.ball_text.Location = new System.Drawing.Point(159, 96);
             this.ball_text.Name = "ball_text";
             this.ball_text.Size = new System.Drawing.Size(147, 24);
             this.ball_text.TabIndex = 5;
@@ -238,7 +236,7 @@
             // 
             this.car_text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.car_text.ForeColor = System.Drawing.Color.Black;
-            this.car_text.Location = new System.Drawing.Point(159, 172);
+            this.car_text.Location = new System.Drawing.Point(159, 123);
             this.car_text.Name = "car_text";
             this.car_text.Size = new System.Drawing.Size(147, 24);
             this.car_text.TabIndex = 6;
@@ -255,18 +253,6 @@
             this.unlJumps_checkBox.TabIndex = 8;
             this.unlJumps_checkBox.Text = "Enable Unlimited Jumps";
             this.unlJumps_checkBox.UseVisualStyleBackColor = true;
-            // 
-            // zombieCheckBox
-            // 
-            this.zombieCheckBox.AutoSize = true;
-            this.zombieCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zombieCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.zombieCheckBox.Location = new System.Drawing.Point(10, 50);
-            this.zombieCheckBox.Name = "zombieCheckBox";
-            this.zombieCheckBox.Size = new System.Drawing.Size(255, 23);
-            this.zombieCheckBox.TabIndex = 9;
-            this.zombieCheckBox.Text = "Enable Zombie Mode (Bots Required)";
-            this.zombieCheckBox.UseVisualStyleBackColor = true;
             // 
             // saveBtn
             // 
@@ -615,7 +601,7 @@
             this.spinRateLabel.AutoSize = true;
             this.spinRateLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spinRateLabel.ForeColor = System.Drawing.Color.Black;
-            this.spinRateLabel.Location = new System.Drawing.Point(6, 203);
+            this.spinRateLabel.Location = new System.Drawing.Point(6, 154);
             this.spinRateLabel.Name = "spinRateLabel";
             this.spinRateLabel.Size = new System.Drawing.Size(101, 19);
             this.spinRateLabel.TabIndex = 29;
@@ -625,7 +611,7 @@
             // 
             this.spinRateText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spinRateText.ForeColor = System.Drawing.Color.Black;
-            this.spinRateText.Location = new System.Drawing.Point(159, 200);
+            this.spinRateText.Location = new System.Drawing.Point(159, 151);
             this.spinRateText.Name = "spinRateText";
             this.spinRateText.Size = new System.Drawing.Size(147, 24);
             this.spinRateText.TabIndex = 30;
@@ -635,7 +621,7 @@
             // 
             this.speedText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.speedText.ForeColor = System.Drawing.Color.Black;
-            this.speedText.Location = new System.Drawing.Point(159, 226);
+            this.speedText.Location = new System.Drawing.Point(159, 177);
             this.speedText.Name = "speedText";
             this.speedText.Size = new System.Drawing.Size(147, 24);
             this.speedText.TabIndex = 32;
@@ -646,7 +632,7 @@
             this.speedLabel.AutoSize = true;
             this.speedLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.speedLabel.ForeColor = System.Drawing.Color.Black;
-            this.speedLabel.Location = new System.Drawing.Point(6, 229);
+            this.speedLabel.Location = new System.Drawing.Point(6, 180);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(81, 19);
             this.speedLabel.TabIndex = 31;
@@ -657,24 +643,12 @@
             this.spiderManCheckBox.AutoSize = true;
             this.spiderManCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spiderManCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.spiderManCheckBox.Location = new System.Drawing.Point(10, 73);
+            this.spiderManCheckBox.Location = new System.Drawing.Point(10, 48);
             this.spiderManCheckBox.Name = "spiderManCheckBox";
-            this.spiderManCheckBox.Size = new System.Drawing.Size(139, 23);
+            this.spiderManCheckBox.Size = new System.Drawing.Size(110, 23);
             this.spiderManCheckBox.TabIndex = 33;
-            this.spiderManCheckBox.Text = "Spider Man Mode";
+            this.spiderManCheckBox.Text = "Sticky Ceiling";
             this.spiderManCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // randomSizeBotsCheckBox
-            // 
-            this.randomSizeBotsCheckBox.AutoSize = true;
-            this.randomSizeBotsCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.randomSizeBotsCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.randomSizeBotsCheckBox.Location = new System.Drawing.Point(10, 96);
-            this.randomSizeBotsCheckBox.Name = "randomSizeBotsCheckBox";
-            this.randomSizeBotsCheckBox.Size = new System.Drawing.Size(235, 23);
-            this.randomSizeBotsCheckBox.TabIndex = 35;
-            this.randomSizeBotsCheckBox.Text = "Random Size Bots (Bots Required)";
-            this.randomSizeBotsCheckBox.UseVisualStyleBackColor = true;
             // 
             // toolTip1
             // 
@@ -695,7 +669,7 @@
             // 
             this.ballGravityScaleText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ballGravityScaleText.ForeColor = System.Drawing.Color.Black;
-            this.ballGravityScaleText.Location = new System.Drawing.Point(159, 253);
+            this.ballGravityScaleText.Location = new System.Drawing.Point(159, 204);
             this.ballGravityScaleText.Name = "ballGravityScaleText";
             this.ballGravityScaleText.Size = new System.Drawing.Size(147, 24);
             this.ballGravityScaleText.TabIndex = 37;
@@ -706,7 +680,7 @@
             this.ballGravScaleLbl.AutoSize = true;
             this.ballGravScaleLbl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ballGravScaleLbl.ForeColor = System.Drawing.Color.Black;
-            this.ballGravScaleLbl.Location = new System.Drawing.Point(6, 256);
+            this.ballGravScaleLbl.Location = new System.Drawing.Point(6, 207);
             this.ballGravScaleLbl.Name = "ballGravScaleLbl";
             this.ballGravScaleLbl.Size = new System.Drawing.Size(117, 19);
             this.ballGravScaleLbl.TabIndex = 36;
@@ -771,7 +745,6 @@
             this.inGameTabs.Controls.Add(this.hotkeyGame);
             this.inGameTabs.Controls.Add(this.bounceScaleText);
             this.inGameTabs.Controls.Add(this.bounceScaleLbl);
-            this.inGameTabs.Controls.Add(this.randomSizeBotsCheckBox);
             this.inGameTabs.Controls.Add(this.ballGravityScaleText);
             this.inGameTabs.Controls.Add(this.InGameTitleLabel);
             this.inGameTabs.Controls.Add(this.ballGravScaleLbl);
@@ -787,7 +760,6 @@
             this.inGameTabs.Controls.Add(this.car_text);
             this.inGameTabs.Controls.Add(this.spinRateLabel);
             this.inGameTabs.Controls.Add(this.unlJumps_checkBox);
-            this.inGameTabs.Controls.Add(this.zombieCheckBox);
             this.inGameTabs.Location = new System.Drawing.Point(4, 22);
             this.inGameTabs.Name = "inGameTabs";
             this.inGameTabs.Padding = new System.Windows.Forms.Padding(3);
@@ -813,7 +785,7 @@
             // 
             this.bounceScaleText.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bounceScaleText.ForeColor = System.Drawing.Color.Black;
-            this.bounceScaleText.Location = new System.Drawing.Point(159, 283);
+            this.bounceScaleText.Location = new System.Drawing.Point(159, 234);
             this.bounceScaleText.Name = "bounceScaleText";
             this.bounceScaleText.Size = new System.Drawing.Size(147, 24);
             this.bounceScaleText.TabIndex = 39;
@@ -824,7 +796,7 @@
             this.bounceScaleLbl.AutoSize = true;
             this.bounceScaleLbl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bounceScaleLbl.ForeColor = System.Drawing.Color.Black;
-            this.bounceScaleLbl.Location = new System.Drawing.Point(6, 286);
+            this.bounceScaleLbl.Location = new System.Drawing.Point(6, 237);
             this.bounceScaleLbl.Name = "bounceScaleLbl";
             this.bounceScaleLbl.Size = new System.Drawing.Size(119, 19);
             this.bounceScaleLbl.TabIndex = 38;
@@ -2095,7 +2067,6 @@
         private System.Windows.Forms.TextBox ball_text;
         private System.Windows.Forms.TextBox car_text;
         private System.Windows.Forms.CheckBox unlJumps_checkBox;
-        private System.Windows.Forms.CheckBox zombieCheckBox;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.CheckBox customBlog_checkBox;
         private System.Windows.Forms.Label blogTitle_label;
@@ -2125,7 +2096,6 @@
         private System.Windows.Forms.ToolStripMenuItem setRLPathToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem1;
         private System.Windows.Forms.CheckBox spiderManCheckBox;
-        private System.Windows.Forms.CheckBox randomSizeBotsCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private System.Windows.Forms.TextBox ballGravityScaleText;
