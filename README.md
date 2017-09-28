@@ -1,5 +1,7 @@
 # Rocket Launcher
 
+### New Repository Here: https://github.com/ButternCream/Rocket-Launcher-GUI
+
 _Rocket Launcher still has many bugs that need to be fixed / can't be fixed. Expect issues to arise._
 
 ### Current Version: 3.0a
